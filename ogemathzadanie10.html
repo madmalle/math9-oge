@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ 2027. Задание 10 — Тренажёр</title>
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath();"></script>
+
+<style>
+  :root{
+    --bg:#f2f7f4;
+    --card:#ffffff;
+    --accent:#2e7d32;
+    --accent-dark:#1b5e20;
+    --ok:#1b5e20;
+    --err:#c62828;
+    --text:#1c2a21;
+    --muted:#5a6e60;
+    --gold:#81c784;
+    --green-1:#e8f5e9;
+    --green-2:#c8e6c9;
+    --green-3:#a5d6a7;
+    --green-4:#f4faf5;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    font-size:15px;
+  }
+  header{
+    background:linear-gradient(135deg,#2e7d32,#1b5e20);
+    color:#fff;
+    padding:22px 16px 18px;
+    text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:clamp(18px,2.5vw,24px)}
+  header p{margin:0; font-size:14px}
+
+  .nav{
+    background:#fff;
+    border-bottom:1px solid var(--green-3);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 10px rgba(46,125,50,.08);
+  }
+  .sections{
+    display:flex;
+    gap:6px;
+    padding:10px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+    border-bottom:1px solid var(--green-2);
+  }
+  .sections::-webkit-scrollbar{height:6px}
+  .sections::-webkit-scrollbar-thumb{background:var(--green-3); border-radius:3px}
+  .section-btn{
+    background:var(--green-1);
+    border:none;
+    padding:8px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent-dark);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .section-btn:hover{background:var(--green-2)}
+  .section-btn.active{background:var(--accent); color:#fff}
+
+  .groups{
+    display:flex;
+    gap:6px;
+    padding:8px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .groups::-webkit-scrollbar{height:6px}
+  .groups::-webkit-scrollbar-thumb{background:var(--green-3); border-radius:3px}
+  .group-btn{
+    background:#fff;
+    border:2px solid var(--green-3);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .group-btn:hover{border-color:var(--accent); color:var(--accent-dark)}
+  .group-btn.active{
+    background:var(--green-1);
+    border-color:var(--accent);
+    color:var(--accent-dark);
+  }
+
+  main{max-width:900px; margin:0 auto; padding:20px 14px 60px}
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 18px rgba(46,125,50,.07);
+    border:1px solid var(--green-2);
+  }
+  .card-label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:800;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+  }
+  .card-source .card-label{background:var(--green-1); color:var(--accent-dark)}
+  .card-practice .card-label{background:#e8f5e9; color:#1b5e20}
+  .card.practice-solved{
+    border-color:var(--ok);
+    box-shadow:0 4px 18px rgba(27,94,32,.14);
+  }
+  .card.practice-solved .card-label{background:#e8f5e9; color:var(--ok)}
+
+  .topic{
+    font-size:16px;
+    font-weight:800;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+  }
+  .condition{font-size:14.5px; margin:0 0 12px}
+
+  .idea{
+    background:#f4faf5;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:10px 12px;
+    margin-bottom:12px;
+    font-size:13.5px;
+  }
+  .idea b{color:#1b5e20}
+
+  .steps{display:flex; flex-direction:column; gap:8px}
+  .step{
+    background:var(--green-4);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+  .step .num{
+    font-weight:700;
+    color:var(--accent-dark);
+    margin-right:5px;
+  }
+
+  .svg-container{
+    text-align:center;
+    margin:12px 0;
+  }
+  .svg-container svg{
+    max-width:100%;
+    height:auto;
+    background:#fff;
+    border-radius:10px;
+    border:1px solid var(--green-2);
+  }
+
+  .answer-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:var(--green-4);
+    border-radius:10px;
+    border:1px dashed var(--green-3);
+    margin-bottom:10px;
+  }
+  .answer-row label{font-weight:600; font-size:14px}
+
+  input[type="text"]{
+    border:2px solid var(--green-3);
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:.15s;
+    background:#fff;
+  }
+  input.final{width:100px}
+  input.blank{width:64px; text-align:center; font-weight:700; font-size:13.5px; vertical-align: middle;}
+  input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(46,125,50,.15);
+  }
+  input.ok{border-color:var(--ok); background:#eefaf2}
+  input.err{border-color:var(--err); background:#fdeeee}
+  input.shown{border-color:var(--accent); background:var(--green-1)}
+
+  button{
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:13.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.15s;
+    background:var(--accent);
+    color:#fff;
+  }
+  button:hover{background:var(--accent-dark); transform:translateY(-1px)}
+  button.ghost{background:var(--green-1); color:var(--accent-dark)}
+  button.ghost:hover{background:var(--green-2)}
+  button.hint{background:#e8f5e9; color:#1b5e20}
+  button.hint:hover{background:#c8e6c9}
+  button:disabled{opacity:.5; cursor:default; transform:none}
+
+  .feedback{font-weight:700; font-size:14px}
+  .feedback.ok{color:var(--ok)}
+  .feedback.err{color:var(--err)}
+
+  .hint-box{
+    background:#f4faf5;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:9px 12px;
+    margin-top:8px;
+    font-size:13.5px;
+  }
+  .hint-box b{color:#1b5e20}
+
+  .reveal{margin-top:12px; padding-top:12px; border-top:1px solid var(--green-2)}
+  .solution-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin-top:12px;
+  }
+  .blanks-feedback{font-weight:700; font-size:13.5px}
+  .blanks-feedback.ok{color:var(--ok)}
+  .blanks-feedback.err{color:var(--err)}
+
+  .hidden{display:none}
+  .practice-actions{display:flex; gap:8px; flex-wrap:wrap}
+  h2.topic{margin:0 0 10px}
+  button:focus-visible,input:focus-visible{outline:3px solid #1b5e20; outline-offset:2px}
+  @media (max-width:600px){ input[type="text"]{font-size:16px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>ОГЭ 2027. Задание 10 — Теория вероятностей</h1>
+  <p>Примеры + аналоги для самостоятельного решения</p>
+</header>
+<nav class="nav" aria-label="Разделы и задачи">
+  <div class="sections" id="sections"></div>
+  <div class="groups" id="groups"></div>
+</nav>
+<main id="content"></main>
+
+<script>
+/* ============ УТИЛИТЫ ============ */
+let blankCounter = 0;
+const inputMap = {};
+
+function b(ans, width = 64, tol = 0.001) {
+  const id = `blank_${blankCounter++}`;
+  return `<input class="blank" type="text" autocomplete="off" aria-label="Пропуск" id="${id}" data-answer="${ans}" data-tol="${tol}" style="width:${width}px">`;
+}
+
+function normalize(s) { return String(s).trim().replace(/\s+/g,"").replace(",","."); }
+function parseNumber(raw) {
+  let s = String(raw).trim().replace(/\s+/g, "").replace(/[−–—]/g, "-").replace(/,/g, ".");
+  const m = s.match(/^([+-]?\d+(?:\.\d+)?)\/([+-]?\d+(?:\.\d+)?)$/);
+  if (m) { const d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+  return /^[+-]?\d+(?:\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+}
+
+function checkInput(inp) {
+  if (String(inp.value).trim() === "") return false;
+  const ans = parseNumber(inp.dataset.answer);
+  const t = parseFloat(inp.dataset.tol);
+  const tol = isNaN(t) ? 0.001 : t;
+  const num = parseNumber(inp.value);
+  if (!isNaN(ans)) return !isNaN(num) && Math.abs(num - ans) <= tol + 1e-9;
+  return normalize(inp.value).toLowerCase() === normalize(inp.dataset.answer).toLowerCase();
+}
+
+function replaceInputsInMath(mathStr) {
+  return mathStr.replace(/<input class="blank"[^>]*>/g, (match) => {
+    const idMatch = match.match(/id="([^"]+)"/);
+    if (idMatch) {
+      const id = idMatch[1];
+      inputMap[id] = match;
+      return `\\htmlClass{${id}}{\\square}`;
+    }
+    return match;
+  });
+}
+
+function prepareMath(html) {
+  let processed = html.replace(/\\\((.*?)\\\)/gs, (match, inner) => {
+    return '\\(' + replaceInputsInMath(inner) + '\\)';
+  });
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (match, inner) => {
+    return '$$' + replaceInputsInMath(inner) + '$$';
+  });
+  return processed;
+}
+
+function restoreInputs(container) {
+  if (!container) return;
+  container.querySelectorAll('span[class*="blank_"]').forEach(span => {
+    const className = Array.from(span.classList).find(c => c.startsWith('blank_'));
+    if (className && inputMap[className]) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = inputMap[className];
+      const input = tmp.firstElementChild;
+      input.style.verticalAlign = 'middle';
+      span.parentNode.replaceChild(input, span);
+    }
+  });
+}
+
+function renderMath(container = document.body) {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(container, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false,
+      trust: true
+    });
+  }
+}
+
+/* ============ SVG ГЕНЕРАТОРЫ ============ */
+function createEulerPointsSVG(aOnly, inBoth, bOnly, outside) {
+  return `
+  <div class="svg-container">
+    <svg width="300" height="150" viewBox="0 0 300 150">
+      <rect x="5" y="5" width="290" height="140" fill="#f4faf5" stroke="#a5d6a7" stroke-width="2" rx="8"/>
+      <ellipse cx="110" cy="75" rx="65" ry="45" fill="#c8e6c9" fill-opacity="0.4" stroke="#2e7d32" stroke-width="2"/>
+      <ellipse cx="190" cy="75" rx="65" ry="45" fill="#a5d6a7" fill-opacity="0.4" stroke="#1b5e20" stroke-width="2"/>
+      <text x="55" y="78" font-size="18" font-weight="bold" fill="#2e7d32">A</text>
+      <text x="240" y="78" font-size="18" font-weight="bold" fill="#1b5e20">B</text>
+      ${aOnly} ${inBoth} ${bOnly} ${outside}
+    </svg>
+  </div>`;
+}
+
+function createEulerNumbersSVG(nOut, nA, nBoth, nB) {
+  return `
+  <div class="svg-container">
+    <svg width="300" height="150" viewBox="0 0 300 150">
+      <rect x="5" y="5" width="290" height="140" fill="#f4faf5" stroke="#a5d6a7" stroke-width="2" rx="8"/>
+      <ellipse cx="110" cy="75" rx="65" ry="45" fill="#e8f5e9" stroke="#2e7d32" stroke-width="2"/>
+      <ellipse cx="190" cy="75" rx="65" ry="45" fill="#c8e6c9" fill-opacity="0.5" stroke="#1b5e20" stroke-width="2"/>
+      <text x="35" y="30" font-size="16" font-weight="bold" fill="#1b5e20">${nOut}</text>
+      <text x="90" y="80" font-size="18" font-weight="bold" fill="#2e7d32">${nA}</text>
+      <text x="145" y="80" font-size="18" font-weight="bold" fill="#1b5e20">${nBoth}</text>
+      <text x="205" y="80" font-size="18" font-weight="bold" fill="#1b5e20">${nB}</text>
+      <text x="55" y="80" font-size="20" font-weight="bold" fill="#2e7d32">A</text>
+      <text x="240" y="80" font-size="20" font-weight="bold" fill="#1b5e20">B</text>
+    </svg>
+  </div>`;
+}
+
+function createTreeSVG(pA, pNotA, pAB, pANotB, pNotAB, pNotANotB) {
+  return `
+  <div class="svg-container">
+    <svg width="280" height="170" viewBox="0 0 280 170">
+      <line x1="140" y1="20" x2="70" y2="70" stroke="#2e7d32" stroke-width="2"/>
+      <line x1="140" y1="20" x2="210" y2="70" stroke="#2e7d32" stroke-width="2"/>
+      <line x1="70" y1="70" x2="35" y2="135" stroke="#1b5e20" stroke-width="1.5"/>
+      <line x1="70" y1="70" x2="105" y2="135" stroke="#1b5e20" stroke-width="1.5"/>
+      <line x1="210" y1="70" x2="175" y2="135" stroke="#1b5e20" stroke-width="1.5"/>
+      <line x1="210" y1="70" x2="245" y2="135" stroke="#1b5e20" stroke-width="1.5"/>
+
+      <text x="135" y="15" font-size="15" font-weight="bold" fill="#2e7d32">S</text>
+      <text x="63" y="65" font-size="15" font-weight="bold" fill="#2e7d32">A</text>
+      <text x="203" y="65" font-size="15" font-weight="bold" fill="#2e7d32">Ā</text>
+      <text x="28" y="152" font-size="15" font-weight="bold" fill="#1b5e20">B</text>
+      <text x="98" y="152" font-size="15" font-weight="bold" fill="#1b5e20">B̄</text>
+      <text x="168" y="152" font-size="15" font-weight="bold" fill="#1b5e20">B</text>
+      <text x="238" y="152" font-size="15" font-weight="bold" fill="#1b5e20">B̄</text>
+
+      <text x="85" y="40" font-size="12" font-weight="bold" fill="#1b5e20">${pA}</text>
+      <text x="175" y="40" font-size="12" font-weight="bold" fill="#1b5e20">${pNotA}</text>
+      <text x="38" y="100" font-size="11" font-weight="bold" fill="#2e7d32">${pAB}</text>
+      <text x="92" y="100" font-size="11" font-weight="bold" fill="#2e7d32">${pANotB}</text>
+      <text x="178" y="100" font-size="11" font-weight="bold" fill="#2e7d32">${pNotAB}</text>
+      <text x="232" y="100" font-size="11" font-weight="bold" fill="#2e7d32">${pNotANotB}</text>
+    </svg>
+  </div>`;
+}
+
+/* ============ ДАННЫЕ ============ */
+const groups = [
+
+/* I) Статистическое определение вероятности */
+{
+  id: 1,
+  section: "I. Статистическая вероятность",
+  topic: "1. Монета (орёл и решка)",
+  source: {
+    condition: "Монету бросили 50 раз. Известно, что орёл выпал 31 раз. Найдите вероятность того, что при втором по счёту броске выпала решка.",
+    idea: "<b>Главная мысль:</b> частота выпадения решки во всей серии испытаний равна статистической вероятности выпадения решки при любом броске.",
+    steps: [
+      "Число выпадений решки во всей серии: \\(50 - 31 = 19\\).",
+      "Относительная частота (вероятность): \\(P = \\frac{19}{50} = 0{,}38\\).",
+      "Ответ: 0,38."
+    ]
+  },
+  practice: {
+    condition: "Монету бросили 20 раз. Известно, что орёл выпал 12 раз. Найдите вероятность того, что при втором по счёту броске выпала решка.",
+    answer: { val: 0.4, unit: "" },
+    hints: ["Количество решек: \\(20 - 12 = 8\\).", "Разделите 8 на 20."],
+    solution: { steps: [`Число решек: \\(20 - 12 = ${b(8,50)}\\).`, `Вероятность: \\(P = \\frac{8}{20} = ${b(0.4,60)}\\).`, "Ответ: 0,4."] }
+  }
+},
+{
+  id: 2,
+  section: "I. Статистическая вероятность",
+  topic: "2. Фонарики (исправность)",
+  source: {
+    condition: "В среднем из 120 карманных фонариков, поступивших в продажу, три неисправных. Найдите вероятность того, что выбранный наудачу в магазине фонарик окажется исправен.",
+    idea: "<b>Главная мысль:</b> найдем отношение количества исправных фонариков к их общему числу.",
+    steps: [
+      "Количество исправных фонариков: \\(120 - 3 = 117\\).",
+      "Вероятность: \\(P = \\frac{117}{120} = 0{,}975\\).",
+      "Ответ: 0,975."
+    ]
+  },
+  practice: {
+    condition: "В среднем из 150 карманных фонариков, поступивших в продажу, три неисправных. Найдите вероятность того, что выбранный наудачу в магазине фонарик окажется исправен.",
+    answer: { val: 0.98, unit: "" },
+    hints: ["Исправных: \\(150 - 3 = 147\\).", "Разделите 147 на 150."],
+    solution: { steps: [`Исправных фонариков: \\(150 - 3 = ${b(147,60)}\\).`, `Вероятность: \\(P = \\frac{147}{150} = ${b(0.98,60)}\\).`, "Ответ: 0,98."] }
+  }
+},
+
+/* II) Классическое определение вероятности */
+{
+  id: 3,
+  section: "II. Классическая вероятность",
+  topic: "3. Элементарные события N(A) и N",
+  source: {
+    condition: "В случайном опыте \\(N=30\\) равновозможных элементарных событий, из которых \\(N(A)=3\\) благоприятствуют событию A. Вычислите вероятность события A.",
+    idea: "<b>Главная мысль:</b> классическая вероятность вычисляется по формуле \\(P(A) = \\frac{N(A)}{N}\\).",
+    steps: [
+      "\\(P(A) = \\frac{3}{30} = 0{,}1\\).",
+      "Ответ: 0,1."
+    ]
+  },
+  practice: {
+    condition: "В случайном опыте \\(N=35\\) равновозможных элементарных событий, из которых \\(N(A)=21\\) благоприятствуют событию A. Вычислите вероятность события A.",
+    answer: { val: 0.6, unit: "" },
+    hints: ["Разделите 21 на 35."],
+    solution: { steps: [`\\(P(A) = \\frac{21}{35} = \\frac{3}{5} = ${b(0.6,60)}\\).`, "Ответ: 0,6."] }
+  }
+},
+{
+  id: 4,
+  section: "II. Классическая вероятность",
+  topic: "4. Диаграмма Эйлера (Точки)",
+  source: {
+    condition: `На рисунке изображена диаграмма Эйлера для случайных событий A и B в некотором случайном опыте. Точками показаны все равновозможные элементарные события опыта:
+    ${createEulerPointsSVG(
+      '<circle cx="85" cy="60" r="4" fill="#1b5e20"/><circle cx="100" cy="95" r="4" fill="#1b5e20"/><circle cx="75" cy="85" r="4" fill="#1b5e20"/>',
+      '<circle cx="150" cy="55" r="4" fill="#1b5e20"/><circle cx="140" cy="80" r="4" fill="#1b5e20"/><circle cx="160" cy="95" r="4" fill="#1b5e20"/>',
+      '<circle cx="210" cy="70" r="4" fill="#1b5e20"/>',
+      '<circle cx="250" cy="25" r="4" fill="#1b5e20"/><circle cx="275" cy="40" r="4" fill="#1b5e20"/>'
+    )}
+    а) Найдите вероятность события A.<br>
+    б) Найдите вероятность события B.<br>
+    в) Найдите вероятность события \\(A \\cap B\\).<br>
+    г) Найдите вероятность события \\(A \\cup B\\).`,
+    idea: "<b>Главная мысль:</b> посчитаем общее число точек \\(N=10\\) и делим количество точек нужной области на 10.",
+    steps: [
+      "Всего точек \\(N = 10\\).",
+      "а) Точки в A (только A + пересечение): \\(3 + 3 = 6 \\implies P(A) = \\frac{6}{10} = 0{,}6\\).",
+      "б) Точки в B (только B + пересечение): \\(1 + 3 = 4 \\implies P(B) = \\frac{4}{10} = 0{,}4\\).",
+      "в) Точки в пересечении \\(A \\cap B\\): \\(3 \\implies P(A \\cap B) = \\frac{3}{10} = 0{,}3\\).",
+      "г) Точки в объединении \\(A \\cup B\\): \\(3 + 3 + 1 = 7 \\implies P(A \\cup B) = \\frac{7}{10} = 0{,}7\\)."
+    ]
+  },
+  practice: {
+    condition: `На рисунке изображена диаграмма Эйлера с точками:
+    ${createEulerPointsSVG(
+      '<circle cx="80" cy="65" r="4" fill="#1b5e20"/><circle cx="95" cy="95" r="4" fill="#1b5e20"/>',
+      '<circle cx="145" cy="60" r="4" fill="#1b5e20"/><circle cx="150" cy="90" r="4" fill="#1b5e20"/>',
+      '<circle cx="200" cy="55" r="4" fill="#1b5e20"/><circle cx="215" cy="80" r="4" fill="#1b5e20"/><circle cx="190" cy="105" r="4" fill="#1b5e20"/><circle cx="225" cy="105" r="4" fill="#1b5e20"/>',
+      '<circle cx="265" cy="30" r="4" fill="#1b5e20"/>'
+    )}
+    Найдите вероятность события \\(\\bar{A} \\cap B\\) (только B).`,
+    answer: { val: 0.4, unit: "" },
+    hints: ["Общее число точек: N = 10.", "В области 'только B' лежит 4 точки.", "Разделите 4 на 10."],
+    solution: { steps: [`Общее число точек \\(N = 10\\).`, `Точек в области \\(\\bar{A} \\cap B\\): \\(4\\).`, `\\(P(\\bar{A} \\cap B) = \\frac{4}{10} = ${b(0.4,60)}\\).`, "Ответ: 0,4."] }
+  }
+},
+{
+  id: 5,
+  section: "II. Классическая вероятность",
+  topic: "5. Диаграмма Эйлера (Исходы в областях)",
+  source: {
+    condition: `На рисунке изображена диаграмма Эйлера с равновозможными исходами. В каждой области указано, сколько исходов ей принадлежит:
+    ${createEulerNumbersSVG(8, 3, 4, 5)}
+    а) Найдите вероятность события A.<br>
+    б) Найдите вероятность события B.<br>
+    в) Найдите вероятность события \\(\\bar{A} \\cap B\\).<br>
+    г) Найдите вероятность события \\(A \\cap \\bar{B}\\).`,
+    idea: "<b>Главная мысль:</b> сначала найдём общее число исходов: \\(N = 8 + 3 + 4 + 5 = 20\\).",
+    steps: [
+      "Общее число исходов: \\(N = 20\\).",
+      "а) Для A: \\(3 + 4 = 7 \\implies P(A) = \\frac{7}{20} = 0{,}35\\).",
+      "б) Для B: \\(4 + 5 = 9 \\implies P(B) = \\frac{9}{20} = 0{,}45\\).",
+      "в) Для \\(\\bar{A} \\cap B\\) (только B): \\(5 \\implies P = \\frac{5}{20} = 0{,}25\\).",
+      "г) Для \\(A \\cap \\bar{B}\\) (только A): \\(3 \\implies P = \\frac{3}{20} = 0{,}15\\)."
+    ]
+  },
+  practice: {
+    condition: `На диаграмме Эйлера указаны исходы:
+    ${createEulerNumbersSVG(24, 18, 6, 12)}
+    а) Найдите вероятность события A.<br>
+    б) Найдите вероятность события \\(A \\cap \\bar{B}\\) (только A).`,
+    answer: { val: 0.3, unit: "" },
+    hints: ["Общее число исходов: \\(24 + 18 + 6 + 12 = 60\\).", "Исходов 'только A': 18.", "Разделите 18 на 60."],
+    solution: { steps: [`Общее число исходов: \\(60\\).`, `Исходов для \\(A \\cap \\bar{B}\\): \\(18\\).`, `\\(P = \\frac{18}{60} = ${b(0.3,60)}\\).`, "Ответ: 0,3."] }
+  }
+},
+{
+  id: 6,
+  section: "II. Классическая вероятность",
+  topic: "6. Фирма такси",
+  source: {
+    condition: "В фирме такси в данный момент свободно 16 машин: 2 чёрные, 8 жёлтых и 6 зелёных. По вызову выехала одна из машин, случайно оказавшаяся ближе всего. Найдите вероятность того, что к заказчику приедет жёлтое такси.",
+    idea: "<b>Главная мысль:</b> общее число машин делим на число жёлтых машин.",
+    steps: [
+      "Общее число машин: \\(2 + 8 + 6 = 16\\).",
+      "Жёлтых машин: \\(8\\).",
+      "Вероятность: \\(P = \\frac{8}{16} = 0{,}5\\).",
+      "Ответ: 0,5."
+    ]
+  },
+  practice: {
+    condition: "В фирме такси в данный момент свободно 20 машин: 3 чёрные, 3 жёлтые и 14 зелёных. Найдите вероятность того, что к нему приедет жёлтое такси.",
+    answer: { val: 0.15, unit: "" },
+    hints: ["Всего машин: 20.", "Жёлтых машин: 3.", "Разделите 3 на 20."],
+    solution: { steps: [`Жёлтых машин: 3. Всего: 20.`, `\\(P = \\frac{3}{20} = ${b(0.15,60)}\\).`, "Ответ: 0,15."] }
+  }
+},
+{
+  id: 7,
+  section: "II. Классическая вероятность",
+  topic: "7. Подарки / Пазлы",
+  source: {
+    condition: "Родительский комитет закупил 30 пазлов для подарков детям в связи с окончанием учебного года, из них 21 с машинами и 9 с видом города. Подарки распределяются случайным образом между 30 детьми, среди которых есть Серёжа. Найдите вероятность того, что Серёже достанется пазл с машиной.",
+    idea: "<b>Главная мысль:</b> разделить количество пазлов с машинами на общее число детей (пазлов).",
+    steps: [
+      "Всего пазлов: 30. С машинами: 21.",
+      "Вероятность: \\(P = \\frac{21}{30} = 0{,}7\\).",
+      "Ответ: 0,7."
+    ]
+  },
+  practice: {
+    condition: "Родительский комитет закупил 10 пазлов, из них 2 с машинами и 8 с видами городов. Найдите вероятность того, что Андрюше достанется пазл с машиной.",
+    answer: { val: 0.2, unit: "" },
+    hints: ["Разделите 2 на 10."],
+    solution: { steps: [`\\(P = \\frac{2}{10} = ${b(0.2,60)}\\).`, "Ответ: 0,2."] }
+  }
+},
+{
+  id: 8,
+  section: "II. Классическая вероятность",
+  topic: "8. Маркеры для доски",
+  source: {
+    condition: "Под классной доской в лотке лежат 6 чёрных и 34 синих маркеров для доски. Из коробки берут случайный маркер. Найдите вероятность того, что он окажется синим.",
+    idea: "<b>Главная мысль:</b> число синих маркеров делим на сумму всех маркеров.",
+    steps: [
+      "Всего маркеров: \\(6 + 34 = 40\\).",
+      "Синих маркеров: 34.",
+      "Вероятность: \\(P = \\frac{34}{40} = 0{,}85\\).",
+      "Ответ: 0,85."
+    ]
+  },
+  practice: {
+    condition: "Под классной доской в лотке лежат 12 чёрных и 18 синих маркеров для доски. Из коробки берут случайный маркер. Найдите вероятность того, что он окажется синим.",
+    answer: { val: 0.6, unit: "" },
+    hints: ["Всего маркеров: \\(12 + 18 = 30\\).", "Синих маркеров: 18.", "Разделите 18 на 30."],
+    solution: { steps: [`Всего маркеров: \\(30\\).`, `\\(P = \\frac{18}{30} = ${b(0.6,60)}\\).`, "Ответ: 0,6."] }
+  }
+},
+{
+  id: 9,
+  section: "II. Классическая вероятность",
+  topic: "9. Лыжные гонки (3 вопроса)",
+  source: {
+    condition: "В лыжных гонках участвуют 5 спортсменов из России, 2 спортсмена из Норвегии и 3 спортсмена из Швеции. Порядок старта определяется жребием. Найдите вероятность того, что:<br>а) первым будет стартовать спортсмен из России;<br>б) первым будет стартовать спортсмен из России или Швеции;<br>в) первым будет стартовать спортсмен не из Швеции.",
+    idea: "<b>Главная мысль:</b> общее число спортсменов \\(N = 5 + 2 + 3 = 10\\). Разбираем каждый пункт отдельно.",
+    steps: [
+      "Общее число спортсменов: \\(N = 10\\).",
+      "а) Из России (5 человек): \\(P = \\frac{5}{10} = 0{,}5\\).",
+      "б) Из России или Швеции (5 + 3 = 8 человек): \\(P = \\frac{8}{10} = 0{,}8\\).",
+      "в) Не из Швеции (Россия + Норвегия = 5 + 2 = 7 человек): \\(P = \\frac{7}{10} = 0{,}7\\)."
+    ]
+  },
+  practice: {
+    condition: "В лыжных гонках участвуют 13 спортсменов из России, 2 из Норвегии и 5 из Швеции. Порядок определяется жребием. Найдите вероятность того, что первым будет стартовать спортсмен из Норвегии или Швеции.",
+    answer: { val: 0.35, unit: "" },
+    hints: ["Всего спортсменов: \\(13 + 2 + 5 = 20\\).", "Норвегия или Швеция: \\(2 + 5 = 7\\).", "Разделите 7 на 20."],
+    solution: { steps: [`Всего спортсменов: \\(20\\).`, `Благоприятных: \\(7\\).`, `\\(P = \\frac{7}{20} = ${b(0.35,60)}\\).`, "Ответ: 0,35."] }
+  }
+},
+{
+  id: 10,
+  section: "II. Классическая вероятность",
+  topic: "10. Чашки у бабушки",
+  source: {
+    condition: "У бабушки 15 чашек: 12 с красными цветами, остальные с синими. Бабушка наливает чай в случайно выбранную чашку. Найдите вероятность того, что это будет чашка с синими цветами.",
+    idea: "<b>Главная мысль:</b> найдем количество синих чашек и разделим на 15.",
+    steps: [
+      "Чашек с синими цветами: \\(15 - 12 = 3\\).",
+      "Вероятность: \\(P = \\frac{3}{15} = 0{,}2\\).",
+      "Ответ: 0,2."
+    ]
+  },
+  practice: {
+    condition: "У бабушки 20 чашек: 15 с красными цветами, остальные с синими. Найдите вероятность того, что чай налиют в чашку с синими цветами.",
+    answer: { val: 0.25, unit: "" },
+    hints: ["Синих чашек: \\(20 - 15 = 5\\).", "Разделите 5 на 20."],
+    solution: { steps: [`Синих чашек: \\(5\\).`, `\\(P = \\frac{5}{20} = ${b(0.25,60)}\\).`, "Ответ: 0,25."] }
+  }
+},
+{
+  id: 11,
+  section: "II. Классическая вероятность",
+  topic: "11. Экзаменационные билеты",
+  source: {
+    condition: "На экзамене 40 билетов, Гриша не выучил 10 из них. Найдите вероятность того, что ему попадётся выученный билет.",
+    idea: "<b>Главная мысль:</b> число выученных билетов делим на общее количество билетов.",
+    steps: [
+      "Выучил билетов: \\(40 - 10 = 30\\).",
+      "Вероятность: \\(P = \\frac{30}{40} = 0{,}75\\).",
+      "Ответ: 0,75."
+    ]
+  },
+  practice: {
+    condition: "На экзамене 30 билетов, Серёжа не выучил 9 из них. Найдите вероятность того, что ему попадётся выученный билет.",
+    answer: { val: 0.7, unit: "" },
+    hints: ["Выучил билетов: \\(30 - 9 = 21\\).", "Разделите 21 на 30."],
+    solution: { steps: [`Выученных билетов: \\(21\\).`, `\\(P = \\frac{21}{30} = ${b(0.7,60)}\\).`, "Ответ: 0,7."] }
+  }
+},
+{
+  id: 12,
+  section: "II. Классическая вероятность",
+  topic: "12. Магазин канцтоваров (ручки)",
+  source: {
+    condition: "В магазине канцтоваров продаётся 180 ручек: 43 красных, 54 зелёных, 29 фиолетовых, остальные синие и чёрные, их поровну. Найдите вероятность того, что случайно выбранная ручка будет:<br>а) красной или фиолетовой;<br>б) синей или чёрной;<br>в) чёрной или зелёной.",
+    idea: "<b>Главная мысль:</b> для каждого пункта суммируем количество нужных цветных ручек и делим на 180.",
+    steps: [
+      "Всего ручек: 180.",
+      "Остаток (синие + чёрные): \\(180 - (43 + 54 + 29) = 54\\) ручки (по 27 каждого цвета).",
+      "а) Красных или фиолетовых: \\(43 + 29 = 72 \\implies P = \\frac{72}{180} = 0{,}4\\).",
+      "б) Синей или чёрной: \\(27 + 27 = 54 \\implies P = \\frac{54}{180} = 0{,}3\\).",
+      "в) Чёрной или зелёной: \\(27 + 54 = 81 \\implies P = \\frac{81}{180} = 0{,}45\\)."
+    ]
+  },
+  practice: {
+    condition: "В магазине канцтоваров продаётся 120 ручек: 32 красных, 32 зелёных, 46 фиолетовых, остальные синие и чёрные (поровну). Найдите вероятность того, что случайно выбранная ручка будет красной или фиолетовой.",
+    answer: { val: 0.65, unit: "" },
+    hints: ["Красных и фиолетовых: \\(32 + 46 = 78\\).", "Разделите 78 на 120."],
+    solution: { steps: [`Красных и фиолетовых: \\(78\\).`, `\\(P = \\frac{78}{120} = ${b(0.65,60)}\\).`, "Ответ: 0,65."] }
+  }
+},
+{
+  id: 13,
+  section: "II. Классическая вероятность",
+  topic: "13. Игральный кубик (два броска)",
+  source: {
+    condition: "Симметричный игральный кубик бросают два раза. Найдите вероятность события «сумма выпавших очков равна 3, 4 или 5».",
+    idea: "<b>Главная мысль:</b> всего при двух бросках исходов \\(6 \\times 6 = 36\\). Находим комбинации с нужными суммами.",
+    steps: [
+      "Сумма 3: (1,2), (2,1) — 2 исхода.",
+      "Сумма 4: (1,3), (2,2), (3,1) — 3 исхода.",
+      "Сумма 5: (1,4), (2,3), (3,2), (4,1) — 4 исхода.",
+      "Всего благоприятных исходов: \\(2 + 3 + 4 = 9\\).",
+      "Вероятность: \\(P = \\frac{9}{36} = 0{,}25\\).",
+      "Ответ: 0,25."
+    ]
+  },
+  practice: {
+    condition: "Симметричный игральный кубик бросают два раза. Найдите вероятность события «сумма выпавших очков равна 9, 10 или 11».",
+    answer: { val: 0.25, unit: "" },
+    hints: ["Сумма 9: 4 пары; Сумма 10: 3 пары; Сумма 11: 2 пары.", "Всего 9 пар из 36."],
+    solution: { steps: [`Благоприятных пар: \\(4 + 3 + 2 = 9\\).`, `\\(P = \\frac{9}{36} = ${b(0.25,60)}\\).`, "Ответ: 0,25."] }
+  }
+},
+
+/* III) Формулы для вычисления вероятностей. Условная вероятность */
+{
+  id: 14,
+  section: "III. Формулы и Диаграммы",
+  topic: "14. Качество ручек (противоположное)",
+  source: {
+    condition: "Вероятность того, что новая шариковая ручка пишет плохо (или не пишет), равна 0,16. Покупатель в магазине выбирает одну такую ручку. Найдите вероятность того, что эта ручка пишет хорошо.",
+    idea: "<b>Главная мысль:</b> события «пишет плохо» и «пишет хорошо» противоположны, сумма их вероятностей равна 1.",
+    steps: [
+      "\\(P = 1 - 0{,}16 = 0{,}84\\).",
+      "Ответ: 0,84."
+    ]
+  },
+  practice: {
+    condition: "Вероятность того, что новая шариковая ручка пишет плохо (или не пишет), равна 0,14. Найдите вероятность того, что эта ручка пишет хорошо.",
+    answer: { val: 0.86, unit: "" },
+    hints: ["Вычтите 0,14 из 1."],
+    solution: { steps: [`\\(P = 1 - 0{,}14 = ${b(0.86,60)}\\).`, "Ответ: 0,86."] }
+  }
+},
+{
+  id: 15,
+  section: "III. Формулы и Диаграммы",
+  topic: "15. Диаграмма Эйлера (Вероятности)",
+  source: {
+    condition: `На рисунке изображена диаграмма Эйлера. В каждой из четырёх областей указана вероятность события:
+    ${createEulerNumbersSVG("0,1", "0,4", "0,2", "0,3")}
+    а) Найдите вероятность события A.<br>
+    б) Найдите вероятность события B.<br>
+    в) Найдите вероятность события \\(\\bar{A} \\cup B\\).<br>
+    г) Найдите вероятность события \\(A \\cup \\bar{B}\\).`,
+    idea: "<b>Главная мысль:</b> аккуратно складываем вероятности входящих в выражение областей.",
+    steps: [
+      "а) \\(P(A) = 0{,}4 + 0{,}2 = 0{,}6\\).",
+      "б) \\(P(B) = 0{,}2 + 0{,}3 = 0{,}5\\).",
+      "в) Для \\(\\bar{A} \\cup B\\) (всё кроме 'только A'): \\(0{,}2 + 0{,}3 + 0{,}1 = 0{,}6\\).",
+      "г) Для \\(A \\cup \\bar{B}\\) (всё кроме 'только B'): \\(0{,}4 + 0{,}2 + 0{,}1 = 0{,}7\\)."
+    ]
+  },
+  practice: {
+    condition: `На рисунке изображена диаграмма Эйлера с вероятностями:
+    ${createEulerNumbersSVG("0,4", "0,3", "0,1", "0,2")}
+    в) Найдите вероятность события \\(\\bar{A} \\cup B\\).<br>
+    г) Найдите вероятность события \\(A \\cup \\bar{B}\\).`,
+    answer: { val: 0.7, unit: "" },
+    hints: ["Для \\(\\bar{A} \\cup B\\): складываем всё, кроме 'только A' (0,3): 0,1 + 0,2 + 0,4 = 0,7."],
+    solution: { steps: [`\\(P(\\bar{A} \\cup B) = 0{,}1 + 0{,}2 + 0{,}4 = ${b(0.7,60)}\\).`, "Ответ: 0,7."] }
+  }
+},
+{
+  id: 16,
+  section: "III. Формулы и Диаграммы",
+  topic: "16. Диаграмма Эйлера (Точки с вероятностями)",
+  source: {
+    condition: `На рисунке точками показаны все элементарные события, около каждого указана его вероятность:
+    ${createEulerPointsSVG(
+      '<text x="75" y="60" font-size="11" font-weight="bold" fill="#1b5e20">• 0,05</text><text x="80" y="100" font-size="11" font-weight="bold" fill="#1b5e20">• 0,1</text>',
+      '<text x="140" y="60" font-size="11" font-weight="bold" fill="#1b5e20">• 0,2</text><text x="135" y="95" font-size="11" font-weight="bold" fill="#1b5e20">• 0,05</text>',
+      '<text x="200" y="65" font-size="11" font-weight="bold" fill="#1b5e20">• 0,15</text><text x="195" y="105" font-size="11" font-weight="bold" fill="#1b5e20">• 0,2</text>',
+      '<text x="210" y="25" font-size="11" font-weight="bold" fill="#1b5e20">• 0,15</text><text x="100" y="140" font-size="11" font-weight="bold" fill="#1b5e20">• 0,1</text>'
+    )}
+    а) Найдите вероятность события A.<br>
+    б) Найдите вероятность события B.<br>
+    в) Найдите вероятность события \\(\\overline{A \\cap B}\\).<br>
+    г) Найдите вероятность события \\(\\overline{A \\cup B}\\).`,
+    idea: "<b>Главная мысль:</b> аккуратно суммируем значения вероятностей указанных точек.",
+    steps: [
+      "а) Точки в A: \\(0{,}05 + 0{,}1 + 0{,}2 + 0{,}05 = 0{,}4\\).",
+      "б) Точки в B: \\(0{,}2 + 0{,}05 + 0{,}15 + 0{,}2 = 0{,}6\\).",
+      "в) Отрицание пересечения \\(\\overline{A \\cap B}\\): вычитаем из 1 точки пересечения (0,2 и 0,05), получаем \\(1 - 0{,}25 = 0{,}75\\).",
+      "г) Отрицание объединения \\(\\overline{A \\cup B}\\): берем только точки снаружи кругов = \\(0{,}15 + 0{,}1 = 0{,}25\\)."
+    ]
+  },
+  practice: {
+    condition: `По диаграмме с вероятностями точек выше найдите вероятность события \\(\\overline{A \\cap B}\\).`,
+    answer: { val: 0.6, unit: "" },
+    hints: ["В пересечении точки 0,1 и 0,3 (сумма = 0,4).", "Вычтите из 1: \\(1 - 0{,}4 = 0{,}6\\)."],
+    solution: { steps: [`Точки пересечения: \\(0{,}1 + 0{,}3 = 0{,}4\\).`, `\\(P(\\overline{A \\cap B}) = 1 - 0{,}4 = ${b(0.6,60)}\\).`, "Ответ: 0,6."] }
+  }
+},
+{
+  id: 17,
+  section: "III. Формулы и Диаграммы",
+  topic: "17. Зависимые события (Карандаши)",
+  source: {
+    condition: "Из ящика, где хранятся 6 жёлтых и 15 зелёных карандашей, не глядя достали два карандаша. Известно, что первый карандаш оказался зелёным. Найдите вероятность того, что второй карандаш тоже оказался зелёным.",
+    idea: "<b>Главная мысль:</b> событие происходит без возвращения. Учитываем извлечение одного зелёного карандаша.",
+    steps: [
+      "Осталось зелёных карандашей: \\(15 - 1 = 14\\).",
+      "Осталось всего карандашей: \\(6 + 14 = 20\\).",
+      "Вероятность: \\(P = \\frac{14}{20} = 0{,}7\\).",
+      "Ответ: 0,7."
+    ]
+  },
+  practice: {
+    condition: "Из ящика, где хранятся 10 жёлтых и 16 зелёных карандашей, не глядя достали два карандаша. Известно, что первый карандаш оказался зелёным. Найдите вероятность того, что второй карандаш тоже оказался зелёным.",
+    answer: { val: 0.6, unit: "" },
+    hints: ["Осталось зелёных: 15.", "Осталось всего: \\(10 + 15 = 25\\).", "Разделите 15 на 25."],
+    solution: { steps: [`Зелёных осталось: \\(15\\). Всего осталось: \\(25\\).`, `\\(P = \\frac{15}{25} = ${b(0.6,60)}\\).`, "Ответ: 0,6."] }
+  }
+},
+{
+  id: 18,
+  section: "III. Формулы и Диаграммы",
+  topic: "18. Дерево случайного опыта",
+  source: {
+    condition: `На рисунке изображено дерево случайного опыта:
+    ${createTreeSVG("0,35", "0,65", "0,7", "0,3", "0,1", "0,9")}
+    Найдите вероятность события B.`,
+    idea: "<b>Главная мысль:</b> событие B наступает по двум путям: через A ИЛИ через \\(\\bar{A}\\). Перемножаем вероятности вдоль ветвей и складываем.",
+    steps: [
+      "Путь через A: \\(0{,}35 \\times 0{,}7 = 0{,}245\\).",
+      "Путь через \\(\\bar{A}\\): \\(0{,}65 \\times 0{,}1 = 0{,}065\\).",
+      "Вероятность B: \\(0{,}245 + 0{,}065 = 0{,}31\\).",
+      "Ответ: 0,31."
+    ]
+  },
+  practice: {
+    condition: `На рисунке изображено дерево опыта:
+    ${createTreeSVG("0,75", "0,25", "0,6", "0,4", "0,2", "0,8")}
+    Найдите вероятность события B.`,
+    answer: { val: 0.5, unit: "" },
+    hints: ["Путь 1: \\(0{,}75 \\times 0{,}6 = 0{,}45\\).", "Путь 2: \\(0{,}25 \\times 0{,}2 = 0{,}05\\).", "Сложите произведения."],
+    solution: { steps: [`Путь 1: \\(0{,}75 \\times 0{,}6 = ${b(0.45,60)}\\).`, `Путь 2: \\(0{,}25 \\times 0{,}2 = ${b(0.05,60)}\\).`, `\\(P(B) = 0{,}45 + 0{,}05 = ${b(0.5,60)}\\).`, "Ответ: 0,5."] }
+  }
+}
+
+];
+
+/* ============ РЕНДЕР ИНТЕРФЕЙСА ============ */
+const sections = [...new Set(groups.map(g => g.section))];
+let currentSection = sections[0];
+let currentGroupId = groups[0].id;
+
+const sectionsEl = document.getElementById("sections");
+const groupsEl = document.getElementById("groups");
+const contentEl = document.getElementById("content");
+
+function renderSectionTabs() {
+  sectionsEl.innerHTML = "";
+  sections.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "section-btn" + (s === currentSection ? " active" : "");
+    btn.textContent = s;
+    btn.setAttribute("aria-pressed", s === currentSection ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentSection = s;
+      const firstInSection = groups.find(g => g.section === s);
+      currentGroupId = firstInSection.id;
+      renderSectionTabs();
+      renderGroupTabs();
+      renderContent();
+    });
+    sectionsEl.appendChild(btn);
+  });
+}
+
+function renderGroupTabs() {
+  groupsEl.innerHTML = "";
+  groups.filter(g => g.section === currentSection).forEach(g => {
+    const btn = document.createElement("button");
+    btn.className = "group-btn" + (g.id === currentGroupId ? " active" : "");
+    btn.innerHTML = prepareMath(`${g.topic}`);
+    btn.setAttribute("aria-pressed", g.id === currentGroupId ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentGroupId = g.id;
+      renderGroupTabs();
+      renderContent();
+    });
+    groupsEl.appendChild(btn);
+    renderMath(btn);
+  });
+}
+
+function renderContent() {
+  const g = groups.find(x => x.id === currentGroupId);
+  const src = g.source;
+  const pr = g.practice;
+
+  const rawHTML = `
+    <h2 class="topic">${g.topic}</h2>
+
+    <div class="card card-source">
+      <div class="card-label">📖 Пример решения</div>
+      <div class="condition">${src.condition}</div>
+      <div class="idea">${src.idea}</div>
+      <div class="steps">
+        ${src.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+      </div>
+    </div>
+
+    <div class="card card-practice" id="practiceCard">
+      <div class="card-label">✏️ Реши самостоятельно</div>
+      <div class="condition">${pr.condition}</div>
+      <div class="answer-row">
+        <label>Ответ: <input class="final" type="text" autocomplete="off" data-answer="${pr.answer.val}" data-tol="0.001"> ${pr.answer.unit}</label>
+        <button class="check-answer">Проверить ответ</button>
+        <span class="feedback" role="status" aria-live="polite"></span>
+      </div>
+      <div class="practice-actions">
+        <button class="hint">💡 Подсказка</button>
+        <button class="ghost reveal-btn">🔎 Показать решение (с пропусками)</button>
+      </div>
+      <div class="hints-wrap"></div>
+      <div class="reveal hidden">
+        <div class="steps">
+          ${pr.solution.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+        </div>
+        <div class="solution-controls">
+          <button class="check-blanks">Проверить пропуски</button>
+          <button class="ghost show-all">Показать все ответы</button>
+          <span class="blanks-feedback" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  contentEl.innerHTML = prepareMath(rawHTML);
+  renderMath(contentEl);
+  restoreInputs(contentEl);
+
+  const card = document.getElementById("practiceCard");
+  const input = card.querySelector(".final");
+  const feedback = card.querySelector(".feedback");
+  const hintsWrap = card.querySelector(".hints-wrap");
+  const hintBtn = card.querySelector(".hint");
+  const revealBtn = card.querySelector(".reveal-btn");
+  const reveal = card.querySelector(".reveal");
+  const blanksFb = card.querySelector(".blanks-feedback");
+  let hintIndex = 0;
+  input.addEventListener("keydown", e => { if (e.key === "Enter") card.querySelector(".check-answer").click(); });
+
+  card.querySelector(".check-answer").addEventListener("click", () => {
+    const ok = checkInput(input);
+    input.classList.toggle("ok", ok);
+    input.classList.toggle("err", !ok);
+    feedback.textContent = ok ? "Верно! Отличная работа." : "Пока неверно — попробуй ещё раз или открой решение.";
+    feedback.className = "feedback " + (ok ? "ok" : "err");
+    if (ok) card.classList.add("practice-solved");
+  });
+
+  hintBtn.addEventListener("click", () => {
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны"; return;
+    }
+    const box = document.createElement("div");
+    box.className = "hint-box";
+    box.innerHTML = prepareMath(`<b>Подсказка ${hintIndex+1}.</b> ${pr.hints[hintIndex]}`);
+    hintsWrap.appendChild(box);
+    renderMath(box);
+    restoreInputs(box);
+    hintIndex++;
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны";
+    }
+  });
+
+  revealBtn.addEventListener("click", () => {
+    reveal.classList.toggle("hidden");
+    revealBtn.textContent = reveal.classList.contains("hidden")
+      ? "🔎 Показать решение (с пропусками)"
+      : "Скрыть решение";
+    if (!reveal.classList.contains("hidden")) {
+      renderMath(reveal);
+      restoreInputs(reveal);
+    }
+  });
+
+  card.querySelector(".check-blanks").addEventListener("click", () => {
+    const blanks = reveal.querySelectorAll("input.blank");
+    let okCount = 0;
+    blanks.forEach(inp => {
+      const ok = checkInput(inp);
+      inp.classList.remove("shown");
+      inp.classList.toggle("ok", ok);
+      inp.classList.toggle("err", !ok && inp.value.trim() !== "");
+      if (ok) okCount++;
+    });
+    blanksFb.textContent = `Верно: ${okCount} из ${blanks.length}`;
+    blanksFb.className = "blanks-feedback " + (okCount === blanks.length ? "ok" : "err");
+  });
+
+  card.querySelector(".show-all").addEventListener("click", () => {
+    reveal.querySelectorAll("input.blank").forEach(inp => {
+      inp.value = String(inp.dataset.answer).replace(".", ",");
+      inp.classList.remove("err", "ok");
+      inp.classList.add("shown");
+    });
+    blanksFb.textContent = "Все пропуски заполнены.";
+    blanksFb.className = "blanks-feedback ok";
+  });
+}
+
+renderSectionTabs();
+renderGroupTabs();
+renderContent();
+</script>
+</body>
+</html>

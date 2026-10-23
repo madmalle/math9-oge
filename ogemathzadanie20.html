@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ. Задание 20 — тренажёр</title>
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath();"></script>
+
+<style>
+  :root{
+    --bg:#fdf2f7;
+    --card:#ffffff;
+    --accent:#d81b60;
+    --accent-dark:#ad1457;
+    --ok:#1d7a4d;
+    --err:#d02a4c;
+    --text:#2b2028;
+    --muted:#7a6670;
+    --gold:#f48fb1;
+    --rose-1:#fce4ec;
+    --rose-2:#f8d7e3;
+    --rose-3:#f3c9da;
+    --rose-4:#fffafc;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    font-size:15px;
+  }
+  header{
+    background:linear-gradient(135deg,#d81b60,#ad1457);
+    color:#fff;
+    padding:22px 16px 18px;
+    text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:clamp(18px,2.5vw,24px)}
+  header p{margin:0; font-size:14px}
+
+  .nav{
+    background:#fff;
+    border-bottom:1px solid var(--rose-3);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 10px rgba(216,27,96,.08);
+  }
+  .sections{
+    display:flex;
+    gap:6px;
+    padding:10px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+    border-bottom:1px solid var(--rose-2);
+  }
+  .sections::-webkit-scrollbar{height:6px}
+  .sections::-webkit-scrollbar-thumb{background:var(--rose-3); border-radius:3px}
+  .section-btn{
+    background:var(--rose-1);
+    border:none;
+    padding:8px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent-dark);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .section-btn:hover{background:var(--rose-2)}
+  .section-btn.active{background:var(--accent); color:#fff}
+
+  .groups{
+    display:flex;
+    gap:6px;
+    padding:8px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .groups::-webkit-scrollbar{height:6px}
+  .groups::-webkit-scrollbar-thumb{background:var(--rose-3); border-radius:3px}
+  .group-btn{
+    background:#fff;
+    border:2px solid var(--rose-3);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .group-btn:hover{border-color:var(--accent); color:var(--accent-dark)}
+  .group-btn.active{
+    background:var(--rose-1);
+    border-color:var(--accent);
+    color:var(--accent-dark);
+  }
+
+  main{max-width:900px; margin:0 auto; padding:20px 14px 60px}
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 18px rgba(216,27,96,.07);
+    border:1px solid var(--rose-2);
+  }
+  .card-label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:800;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+  }
+  .card-source .card-label{background:var(--rose-1); color:var(--accent-dark)}
+  .card-practice .card-label{background:#fde7f0; color:#b0306e}
+  .card.practice-solved{
+    border-color:var(--ok);
+    box-shadow:0 4px 18px rgba(46,158,107,.14);
+  }
+  .card.practice-solved .card-label{background:#e4f7ec; color:var(--ok)}
+
+  .topic{
+    font-size:16px;
+    font-weight:800;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+  }
+  .condition{font-size:14.5px; margin:0 0 12px}
+
+  .idea{
+    background:#fff5f9;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:10px 12px;
+    margin-bottom:12px;
+    font-size:13.5px;
+  }
+  .idea b{color:#b0306e}
+
+  .table-wrap{overflow-x:auto; margin-bottom:12px}
+  table.cond{
+    border-collapse:collapse;
+    width:100%;
+    font-size:13.5px;
+    background:#fff;
+  }
+  table.cond caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--accent-dark);
+    padding-bottom:5px;
+    font-size:13px;
+  }
+  table.cond th, table.cond td{
+    border:1px solid var(--rose-3);
+    padding:6px 8px;
+    text-align:center;
+  }
+  table.cond th{
+    background:var(--rose-1);
+    color:var(--accent-dark);
+    font-weight:700;
+    font-size:12.5px;
+  }
+  table.cond td.left{
+    text-align:left;
+    font-weight:600;
+    background:var(--rose-4);
+  }
+
+  .steps{display:flex; flex-direction:column; gap:8px}
+  .step{
+    background:var(--rose-4);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+  .step .num{
+    font-weight:700;
+    color:var(--accent-dark);
+    margin-right:5px;
+  }
+  .check-line{
+    background:#eaf7ef;
+    border-radius:6px;
+    padding:8px 12px;
+    font-size:13.5px;
+    margin-top:10px;
+    color:#0e6b3c;
+    font-weight:600;
+  }
+
+  .answer-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:var(--rose-4);
+    border-radius:10px;
+    border:1px dashed var(--rose-3);
+    margin-bottom:10px;
+  }
+  .answer-row label{font-weight:600; font-size:14px}
+
+  input[type="text"]{
+    border:2px solid var(--rose-3);
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:.15s;
+    background:#fff;
+  }
+  input.final{width:100px}
+  input.blank{width:64px; text-align:center; font-weight:700; font-size:13.5px; vertical-align: middle;}
+  input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(216,27,96,.15);
+  }
+  input.ok{border-color:var(--ok); background:#eefaf2}
+  input.err{border-color:var(--err); background:#fdeeee}
+  input.shown{border-color:var(--accent); background:var(--rose-1)}
+
+  button{
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:13.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.15s;
+    background:var(--accent);
+    color:#fff;
+  }
+  button:hover{background:var(--accent-dark); transform:translateY(-1px)}
+  button.ghost{background:var(--rose-1); color:var(--accent-dark)}
+  button.ghost:hover{background:var(--rose-2)}
+  button.hint{background:#fde7f0; color:#b0306e}
+  button.hint:hover{background:#fbd3e3}
+  button:disabled{opacity:.5; cursor:default; transform:none}
+
+  .feedback{font-weight:700; font-size:14px}
+  .feedback.ok{color:var(--ok)}
+  .feedback.err{color:var(--err)}
+
+  .hint-box{
+    background:#fff5f9;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:9px 12px;
+    margin-top:8px;
+    font-size:13.5px;
+  }
+  .hint-box b{color:#b0306e}
+
+  .reveal{margin-top:12px; padding-top:12px; border-top:1px solid var(--rose-2)}
+  .solution-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin-top:12px;
+  }
+  .blanks-feedback{font-weight:700; font-size:13.5px}
+  .blanks-feedback.ok{color:var(--ok)}
+  .blanks-feedback.err{color:var(--err)}
+
+  .hidden{display:none}
+  .practice-actions{display:flex; gap:8px; flex-wrap:wrap}
+  h2.topic{margin:0 0 10px}
+  button:focus-visible,input:focus-visible{outline:3px solid #1b3a8a; outline-offset:2px}
+  @media (max-width:600px){ input[type="text"]{font-size:16px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>ОГЭ. Задание 20 — тренажёр</h1>
+  <p>Алгебраические выражения, уравнения и неравенства</p>
+</header>
+<nav class="nav" aria-label="Разделы и задачи">
+  <div class="sections" id="sections"></div>
+  <div class="groups" id="groups"></div>
+</nav>
+<main id="content"></main>
+
+<script>
+/* ============ утилиты ============ */
+let blankCounter = 0;
+const inputMap = {};
+
+function b(ans, width = 64, tol = 0.01) {
+  const id = `blank_${blankCounter++}`;
+  return `<input class="blank" type="text" autocomplete="off" aria-label="Пропуск в решении" id="${id}" data-answer="${ans}" data-tol="${tol}" style="width:${width}px">`;
+}
+
+function normalize(s) { return String(s).trim().replace(/\s+/g,"").replace(",","."); }
+const UNITS = /(км\/ч|м\/с|л\/мин|дет\.?\/ч|км|кг|мин|дет\.?|м|л|ч|с)\.?$/i;
+function parseNumber(raw) {
+  let s = String(raw).trim().replace(/\s+/g, "").replace(/[−–—]/g, "-").replace(/,/g, ".");
+  s = s.replace(/^[xXхХyYуУ]=/, "").replace(UNITS, "");
+  const m = s.match(/^([+-]?\d+(?:\.\d+)?)\/([+-]?\d+(?:\.\d+)?)$/);
+  if (m) { const d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+  return /^[+-]?\d+(?:\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+}
+
+function checkInput(inp) {
+  if (String(inp.value).trim() === "") return false;
+  const ans = parseNumber(inp.dataset.answer);
+  const t = parseFloat(inp.dataset.tol);
+  const tol = isNaN(t) ? 0.01 : t;
+  const num = parseNumber(inp.value);
+  if (!isNaN(ans)) return !isNaN(num) && Math.abs(num - ans) <= tol + 1e-9;
+  return normalize(inp.value).toLowerCase() === normalize(inp.dataset.answer).toLowerCase();
+}
+
+function replaceInputsInMath(mathStr) {
+  return mathStr.replace(/<input class="blank"[^>]*>/g, (match) => {
+    const idMatch = match.match(/id="([^"]+)"/);
+    if (idMatch) {
+      const id = idMatch[1];
+      inputMap[id] = match;
+      return `\\htmlClass{${id}}{\\square}`;
+    }
+    return match;
+  });
+}
+
+function prepareMath(html) {
+  let processed = html.replace(/\\\((.*?)\\\)/gs, (match, inner) => {
+    return '\\(' + replaceInputsInMath(inner) + '\\)';
+  });
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (match, inner) => {
+    return '$$' + replaceInputsInMath(inner) + '$$';
+  });
+  return processed;
+}
+
+function restoreInputs(container) {
+  if (!container) return;
+  container.querySelectorAll('span[class*="blank_"]').forEach(span => {
+    const className = Array.from(span.classList).find(c => c.startsWith('blank_'));
+    if (className && inputMap[className]) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = inputMap[className];
+      const input = tmp.firstElementChild;
+      input.style.verticalAlign = 'middle';
+      span.parentNode.replaceChild(input, span);
+    }
+  });
+}
+
+function renderMath(container = document.body) {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(container, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false,
+      trust: true
+    });
+  }
+}
+
+/* ============ данные ============ */
+const groups = [
+
+/* ============================================================
+   РАЗДЕЛ: ВЫРАЖЕНИЯ
+   ============================================================ */
+{
+  id: 1,
+  section: "Выражения",
+  topic: "Нахождение значения выражения",
+  source: {
+    condition: "Найдите значение выражения \\(28a - 7b + 13\\), если \\(\\frac{2a - 5b + 8}{5a - 2b + 8} = 6\\).",
+    idea: "<b>Главная мысль:</b> из заданного дробного равенства нужно выразить комбинацию \\(28a - 7b\\).",
+    steps: [
+      "Умножим обе части на знаменатель: \\(2a - 5b + 8 = 6(5a - 2b + 8)\\).",
+      "Раскроем скобки: \\(2a - 5b + 8 = 30a - 12b + 48\\).",
+      "Перенесём слагаемые с \\(a\\) и \\(b\\) влево, а числа вправо: \\(2a - 30a - 5b + 12b = 48 - 8\\).",
+      "\\(-28a + 7b = 40\\). Умножим на \\(-1\\): \\(28a - 7b = -40\\).",
+      "Подставим в искомое выражение: \\(-40 + 13 = -27\\).",
+      "Ответ: -27."
+    ]
+  },
+  practice: {
+    condition: "Найдите значение выражения \\(31a - 4b + 55\\), если \\(\\frac{a - 4b + 7}{4a - b + 7} = 8\\).",
+    answer: { val: 6, unit: "" },
+    hints: [
+      "Умножьте обе части на знаменатель: \\(a - 4b + 7 = 8(4a - b + 7)\\).",
+      "Раскройте скобки и выразите \\(31a - 4b\\)."
+    ],
+    solution: {
+      steps: [
+        `\\(a - 4b + 7 = 8(4a - b + 7)\\)`,
+        `\\(a - 4b + 7 = 32a - 8b + 56\\)`,
+        `\\(a - 32a - 4b + 8b = 56 - 7\\)`,
+        `\\(-31a + 4b = ${b(49,70)}\\)`,
+        `Умножим на \\(-1\\): \\(31a - 4b = ${b(-49,70)}\\)`,
+        `Тогда \\(31a - 4b + 55 = -49 + 55 = ${b(6,70)}\\).`,
+        "Ответ: 6."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: УРАВНЕНИЯ
+   ============================================================ */
+{
+  id: 2,
+  section: "Уравнения",
+  topic: "Кубические уравнения (группировка)",
+  source: {
+    condition: "Решите уравнение: \\(x^3 + 5x^2 - 16x - 80 = 0\\).",
+    idea: "<b>Главная мысль:</b> сгруппируем слагаемые попарно и вынесем общий множитель.",
+    steps: [
+      "Группируем: \\((x^3 + 5x^2) - (16x + 80) = 0\\).",
+      "Выносим общий множитель: \\(x^2(x + 5) - 16(x + 5) = 0\\).",
+      "Получаем: \\((x^2 - 16)(x + 5) = 0\\).",
+      "Разность квадратов: \\((x - 4)(x + 4)(x + 5) = 0\\).",
+      "Корни: \\(x = 4\\), \\(x = -4\\), \\(x = -5\\).",
+      "Ответ: -5; -4; 4."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\(x^3 + 2x^2 - x - 2 = 0\\).",
+    answer: { val: "-2;-1;1", unit: "" },
+    hints: [
+      "Сгруппируйте первое со вторым, а третье с четвёртым слагаемым.",
+      "Вынесите \\(x^2\\) из первой скобки и \\(-1\\) из второй."
+    ],
+    solution: {
+      steps: [
+        `\\((x^3 + 2x^2) - (x + 2) = 0\\)`,
+        `\\(x^2(x + 2) - 1(x + 2) = 0\\)`,
+        `\\((x^2 - 1)(x + 2) = 0\\)`,
+        `\\((x - 1)(x + 1)(x + 2) = 0\\)`,
+        `\\(x_1 = ${b(1,50)}\\), \\(x_2 = ${b(-1,50)}\\), \\(x_3 = ${b(-2,50)}\\).`,
+        "Ответ: -2; -1; 1."
+      ]
+    }
+  }
+},
+{
+  id: 3,
+  section: "Уравнения",
+  topic: "Уравнения с квадратным корнем",
+  source: {
+    condition: "Решите уравнение: \\(x^2 - 2x + \\sqrt{7 - x} = \\sqrt{7 - x} + 48\\).",
+    idea: "<b>Главная мысль:</b> корни взаимно уничтожаются, но нужно учесть ОДЗ подкоренного выражения.",
+    steps: [
+      "Уничтожаем \\(\\sqrt{7 - x}\\) с обеих сторон: \\(x^2 - 2x = 48\\).",
+      "Переносим всё влево: \\(x^2 - 2x - 48 = 0\\).",
+      "По теореме Виета корни: \\(x_1 = 8\\), \\(x_2 = -6\\).",
+      "ОДЗ: \\(7 - x \\ge 0 \\Rightarrow x \\le 7\\).",
+      "Корень \\(x = 8\\) не подходит. Остаётся \\(x = -6\\).",
+      "Ответ: -6."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\(x^2 - 2x + \\sqrt{4 - x} = \\sqrt{4 - x} + 15\\).",
+    answer: { val: -3, unit: "" },
+    hints: [
+      "Уничтожьте корни. Получится квадратное уравнение.",
+      "Не забудьте проверить ОДЗ: \\(4 - x \\ge 0\\)."
+    ],
+    solution: {
+      steps: [
+        `Убираем корни: \\(x^2 - 2x = ${b(15,70)}\\).`,
+        `\\(x^2 - 2x - 15 = 0\\).`,
+        `Корни: \\(x = ${b(5,50)}\\) и \\(x = ${b(-3,50)}\\).`,
+        `ОДЗ: \\(4 - x \\ge 0 \\Rightarrow x \\le 4\\).`,
+        `Корень \\(5\\) не подходит, так как \\(5 > 4\\).`,
+        "Ответ: -3."
+      ]
+    }
+  }
+},
+{
+  id: 4,
+  section: "Уравнения",
+  topic: "Разложение на множители (с квадратом двучлена)",
+  source: {
+    condition: "Решите уравнение: \\(x(x^2 + 10x + 25) = 14(x + 5)\\).",
+    idea: "<b>Главная мысль:</b> свёртываем квадрат двучлена и выносим общий множитель.",
+    steps: [
+      "Замечаем, что \\(x^2 + 10x + 25 = (x + 5)^2\\).",
+      "Перепишем: \\(x(x + 5)^2 - 14(x + 5) = 0\\).",
+      "Вынесем \\((x + 5)\\): \\((x + 5)(x(x + 5) - 14) = 0\\).",
+      "Упрощаем вторую скобку: \\((x + 5)(x^2 + 5x - 14) = 0\\).",
+      "Раскладываем трёхчлен: \\((x + 5)(x + 7)(x - 2) = 0\\).",
+      "Ответ: -7; -5; 2."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\((x - 1)(x^2 + 8x + 16) = 6(x + 4)\\).",
+    answer: { val: "-5;-4;2", unit: "" },
+    hints: [
+      "Сверните трёхчлен в квадрат: \\((x+4)^2\\).",
+      "Вынесите \\((x+4)\\) за скобку."
+    ],
+    solution: {
+      steps: [
+        `\\((x - 1)(x + 4)^2 - 6(x + 4) = 0\\)`,
+        `\\((x + 4)((x - 1)(x + 4) - 6) = 0\\)`,
+        `\\((x + 4)(x^2 + 3x - 4 - 6) = 0\\)`,
+        `\\((x + 4)(x^2 + 3x - 10) = 0\\)`,
+        `Корни второй скобки: \\(x = ${b(-5,50)}\\) и \\(x = ${b(2,50)}\\).`,
+        `Корень первой: \\(x = ${b(-4,50)}\\).`,
+        "Ответ: -5; -4; 2."
+      ]
+    }
+  }
+},
+{
+  id: 5,
+  section: "Уравнения",
+  topic: "Сумма квадратов равна нулю",
+  source: {
+    condition: "Решите уравнение: \\((x^2 - 16)^2 + (x^2 + 3x - 28)^2 = 0\\).",
+    idea: "<b>Главная мысль:</b> сумма квадратов равна нулю, только если каждое слагаемое равно нулю.",
+    steps: [
+      "Приравниваем каждое выражение к нулю: \\(x^2 - 16 = 0\\) и \\(x^2 + 3x - 28 = 0\\).",
+      "Корни первого: \\(x = \\pm 4\\).",
+      "Корни второго: \\(x = 4\\) и \\(x = -7\\).",
+      "Общий корень — это \\(x = 4\\).",
+      "Ответ: 4."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\((x^2 - 4)^2 + (x^2 - 3x - 10)^2 = 0\\).",
+    answer: { val: -2, unit: "" },
+    hints: [
+      "Решите два уравнения отдельно: \\(x^2 - 4 = 0\\) и \\(x^2 - 3x - 10 = 0\\).",
+      "Найдите их общий корень."
+    ],
+    solution: {
+      steps: [
+        `1) \\(x^2 - 4 = 0 \\Rightarrow x = ${b(2,50)}\\) или \\(x = ${b(-2,50)}\\).`,
+        `2) \\(x^2 - 3x - 10 = 0 \\Rightarrow x = ${b(5,50)}\\) или \\(x = ${b(-2,50)}\\).`,
+        `Общий корень: \\(x = ${b(-2,50)}\\).`,
+        "Ответ: -2."
+      ]
+    }
+  }
+},
+{
+  id: 6,
+  section: "Уравнения",
+  topic: "Замена переменной (дроби)",
+  source: {
+    condition: "Решите уравнение: \\(\\frac{1}{x^2} + \\frac{6}{x} - 40 = 0\\).",
+    idea: "<b>Главная мысль:</b> введём замену \\(t = \\frac{1}{x}\\).",
+    steps: [
+      "Пусть \\(t = \\frac{1}{x}\\), тогда \\(t^2 = \\frac{1}{x^2}\\).",
+      "Уравнение примет вид: \\(t^2 + 6t - 40 = 0\\).",
+      "По теореме Виета: \\(t_1 = -10\\), \\(t_2 = 4\\).",
+      "Обратная замена: \\(\\frac{1}{x} = -10 \\Rightarrow x = -0{,}1\\); \\(\\frac{1}{x} = 4 \\Rightarrow x = 0{,}25\\).",
+      "Ответ: -0,1; 0,25."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\(\\frac{1}{x^2} + \\frac{4}{x} - 12 = 0\\).",
+    answer: { val: "-1/6;0.5", unit: "" },
+    hints: [
+      "Введите замену \\(t = \\frac{1}{x}\\).",
+      "Решите квадратное уравнение \\(t^2 + 4t - 12 = 0\\)."
+    ],
+    solution: {
+      steps: [
+        `Замена \\(t = 1/x\\): \\(t^2 + 4t - 12 = 0\\).`,
+        `Корни: \\(t_1 = ${b(-6,50)}\\), \\(t_2 = ${b(2,50)}\\).`,
+        `Обратная замена: \\(1/x = -6 \\Rightarrow x = ${b(-1/6,60)}\\).`,
+        `\\(1/x = 2 \\Rightarrow x = ${b(1/2,60)}\\).`,
+        "Ответ: -1/6; 0,5."
+      ]
+    }
+  }
+},
+{
+  id: 7,
+  section: "Уравнения",
+  topic: "Биквадратные уравнения (замена)",
+  source: {
+    condition: "Решите уравнение: \\((x + 5)^4 + (x + 5)^2 - 12 = 0\\).",
+    idea: "<b>Главная мысль:</b> заменим \\((x + 5)^2\\) на новую переменную.",
+    steps: [
+      "Пусть \\(t = (x + 5)^2\\), причём \\(t \\ge 0\\).",
+      "Уравнение: \\(t^2 + t - 12 = 0\\).",
+      "Корни: \\(t = 3\\) и \\(t = -4\\). Так как \\(t \\ge 0\\), остаётся \\(t = 3\\).",
+      "Возвращаемся: \\((x + 5)^2 = 3 \\Rightarrow x + 5 = \\pm\\sqrt{3} \\Rightarrow x = -5 \\pm \\sqrt{3}\\).",
+      "Ответ: \\(-5 - \\sqrt{3}\\); \\(-5 + \\sqrt{3}\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\((x + 4)^4 - 6(x + 4)^2 - 7 = 0\\).",
+    answer: { val: "-4-√7;-4+√7", unit: "" },
+    hints: [
+      "Сделайте замену \\(t = (x+4)^2\\).",
+      "Корень \\(t = 7\\) (второй корень отрицательный)."
+    ],
+    solution: {
+      steps: [
+        `Замена \\(t = (x+4)^2 \ge 0\\): \\(t^2 - 6t - 7 = 0\\).`,
+        `Корни: \\(t = 7\\) и \\(t = -1\\) (не подходит).`,
+        `\\((x+4)^2 = ${b(7,50)}\\).`,
+        `\\(x + 4 = \pm\sqrt{7}\\).`,
+        `\\(x = -4 \pm \sqrt{7}\\).`,
+        "Ответ: \\(-4-\\sqrt{7}\\); \\(-4+\\sqrt{7}\\)."
+      ]
+    }
+  }
+},
+{
+  id: 8,
+  section: "Уравнения",
+  topic: "Уравнения вида \\(x^4 = (x - a)^2\\)",
+  source: {
+    condition: "Решите уравнение: \\(x^4 = (x - 42)^2\\).",
+    idea: "<b>Главная мысль:</b> извлечём квадратный корень: \\(x^2 = |x - 42|\\).",
+    steps: [
+      "Снимаем квадрат: \\(x^2 = |x - 42|\\).",
+      "Случай 1: \\(x^2 = x - 42 \\Rightarrow x^2 - x + 42 = 0\\). Дискриминант \\(1 - 168 < 0\\), корней нет.",
+      "Случай 2: \\(x^2 = -(x - 42) = 42 - x \\Rightarrow x^2 + x - 42 = 0\\).",
+      "Корни: \\(x = 6\\) и \\(x = -7\\).",
+      "Ответ: -7; 6."
+    ]
+  },
+  practice: {
+    condition: "Решите уравнение: \\(x^4 = (x - 20)^2\\).",
+    answer: { val: "-5;4", unit: "" },
+    hints: [
+      "Получите два уравнения: \\(x^2 = x - 20\\) и \\(x^2 = 20 - x\\).",
+      "У одного из них нет корней."
+    ],
+    solution: {
+      steps: [
+        `1) \\(x^2 = x - 20 \\Rightarrow x^2 - x + 20 = 0\\). Нет корней.`,
+        `2) \\(x^2 = 20 - x \\Rightarrow x^2 + x - 20 = 0\\).`,
+        `Корни: \\(x = ${b(-5,50)}\\) и \\(x = ${b(4,50)}\\).`,
+        "Ответ: -5; 4."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: СИСТЕМЫ УРАВНЕНИЙ
+   ============================================================ */
+{
+  id: 9,
+  section: "Системы уравнений",
+  topic: "Системы (подстановка)",
+  source: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} 3x^2 - 8x = y, \\\\ 9x - 24 = y \\end{cases}\\)",
+    idea: "<b>Главная мысль:</b> приравняем правые части (или подставим \\(y\\) из второго в первое).",
+    steps: [
+      "Приравняем: \\(3x^2 - 8x = 9x - 24\\).",
+      "Переносим всё влево: \\(3x^2 - 17x + 24 = 0\\).",
+      "Дискриминант \\(D = 289 - 288 = 1\\). Корни: \\(x_1 = 3\\), \\(x_2 = \\frac{16}{6} = \\frac{8}{3}\\).",
+      "Найдём \\(y\\): при \\(x = 3\\), \\(y = 9(3) - 24 = 3\\).",
+      "При \\(x = \\frac{8}{3}\\), \\(y = 9(\\frac{8}{3}) - 24 = 24 - 24 = 0\\).",
+      "Ответ: (3; 3), \\(\\left(\\frac{8}{3}; 0\\right)\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} x^2 + y = 7, \\\\ 2x^2 - y = 5 \\end{cases}\\)",
+    answer: { val: "(2;3);(-2;3)", unit: "" },
+    hints: [
+      "Сложите два уравнения системы.",
+      "Найдите \\(x\\), затем подставьте в любое уравнение."
+    ],
+    solution: {
+      steps: [
+        `Складываем: \\(3x^2 = 12 \\Rightarrow x^2 = ${b(4,50)}\\).`,
+        `\\(x = ${b(2,50)}\\) или \\(x = ${b(-2,50)}\\).`,
+        `Подставляем в первое: \\(4 + y = 7 \\Rightarrow y = ${b(3,50)}\\).`,
+        "Ответ: (2; 3), (-2; 3)."
+      ]
+    }
+  }
+},
+{
+  id: 10,
+  section: "Системы уравнений",
+  topic: "Системы (сложение)",
+  source: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} 7x^2 + y = 14, \\\\ 2x^2 - y = 22 \\end{cases}\\)",
+    idea: "<b>Главная мысль:</b> коэффициенты при \\(y\\) противоположны, удобно сложить уравнения.",
+    steps: [
+      "Складываем уравнения: \\(9x^2 = 36 \\Rightarrow x^2 = 4\\).",
+      "Отсюда \\(x = 2\\) или \\(x = -2\\).",
+      "Подставим \\(x\\) в первое уравнение: \\(7(4) + y = 14 \\Rightarrow 28 + y = 14 \\Rightarrow y = -14\\).",
+      "Ответ: (2; -14), (-2; -14)."
+    ]
+  },
+  practice: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} 4x^2 + y = 9, \\\\ 8x^2 - y = 3 \\end{cases}\\)",
+    answer: { val: "(1;5);(-1;5)", unit: "" },
+    hints: [
+      "Сложите уравнения, чтобы избавиться от \\(y\\).",
+      "Получится \\(12x^2 = 12\\)."
+    ],
+    solution: {
+      steps: [
+        `Складываем: \\(12x^2 = 12 \\Rightarrow x^2 = ${b(1,50)}\\).`,
+        `\\(x = ${b(1,50)}\\) или \\(x = ${b(-1,50)}\\).`,
+        `Тогда \\(y = 9 - 4x^2 = 9 - 4 = ${b(5,50)}\\).`,
+        "Ответ: (1; 5), (-1; 5)."
+      ]
+    }
+  }
+},
+{
+  id: 11,
+  section: "Системы уравнений",
+  topic: "Системы (специальные)",
+  source: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} 2x^2 + y^2 = 59, \\\\ 10x^2 + 5y^2 = 59x \\end{cases}\\)",
+    idea: "<b>Главная мысль:</b> вынесем 5 во втором уравнении, чтобы использовать первое.",
+    steps: [
+      "Во втором уравнении вынесем 5: \\(5(2x^2 + y^2) = 59x\\).",
+      "Из первого уравнения \\(2x^2 + y^2 = 59\\). Подставляем: \\(5 \\cdot 59 = 59x\\).",
+      "Делим на 59 (оно не равно нулю): \\(x = 5\\).",
+      "Подставим в первое: \\(2(25) + y^2 = 59 \\Rightarrow 50 + y^2 = 59 \\Rightarrow y^2 = 9 \\Rightarrow y = \\pm 3\\).",
+      "Ответ: (5; 3), (5; -3)."
+    ]
+  },
+  practice: {
+    condition: "Решите систему уравнений: \\(\\begin{cases} 2x^2 + 4y^2 = 24, \\\\ 4x^2 + 8y^2 = 24x \\end{cases}\\)",
+    answer: { val: "(2;2);(2;-2)", unit: "" },
+    hints: [
+      "Заметьте, что левая часть второго уравнения в 2 раза больше левой части первого.",
+      "Умножьте первое уравнение на 2 и приравняйте к правой части второго."
+    ],
+    solution: {
+      steps: [
+        `Умножаем первое на 2: \\(4x^2 + 8y^2 = 48\\).`,
+        `Приравниваем: \\(24x = 48 \\Rightarrow x = ${b(2,50)}\\).`,
+        `Подставляем в первое: \\(2(4) + 4y^2 = 24 \\Rightarrow 8 + 4y^2 = 24 \\Rightarrow 4y^2 = 16 \\Rightarrow y^2 = 4\\).`,
+        `\\(y = ${b(2,50)}\\) или \\(y = ${b(-2,50)}\\).`,
+        "Ответ: (2; 2), (2; -2)."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: НЕРАВЕНСТВА
+   ============================================================ */
+{
+  id: 12,
+  section: "Неравенства",
+  topic: "Неравенства с корнем",
+  source: {
+    condition: "Решите неравенство: \\((x - 7)^2 < \\sqrt{11}(x - 7)\\).",
+    idea: "<b>Главная мысль:</b> сделаем замену \\(t = x - 7\\), чтобы упростить вид.",
+    steps: [
+      "Пусть \\(t = x - 7\\), тогда неравенство примет вид \\(t^2 < \\sqrt{11}t\\).",
+      "Переносим: \\(t^2 - \\sqrt{11}t < 0 \\Rightarrow t(t - \\sqrt{11}) < 0\\).",
+      "Решение для \\(t\\): \\(0 < t < \\sqrt{11}\\).",
+      "Возвращаемся: \\(0 < x - 7 < \\sqrt{11} \\Rightarrow 7 < x < 7 + \\sqrt{11}\\).",
+      "Ответ: \\((7; 7 + \\sqrt{11})\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\((x - 8)^2 < \\sqrt{3}(x - 8)\\).",
+    answer: { val: "(8;8+√3)", unit: "" },
+    hints: [
+      "Сделайте замену \\(t = x - 8\\).",
+      "Получится \\(t(t - \\sqrt{3}) < 0\\)."
+    ],
+    solution: {
+      steps: [
+        `Замена \\(t = x - 8\\): \\(t^2 - \\sqrt{3}t < 0\\).`,
+        `\\(0 < t < ${b("√3",60)}\\).`,
+        `Возвращаемся: \\(8 < x < 8 + \\sqrt{3}\\).`,
+        "Ответ: \\((8; 8 + \\sqrt{3})\\)."
+      ]
+    }
+  }
+},
+{
+  id: 13,
+  section: "Неравенства",
+  topic: "Дробно-рациональные (квадрат в знаменателе)",
+  source: {
+    condition: "Решите неравенство: \\(\\frac{-21}{(x + 6)^2 - 10} \\ge 0\\).",
+    idea: "<b>Главная мысль:</b> дробь с отрицательным числителем неотрицательна, если знаменатель отрицателен.",
+    steps: [
+      "Так как \\(-21 < 0\\), нужно, чтобы знаменатель был меньше нуля.",
+      "\\((x + 6)^2 - 10 < 0\\).",
+      "Раскрываем как разность квадратов: \\((x + 6)^2 < 10\\).",
+      "Извлекаем корень: \\(-\\sqrt{10} < x + 6 < \\sqrt{10}\\).",
+      "Вычитаем 6: \\(-6 - \\sqrt{10} < x < -6 + \\sqrt{10}\\).",
+      "Ответ: \\((-6 - \\sqrt{10}; -6 + \\sqrt{10})\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(\\frac{-16}{(x + 2)^2 - 5} \\ge 0\\).",
+    answer: { val: "(-2-√5;-2+√5)", unit: "" },
+    hints: [
+      "Знаменатель должен быть отрицательным.",
+      "\\((x + 2)^2 < 5\\)."
+    ],
+    solution: {
+      steps: [
+        `Знаменатель \\(< 0\\): \\((x + 2)^2 - 5 < 0\\).`,
+        `\\((x + 2)^2 < ${b(5,50)}\\).`,
+        `\\(-\\sqrt{5} < x + 2 < \\sqrt{5}\\).`,
+        `\\(-2 - \\sqrt{5} < x < -2 + \\sqrt{5}\\).`,
+        "Ответ: \\((-2 - \\sqrt{5}; -2 + \\sqrt{5})\\)."
+      ]
+    }
+  }
+},
+{
+  id: 14,
+  section: "Неравенства",
+  topic: "Метод интервалов (с чётными корнями)",
+  source: {
+    condition: "Решите неравенство: \\((2 - x)(x^2 - 4) \\ge 0\\).",
+    idea: "<b>Главная мысль:</b> приводим к стандартному виду и следим за кратными корнями (чётная степень не меняет знак).",
+    steps: [
+      "Вынесем минус из первой скобки: \\(-(x - 2)(x^2 - 4) \\ge 0\\).",
+      "Умножим на \\(-1\\), поменяв знак: \\((x - 2)(x^2 - 4) \\le 0\\).",
+      "Раскладываем: \\((x - 2)(x - 2)(x + 2) \\le 0 \\Rightarrow (x - 2)^2(x + 2) \\le 0\\).",
+      "Наносим на ось: \\(-2\\) (знак меняется) и \\(2\\) (кратный корень, знак не меняется).",
+      "Определяем знаки: левее \\(-2\\) знак «минус», правее \\(2\\) знак «плюс».",
+      "Нам нужны \\(\\le 0\\), значит \\(x \\in (-\\infty; -2]\\) и точка \\(2\\).",
+      "Ответ: \\((-\\infty; -2] \\cup \\{2\\}\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\((5 - x)(x^2 - 25) \\ge 0\\).",
+    answer: { val: "(-∞;-5]∪{5}", unit: "" },
+    hints: [
+      "Разложите \\(x^2 - 25\\) как \\((x - 5)(x + 5)\\).",
+      "Первая скобка даст минус: \\(-(x - 5)^2(x + 5) \\ge 0\\)."
+    ],
+    solution: {
+      steps: [
+        `\\(-(x - 5)(x - 5)(x + 5) \\ge 0\\)`,
+        `\\((x - 5)^2(x + 5) \\le 0\\)`,
+        `Корни: \\(x = 5\\) (кратный) и \\(x = ${b(-5,50)}\\).`,
+        `Решаем \\(\\le 0\\): \\(x \\in (-\\infty; -5] \\cup \\{5\\}\\).`,
+        "Ответ: \\((-\\infty; -5] \\cup \\{5\\}\\)."
+      ]
+    }
+  }
+},
+{
+  id: 15,
+  section: "Неравенства",
+  topic: "Метод интервалов (сложные скобки)",
+  source: {
+    condition: "Решите неравенство: \\((x^2 - 2x - 15)(x^2 - 13x + 40) \\ge 0\\).",
+    idea: "<b>Главная мысль:</b> разложить каждый квадратный трёхчлен на множители и применить метод интервалов.",
+    steps: [
+      "Первый трёхчлен: \\(x^2 - 2x - 15 = (x - 5)(x + 3)\\).",
+      "Второй: \\(x^2 - 13x + 40 = (x - 5)(x - 8)\\).",
+      "Получаем: \\((x - 5)(x + 3)(x - 5)(x - 8) \\ge 0 \\Rightarrow (x - 5)^2(x + 3)(x - 8) \\ge 0\\).",
+      "Корни: \\(-3\\), \\(5\\) (кратный), \\(8\\).",
+      "Знаки: \\((-\infty; -3]\\) — плюс, \\([-3; 8]\\) — минус (кроме точки 5, где 0), \\([8; \\infty)\\) — плюс.",
+      "Ответ: \\((-\\infty; -3] \\cup \\{5\\} \\cup [8; +\\infty)\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\((x^2 + x - 12)(x^2 - 9x + 18) \\ge 0\\).",
+    answer: { val: "(-∞;-4]∪{3}∪[6;+∞)", unit: "" },
+    hints: [
+      "Разложите трёхчлены: \\((x+4)(x-3)\\) и \\((x-3)(x-6)\\).",
+      "Выйдет \\((x - 3)^2(x + 4)(x - 6) \\ge 0\\)."
+    ],
+    solution: {
+      steps: [
+        `\\((x + 4)(x - 3)(x - 3)(x - 6) \\ge 0\\)`,
+        `\\((x - 3)^2(x + 4)(x - 6) \\ge 0\\)`,
+        `Корни: \\(-4\\), \\(3\\) (кратный), \\(6\\).`,
+        `Ответ: \\((-\\infty; -4] \\cup \\{3\\} \\cup [6; +\\infty)\\).`
+      ]
+    }
+  }
+},
+{
+  id: 16,
+  section: "Неравенства",
+  topic: "Дробные неравенства (сравнение)",
+  source: {
+    condition: "Решите неравенство: \\(\\frac{1}{x} \\ge \\frac{1}{x - 1}\\).",
+    idea: "<b>Главная мысль:</b> переносим всё в одну сторону и приводим к общему знаменателю.",
+    steps: [
+      "Переносим: \\(\\frac{1}{x} - \\frac{1}{x - 1} \\ge 0\\).",
+      "Приводим к общему знаменателю: \\(\\frac{x - 1 - x}{x(x - 1)} \\ge 0 \\Rightarrow \\frac{-1}{x(x - 1)} \\ge 0\\).",
+      "Умножаем на \\(-1\\), меняем знак: \\(\\frac{1}{x(x - 1)} \\le 0\\).",
+      "Дробь \\(\\le 0\\), когда знаменатель отрицателен (числитель положителен).",
+      "\\(x(x - 1) < 0 \\Rightarrow 0 < x < 1\\).",
+      "Ответ: \\((0; 1)\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(\\frac{1}{x} \\ge \\frac{1}{x - 7}\\).",
+    answer: { val: "(0;7)", unit: "" },
+    hints: [
+      "Приведите к общему знаменателю: \\(\\frac{-7}{x(x-7)} \\ge 0\\).",
+      "Знаменатель должен быть отрицательным."
+    ],
+    solution: {
+      steps: [
+        `\\(\\frac{1}{x} - \\frac{1}{x - 7} \\ge 0\\)`,
+        `\\(\\frac{x - 7 - x}{x(x - 7)} \\ge 0 \\Rightarrow \\frac{-7}{x(x - 7)} \\ge 0\\)`,
+        `Умножаем на \\(-1\\): \\(\\frac{7}{x(x - 7)} \\le 0\\).`,
+        `Знаменатель \\(< 0\\): \\(x(x - 7) < 0\\).`,
+        `Ответ: \\((0; 7)\\).`
+      ]
+    }
+  }
+},
+{
+  id: 17,
+  section: "Неравенства",
+  topic: "Неравенства вида \\(x \\le \\frac{a}{x}\\)",
+  source: {
+    condition: "Решите неравенство: \\(x \\le \\frac{4}{x}\\).",
+    idea: "<b>Главная мысль:</b> приводим к общему знаменателю и используем метод интервалов.",
+    steps: [
+      "Переносим: \\(x - \\frac{4}{x} \\le 0\\).",
+      "Общий знаменатель: \\(\\frac{x^2 - 4}{x} \\le 0\\).",
+      "Раскладываем числитель: \\(\\frac{(x - 2)(x + 2)}{x} \\le 0\\).",
+      "Корни числителя: \\(2, -2\\). Корень знаменателя: \\(0\\) (выколотый).",
+      "Метод интервалов: \\((-\\infty; -2]\\) знак минус, \\([-2; 0)\\) знак плюс, \\((0; 2]\\) знак минус, \\([2; +\\infty)\\) плюс.",
+      "Нам нужны \\(\\le 0\\): \\((-\\infty; -2] \\cup (0; 2]\\).",
+      "Ответ: \\((-\\infty; -2] \\cup (0; 2]\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(x \\le \\frac{81}{x}\\).",
+    answer: { val: "(-∞;-9]∪(0;9]", unit: "" },
+    hints: [
+      "Приведите к виду \\(\\frac{x^2 - 81}{x} \\le 0\\).",
+      "Разложите числитель."
+    ],
+    solution: {
+      steps: [
+        `\\(x - \\frac{81}{x} \\le 0\\)`,
+        `\\(\\frac{x^2 - 81}{x} \\le 0\\)`,
+        `\\(\\frac{(x - 9)(x + 9)}{x} \\le 0\\)`,
+        `Корни: \\(-9, 0, 9\\).`,
+        `Ответ: \\((-\\infty; -9] \\cup (0; 9]\\).`
+      ]
+    }
+  }
+},
+{
+  id: 18,
+  section: "Неравенства",
+  topic: "Неравенства \\(\\frac{x^2}{x-a} \\le x\\)",
+  source: {
+    condition: "Решите неравенство: \\(\\frac{x^2}{x - 8} \\le x\\).",
+    idea: "<b>Главная мысль:</b> переносим \\(x\\) влево и приводим к общему знаменателю.",
+    steps: [
+      "Переносим: \\(\\frac{x^2}{x - 8} - x \\le 0\\).",
+      "Приводим к общему знаменателю: \\(\\frac{x^2 - x(x - 8)}{x - 8} \\le 0\\).",
+      "Раскрываем скобки: \\(\\frac{x^2 - x^2 + 8x}{x - 8} \\le 0 \\Rightarrow \\frac{8x}{x - 8} \\le 0\\).",
+      "Дробь \\(\\le 0\\): числитель и знаменатель разных знаков (или числитель 0).",
+      "Корни: \\(0\\) (закрашенный) и \\(8\\) (выколотый).",
+      "Ответ: \\([0; 8)\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(\\frac{x^2}{x - 5} \\le x\\).",
+    answer: { val: "[0;5)", unit: "" },
+    hints: [
+      "Перенесите \\(x\\) и приведите к общему знаменателю.",
+      "В числителе останется \\(5x\\)."
+    ],
+    solution: {
+      steps: [
+        `\\(\\frac{x^2 - x(x - 5)}{x - 5} \\le 0\\)`,
+        `\\(\\frac{5x}{x - 5} \\le 0\\)`,
+        `Нули числителя: \\(x = 0\\) (закрашен). Нули знаменателя: \\(x = 5\\) (выколот).`,
+        `Ответ: \\([0; 5)\\).`
+      ]
+    }
+  }
+},
+{
+  id: 19,
+  section: "Неравенства",
+  topic: "Сокращение дроби в неравенстве",
+  source: {
+    condition: "Решите неравенство: \\(\\frac{x^2 - 12x + 35}{x - 5} \\le 0\\).",
+    idea: "<b>Главная мысль:</b> разложить числитель и сократить дробь (помня про ОДЗ).",
+    steps: [
+      "Раскладываем числитель: \\(x^2 - 12x + 35 = (x - 5)(x - 7)\\).",
+      "Перепишем: \\(\\frac{(x - 5)(x - 7)}{x - 5} \\le 0\\).",
+      "При \\(x \\ne 5\\) дробь равна \\(x - 7\\).",
+      "Неравенство принимает вид \\(x - 7 \\le 0 \\Rightarrow x \\le 7\\).",
+      "Учитываем ОДЗ: \\(x \\ne 5\\).",
+      "Ответ: \\((-\\infty; 5) \\cup (5; 7]\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(\\frac{x^2 - 10x + 24}{x - 4} \\le 0\\).",
+    answer: { val: "(-∞;4)∪(4;6]", unit: "" },
+    hints: [
+      "Разложите числитель: \\((x - 4)(x - 6)\\).",
+      "Сократите на \\((x - 4)\\), не забыв про \\(x \\ne 4\\)."
+    ],
+    solution: {
+      steps: [
+        `\\(\\frac{(x - 4)(x - 6)}{x - 4} \\le 0\\)`,
+        `При \\(x \\ne 4\\): \\(x - 6 \\le 0 \\Rightarrow x \\le 6\\).`,
+        `Исключаем 4: \\((-\\infty; 4) \\cup (4; 6]\\).`,
+        "Ответ: \\((-\\infty; 4) \\cup (4; 6]\\)."
+      ]
+    }
+  }
+},
+{
+  id: 20,
+  section: "Неравенства",
+  topic: "Выделение полного квадрата",
+  source: {
+    condition: "Решите неравенство: \\(\\frac{2x^2 - 20x + 50}{x + 2} \\le 0\\).",
+    idea: "<b>Главная мысль:</b> в числителе — полный квадрат.",
+    steps: [
+      "Вынесем 2: \\(\\frac{2(x^2 - 10x + 25)}{x + 2} \\le 0\\).",
+      "Свернём квадрат: \\(\\frac{2(x - 5)^2}{x + 2} \\le 0\\).",
+      "Числитель всегда \\(\\ge 0\\). Дробь \\(\\le 0\\), если знаменатель \\(< 0\\) или числитель \\(= 0\\).",
+      "Знаменатель \\(x + 2 < 0 \\Rightarrow x < -2\\).",
+      "Числитель \\(x - 5 = 0 \\Rightarrow x = 5\\).",
+      "Ответ: \\((-\\infty; -2) \\cup \\{5\\}\\)."
+    ]
+  },
+  practice: {
+    condition: "Решите неравенство: \\(\\frac{3x^2 - 12x + 12}{x + 3} \\le 0\\).",
+    answer: { val: "(-∞;-3)∪{2}", unit: "" },
+    hints: [
+      "Вынесите 3 и сверните квадрат: \\((x - 2)^2\\).",
+      "Знаменатель должен быть отрицательным, а числитель может равняться нулю."
+    ],
+    solution: {
+      steps: [
+        `\\(\\frac{3(x - 2)^2}{x + 3} \\le 0\\)`,
+        `Знаменатель \\(< 0\\): \\(x + 3 < 0 \\Rightarrow x < -3\\).`,
+        `Числитель \\(= 0\\): \\(x = 2\\).`,
+        `Ответ: \\((-\\infty; -3) \\cup \\{2\\}\\).`
+      ]
+    }
+  }
+}
+
+];
+
+/* ============ рендер ============ */
+const sections = [...new Set(groups.map(g => g.section))];
+let currentSection = sections[0];
+let currentGroupId = groups[0].id;
+
+const sectionsEl = document.getElementById("sections");
+const groupsEl = document.getElementById("groups");
+const contentEl = document.getElementById("content");
+
+function renderSectionTabs() {
+  sectionsEl.innerHTML = "";
+  sections.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "section-btn" + (s === currentSection ? " active" : "");
+    btn.textContent = s;
+    btn.setAttribute("aria-pressed", s === currentSection ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentSection = s;
+      const firstInSection = groups.find(g => g.section === s);
+      currentGroupId = firstInSection.id;
+      renderSectionTabs();
+      renderGroupTabs();
+      renderContent();
+    });
+    sectionsEl.appendChild(btn);
+  });
+}
+
+function renderGroupTabs() {
+  groupsEl.innerHTML = "";
+  groups.filter(g => g.section === currentSection).forEach(g => {
+    const btn = document.createElement("button");
+    btn.className = "group-btn" + (g.id === currentGroupId ? " active" : "");
+    // Рендерим формулы в кнопках навигации с помощью prepareMath и renderMath
+    btn.innerHTML = prepareMath(`${g.id}. ${g.topic}`);
+    btn.setAttribute("aria-pressed", g.id === currentGroupId ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentGroupId = g.id;
+      renderGroupTabs();
+      renderContent();
+    });
+    groupsEl.appendChild(btn);
+    renderMath(btn);
+  });
+}
+
+function renderContent() {
+  const g = groups.find(x => x.id === currentGroupId);
+  const src = g.source;
+  const pr = g.practice;
+
+  const rawHTML = `
+    <h2 class="topic">${g.id}. ${g.topic}</h2>
+
+    <div class="card card-source">
+      <div class="card-label">📖 Разбираем вместе</div>
+      <p class="condition">${src.condition}</p>
+      <div class="idea">${src.idea}</div>
+      <div class="steps">
+        ${src.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+      </div>
+      ${src.check ? `<div class="check-line">✓ ${src.check}</div>` : ""}
+    </div>
+
+    <div class="card card-practice" id="practiceCard">
+      <div class="card-label">✏️ Реши сам</div>
+      <p class="condition">${pr.condition}</p>
+      <div class="answer-row">
+        <label>Ответ: <input class="final" type="text" autocomplete="off" data-answer="${pr.answer.val}" data-tol="0.01"> ${pr.answer.unit}</label>
+        <button class="check-answer">Проверить ответ</button>
+        <span class="feedback" role="status" aria-live="polite"></span>
+      </div>
+      <div class="practice-actions">
+        <button class="hint">💡 Подсказка</button>
+        <button class="ghost reveal-btn">🔎 Показать решение (заполни пропуски)</button>
+      </div>
+      <div class="hints-wrap"></div>
+      <div class="reveal hidden">
+        <div class="steps">
+          ${pr.solution.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+        </div>
+        <div class="solution-controls">
+          <button class="check-blanks">Проверить пропуски</button>
+          <button class="ghost show-all">Показать все ответы</button>
+          <span class="blanks-feedback" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  contentEl.innerHTML = prepareMath(rawHTML);
+  renderMath(contentEl);
+  restoreInputs(contentEl);
+
+  const card = document.getElementById("practiceCard");
+  const input = card.querySelector(".final");
+  const feedback = card.querySelector(".feedback");
+  const hintsWrap = card.querySelector(".hints-wrap");
+  const hintBtn = card.querySelector(".hint");
+  const revealBtn = card.querySelector(".reveal-btn");
+  const reveal = card.querySelector(".reveal");
+  const blanksFb = card.querySelector(".blanks-feedback");
+  let hintIndex = 0;
+  input.addEventListener("keydown", e => { if (e.key === "Enter") card.querySelector(".check-answer").click(); });
+
+  card.querySelector(".check-answer").addEventListener("click", () => {
+    const ok = checkInput(input);
+    input.classList.toggle("ok", ok);
+    input.classList.toggle("err", !ok);
+    feedback.textContent = ok ? "Верно! Молодец." : "Пока неверно — попробуй ещё или открой решение.";
+    feedback.className = "feedback " + (ok ? "ok" : "err");
+    if (ok) card.classList.add("practice-solved");
+  });
+
+  hintBtn.addEventListener("click", () => {
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны"; return;
+    }
+    const box = document.createElement("div");
+    box.className = "hint-box";
+    box.innerHTML = prepareMath(`<b>Подсказка ${hintIndex+1}.</b> ${pr.hints[hintIndex]}`);
+    hintsWrap.appendChild(box);
+    renderMath(box);
+    restoreInputs(box);
+    hintIndex++;
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны";
+    }
+  });
+
+  revealBtn.addEventListener("click", () => {
+    reveal.classList.toggle("hidden");
+    revealBtn.textContent = reveal.classList.contains("hidden")
+      ? "🔎 Показать решение (заполни пропуски)"
+      : "Скрыть решение";
+    if (!reveal.classList.contains("hidden")) {
+      renderMath(reveal);
+      restoreInputs(reveal);
+    }
+  });
+
+  card.querySelector(".check-blanks").addEventListener("click", () => {
+    const blanks = reveal.querySelectorAll("input.blank");
+    let okCount = 0;
+    blanks.forEach(inp => {
+      const ok = checkInput(inp);
+      inp.classList.remove("shown");
+      inp.classList.toggle("ok", ok);
+      inp.classList.toggle("err", !ok && inp.value.trim() !== "");
+      if (ok) okCount++;
+    });
+    blanksFb.textContent = `Верно: ${okCount} из ${blanks.length}`;
+    blanksFb.className = "blanks-feedback " + (okCount === blanks.length ? "ok" : "err");
+  });
+
+  card.querySelector(".show-all").addEventListener("click", () => {
+    reveal.querySelectorAll("input.blank").forEach(inp => {
+      inp.value = String(inp.dataset.answer).replace(".", ",");
+      inp.classList.remove("err", "ok");
+      inp.classList.add("shown");
+    });
+    blanksFb.textContent = "Все пропуски заполнены.";
+    blanksFb.className = "blanks-feedback ok";
+  });
+}
+
+renderSectionTabs();
+renderGroupTabs();
+renderContent();
+</script>
+</body>
+</html>

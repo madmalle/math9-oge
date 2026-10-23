@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ. Задание 21 — тренажёр</title>
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath();"></script>
+
+<style>
+  :root{
+    --bg:#fdf2f7;
+    --card:#ffffff;
+    --accent:#d81b60;
+    --accent-dark:#ad1457;
+    --ok:#1d7a4d;
+    --err:#d02a4c;
+    --text:#2b2028;
+    --muted:#7a6670;
+    --gold:#f48fb1;
+    --rose-1:#fce4ec;
+    --rose-2:#f8d7e3;
+    --rose-3:#f3c9da;
+    --rose-4:#fffafc;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    font-size:15px;
+  }
+  header{
+    background:linear-gradient(135deg,#d81b60,#ad1457);
+    color:#fff;
+    padding:22px 16px 18px;
+    text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:clamp(18px,2.5vw,24px)}
+  header p{margin:0; font-size:14px}
+
+  .nav{
+    background:#fff;
+    border-bottom:1px solid var(--rose-3);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 10px rgba(216,27,96,.08);
+  }
+  .sections{
+    display:flex;
+    gap:6px;
+    padding:10px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+    border-bottom:1px solid var(--rose-2);
+  }
+  .sections::-webkit-scrollbar{height:6px}
+  .sections::-webkit-scrollbar-thumb{background:var(--rose-3); border-radius:3px}
+  .section-btn{
+    background:var(--rose-1);
+    border:none;
+    padding:8px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent-dark);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .section-btn:hover{background:var(--rose-2)}
+  .section-btn.active{background:var(--accent); color:#fff}
+
+  .groups{
+    display:flex;
+    gap:6px;
+    padding:8px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .groups::-webkit-scrollbar{height:6px}
+  .groups::-webkit-scrollbar-thumb{background:var(--rose-3); border-radius:3px}
+  .group-btn{
+    background:#fff;
+    border:2px solid var(--rose-3);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .group-btn:hover{border-color:var(--accent); color:var(--accent-dark)}
+  .group-btn.active{
+    background:var(--rose-1);
+    border-color:var(--accent);
+    color:var(--accent-dark);
+  }
+
+  main{max-width:900px; margin:0 auto; padding:20px 14px 60px}
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 18px rgba(216,27,96,.07);
+    border:1px solid var(--rose-2);
+  }
+  .card-label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:800;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+  }
+  .card-source .card-label{background:var(--rose-1); color:var(--accent-dark)}
+  .card-practice .card-label{background:#fde7f0; color:#b0306e}
+  .card.practice-solved{
+    border-color:var(--ok);
+    box-shadow:0 4px 18px rgba(46,158,107,.14);
+  }
+  .card.practice-solved .card-label{background:#e4f7ec; color:var(--ok)}
+
+  .topic{
+    font-size:16px;
+    font-weight:800;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+  }
+  .condition{font-size:14.5px; margin:0 0 12px}
+
+  .idea{
+    background:#fff5f9;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:10px 12px;
+    margin-bottom:12px;
+    font-size:13.5px;
+  }
+  .idea b{color:#b0306e}
+
+  .table-wrap{overflow-x:auto; margin-bottom:12px}
+  table.cond{
+    border-collapse:collapse;
+    width:100%;
+    font-size:13.5px;
+    background:#fff;
+  }
+  table.cond caption{
+    caption-side:top;
+    text-align:left;
+    font-weight:700;
+    color:var(--accent-dark);
+    padding-bottom:5px;
+    font-size:13px;
+  }
+  table.cond th, table.cond td{
+    border:1px solid var(--rose-3);
+    padding:6px 8px;
+    text-align:center;
+  }
+  table.cond th{
+    background:var(--rose-1);
+    color:var(--accent-dark);
+    font-weight:700;
+    font-size:12.5px;
+  }
+  table.cond td.left{
+    text-align:left;
+    font-weight:600;
+    background:var(--rose-4);
+  }
+  table.cond tr.total td{
+    background:#fff0f6;
+    font-weight:700;
+  }
+
+  .steps{display:flex; flex-direction:column; gap:8px}
+  .step{
+    background:var(--rose-4);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+  .step .num{
+    font-weight:700;
+    color:var(--accent-dark);
+    margin-right:5px;
+  }
+  .check-line{
+    background:#eaf7ef;
+    border-radius:6px;
+    padding:8px 12px;
+    font-size:13.5px;
+    margin-top:10px;
+    color:#0e6b3c;
+    font-weight:600;
+  }
+
+  .answer-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:var(--rose-4);
+    border-radius:10px;
+    border:1px dashed var(--rose-3);
+    margin-bottom:10px;
+  }
+  .answer-row label{font-weight:600; font-size:14px}
+
+  input[type="text"]{
+    border:2px solid var(--rose-3);
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:.15s;
+    background:#fff;
+  }
+  input.final{width:100px}
+  input.blank{width:64px; text-align:center; font-weight:700; font-size:13.5px; vertical-align: middle;}
+  input.wide{width:90px}
+  input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(216,27,96,.15);
+  }
+  input.ok{border-color:var(--ok); background:#eefaf2}
+  input.err{border-color:var(--err); background:#fdeeee}
+  input.shown{border-color:var(--accent); background:var(--rose-1)}
+
+  button{
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:13.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.15s;
+    background:var(--accent);
+    color:#fff;
+  }
+  button:hover{background:var(--accent-dark); transform:translateY(-1px)}
+  button.ghost{background:var(--rose-1); color:var(--accent-dark)}
+  button.ghost:hover{background:var(--rose-2)}
+  button.hint{background:#fde7f0; color:#b0306e}
+  button.hint:hover{background:#fbd3e3}
+  button:disabled{opacity:.5; cursor:default; transform:none}
+
+  .feedback{font-weight:700; font-size:14px}
+  .feedback.ok{color:var(--ok)}
+  .feedback.err{color:var(--err)}
+
+  .hint-box{
+    background:#fff5f9;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:9px 12px;
+    margin-top:8px;
+    font-size:13.5px;
+  }
+  .hint-box b{color:#b0306e}
+
+  .reveal{margin-top:12px; padding-top:12px; border-top:1px solid var(--rose-2)}
+  .solution-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin-top:12px;
+  }
+  .blanks-feedback{font-weight:700; font-size:13.5px}
+  .blanks-feedback.ok{color:var(--ok)}
+  .blanks-feedback.err{color:var(--err)}
+
+  .hidden{display:none}
+  .practice-actions{display:flex; gap:8px; flex-wrap:wrap}
+  h2.topic{margin:0 0 10px}
+  .table-wrap table + table{margin-top:16px}
+  button:focus-visible,input:focus-visible{outline:3px solid #1b3a8a; outline-offset:2px}
+  @media (max-width:600px){ input[type="text"]{font-size:16px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>ОГЭ. Задание 21 — тренажёр</h1>
+  <p>Разобранный пример + задача для самостоятельного решения</p>
+</header>
+<nav class="nav" aria-label="Разделы и задачи">
+  <div class="sections" id="sections"></div>
+  <div class="groups" id="groups"></div>
+</nav>
+<main id="content"></main>
+
+<script>
+/* ============ утилиты ============ */
+let blankCounter = 0;
+const inputMap = {};
+
+function b(ans, width = 64, tol = 0.01) {
+  const id = `blank_${blankCounter++}`;
+  return `<input class="blank" type="text" autocomplete="off" aria-label="Пропуск в решении" id="${id}" data-answer="${ans}" data-tol="${tol}" style="width:${width}px">`;
+}
+
+function normalize(s) { return String(s).trim().replace(/\s+/g,"").replace(",","."); }
+const UNITS = /(км\/ч|м\/с|л\/мин|дет\.?\/ч|км|кг|мин|дет\.?|м|л|ч|с)\.?$/i;
+function parseNumber(raw) {
+  let s = String(raw).trim().replace(/\s+/g, "").replace(/[−–—]/g, "-").replace(/,/g, ".");
+  s = s.replace(/^[xXхХyYуУ]=/, "").replace(UNITS, "");
+  const m = s.match(/^([+-]?\d+(?:\.\d+)?)\/([+-]?\d+(?:\.\d+)?)$/);
+  if (m) { const d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+  return /^[+-]?\d+(?:\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+}
+
+function checkInput(inp) {
+  if (String(inp.value).trim() === "") return false;
+  const ans = parseNumber(inp.dataset.answer);
+  const t = parseFloat(inp.dataset.tol);
+  const tol = isNaN(t) ? 0.01 : t;
+  const num = parseNumber(inp.value);
+  if (!isNaN(ans)) return !isNaN(num) && Math.abs(num - ans) <= tol + 1e-9;
+  return normalize(inp.value).toLowerCase() === normalize(inp.dataset.answer).toLowerCase();
+}
+
+/* Заменяет поля ввода на \htmlClass{id}{\square} ВНУТРИ формул, чтобы KaTeX не ломался */
+function replaceInputsInMath(mathStr) {
+  return mathStr.replace(/<input class="blank"[^>]*>/g, (match) => {
+    const idMatch = match.match(/id="([^"]+)"/);
+    if (idMatch) {
+      const id = idMatch[1];
+      inputMap[id] = match;
+      return `\\htmlClass{${id}}{\\square}`;
+    }
+    return match;
+  });
+}
+
+/* Подготавливает HTML: находит все формулы и заменяет в них <input> на плейсхолдеры */
+function prepareMath(html) {
+  let processed = html.replace(/\\\((.*?)\\\)/gs, (match, inner) => {
+    return '\\(' + replaceInputsInMath(inner) + '\\)';
+  });
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (match, inner) => {
+    return '$$' + replaceInputsInMath(inner) + '$$';
+  });
+  processed = processed.replace(/\\\[(.*?)\\\]/gs, (match, inner) => {
+    return '\\[' + replaceInputsInMath(inner) + '\\]';
+  });
+  return processed;
+}
+
+/* После рендера KaTeX находит квадратики и меняет их на реальные input */
+function restoreInputs(container) {
+  if (!container) return;
+  container.querySelectorAll('span[class*="blank_"]').forEach(span => {
+    const className = Array.from(span.classList).find(c => c.startsWith('blank_'));
+    if (className && inputMap[className]) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = inputMap[className];
+      const input = tmp.firstElementChild;
+      input.style.verticalAlign = 'middle';
+      span.parentNode.replaceChild(input, span);
+    }
+  });
+}
+
+function renderMath(container = document.body) {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(container, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false,
+      trust: true /* <--- РАЗРЕШАЕМ ИСПОЛЬЗОВАНИЕ \htmlClass */
+    });
+  }
+}
+
+/* ============ данные ============ */
+const groups = [
+
+/* ============================================================
+   РАЗДЕЛ: ДВИЖЕНИЕ ПО ПРЯМОЙ
+   ============================================================ */
+{
+  id: 1,
+  section: "Движение по прямой",
+  topic: "Туда-обратно с остановкой",
+  source: {
+    condition: "Велосипедист выехал с постоянной скоростью из города А в город В, расстояние между которыми равно 60 км. На следующий день он отправился обратно в А, увеличив скорость на 10 км/ч. По пути он сделал остановку на 3 часа, в результате чего затратил на обратный путь столько же времени, сколько на путь из А в В. Найдите скорость велосипедиста на пути из А в В.",
+    idea: "<b>Главная мысль:</b> время туда = время движения обратно + время остановки.",
+    table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Направление</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">А → В</td><td>60</td><td>\\(x\\)</td><td>\\(\\frac{60}{x}\\)</td></tr>
+      <tr><td class="left">В → А (движение)</td><td>60</td><td>\\(x+10\\)</td><td>\\(\\frac{60}{x+10}\\)</td></tr>
+      <tr><td class="left">Стоянка</td><td>—</td><td>—</td><td>3</td></tr>
+      <tr class="total"><td class="left">В → А (всего)</td><td>60</td><td>—</td><td>\\(\\frac{60}{x+10}+3\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Пусть \\(x\\) — скорость из А в В. Обратно — \\(x+10\\). Время туда \\(\\frac{60}{x}\\), обратно \\(\\frac{60}{x+10}+3\\).",
+      "Приравниваем: \\(\\frac{60}{x} = \\frac{60}{x+10} + 3\\).",
+      "Умножаем на \\(x(x+10)\\): \\(60(x+10) = 60x + 3x(x+10)\\), то есть \\(600 = 3x^2 + 30x\\).",
+      "Делим на 3: \\(x^2 + 10x - 200 = 0\\). \\(D = 100 + 800 = 900\\), \\(\\sqrt{D} = 30\\).",
+      "\\(x = \\frac{-10+30}{2} = 10\\) (корень \\(-20\\) не подходит). Ответ: 10 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Велосипедист выехал с постоянной скоростью из А в В, расстояние 180 км. Обратно он поехал, увеличив скорость на 5 км/ч, и сделал остановку на 3 часа. В результате он затратил на обратный путь столько же времени, сколько на путь из А в В. Найдите скорость велосипедиста на пути из А в В.",
+    answer: { val: 15, unit: "км/ч" },
+    hints: [
+      "Пусть \\(x\\) — скорость из А в В. Обратно скорость \\(x+5\\). Время туда \\(\\frac{180}{x}\\), обратно \\(\\frac{180}{x+5}+3\\).",
+      "Уравнение: \\(\\frac{180}{x} = \\frac{180}{x+5} + 3\\). После упрощения получится \\(x^2 + 5x - 300 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица. Заполни</caption><thead><tr><th>Направление</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">А → В</td><td>180</td><td>\\(x\\)</td><td>\\(\\frac{180}{x}\\)</td></tr>
+        <tr><td class="left">В → А (движение)</td><td>180</td><td>\\(x+5\\)</td><td>\\(\\frac{180}{x+5}\\)</td></tr>
+        <tr><td class="left">Стоянка</td><td>—</td><td>—</td><td>${b(3)}</td></tr>
+        <tr class="total"><td class="left">В → А (всего)</td><td>180</td><td>—</td><td>\\(\\frac{180}{x+5}+\\)${b(3)}</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{180}{x} = \\frac{180}{x+5} + ${b(3)}\\).`,
+        `Умножаем на \\(x(x+5)\\): \\(180(x+5) = 180x + 3x(x+5)\\), то есть \\(${b(900,80)} = 3x^2 + 15x\\).`,
+        `Делим на 3: \\(x^2 + 5x - ${b(300,80)} = 0\\).`,
+        `\\(D = 25 + 1200 = ${b(1225,80)}\\), \\(\\sqrt{D} = ${b(35)}\\). \\(x = \\frac{-5+35}{2} = ${b(15)}\\) (корень \\(-20\\) не подходит).`,
+        "Ответ: 15 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 2,
+  section: "Движение по прямой",
+  topic: "Навстречу с остановкой",
+  source: {
+    condition: "Из двух городов одновременно навстречу друг другу отправились два велосипедиста. Первый сделал остановку на 36 минут, а затем продолжил движение до встречи. Расстояние между городами 82 км, скорость первого 28 км/ч, скорость второго 10 км/ч. Определите расстояние от города, из которого выехал второй велосипедист, до места встречи.",
+    idea: "<b>Главная мысль:</b> суммарный путь до встречи = расстояние между городами. Первый был в движении на 36 минут меньше.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — время второго до встречи</caption><thead><tr><th>Велосипедист</th><th>v, км/ч</th><th>t, ч</th><th>S, км</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>28</td><td>\\(x - 0{,}6\\)</td><td>\\(28(x - 0{,}6)\\)</td></tr>
+      <tr><td class="left">Второй</td><td>10</td><td>\\(x\\)</td><td>\\(10x\\)</td></tr>
+      <tr class="total"><td class="left">Вместе</td><td>—</td><td>—</td><td>82</td></tr>
+    </tbody></table>`,
+    steps: [
+      "36 минут = 0,6 часа. Пусть \\(x\\) — время второго до встречи. Первый был в движении \\(x - 0{,}6\\) ч.",
+      "Суммарный путь: \\(28(x - 0{,}6) + 10x = 82\\).",
+      "\\(28x - 16{,}8 + 10x = 82 \\implies 38x = 98{,}8 \\implies x = 2{,}6\\) ч.",
+      "Расстояние от города второго = \\(10 \\cdot 2{,}6 = 26\\) км.",
+      "Ответ: 26 км."
+    ],
+    check: "Проверка: первый проехал \\(28 \\cdot 2 = 56\\) км, второй 26 км; \\(56 + 26 = 82\\). Верно."
+  },
+  practice: {
+    condition: "Из двух городов одновременно навстречу друг другу отправились два велосипедиста. Первый сделал остановку на 45 минут, а затем продолжил движение до встречи. Расстояние между городами 168 км, скорость первого 16 км/ч, скорость второго 20 км/ч. Определите расстояние от города, из которого выехал второй велосипедист, до места встречи.",
+    answer: { val: 100, unit: "км" },
+    hints: [
+      "45 минут = 0,75 часа. Пусть \\(x\\) — время второго до встречи. Первый был в движении \\(x - 0{,}75\\) ч.",
+      "Суммарный путь: \\(16(x - 0{,}75) + 20x = 168\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Велосипедист</th><th>v, км/ч</th><th>t, ч</th><th>S, км</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>16</td><td>\\(x - ${b(0.75,70)}\\)</td><td>\\(16(x - 0{,}75)\\)</td></tr>
+        <tr><td class="left">Второй</td><td>20</td><td>\\(x\\)</td><td>\\(20x\\)</td></tr>
+        <tr class="total"><td class="left">Вместе</td><td>—</td><td>—</td><td>168</td></tr>
+      </tbody></table>`,
+      steps: [
+        `45 минут = \\(${b(0.75,70)}\\) часа.`,
+        "Уравнение: \\(16(x - 0{,}75) + 20x = 168\\).",
+        `\\(16x - ${b(12,70)} + 20x = 168 \\implies 36x = ${b(180,80)} \\implies x = ${b(5,70)}\\) ч.`,
+        `Расстояние от города второго: \\(20 \\cdot 5 = ${b(100,80)}\\) км.`,
+        "Ответ: 100 км."
+      ]
+    }
+  }
+},
+{
+  id: 3,
+  section: "Движение по прямой",
+  topic: "Вдогонку: автомобили",
+  source: {
+    condition: "Два автомобиля одновременно отправляются в 560-километровый пробег. Первый едет со скоростью, на 10 км/ч большей, чем второй, и прибывает к финишу на 1 час раньше второго. Найдите скорость первого автомобиля.",
+    idea: "<b>Главная мысль:</b> путь одинаковый, более быстрый тратит меньше времени. Разница во времени даёт уравнение.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость второго</caption><thead><tr><th>Автомобиль</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Второй</td><td>\\(x\\)</td><td>560</td><td>\\(\\frac{560}{x}\\)</td></tr>
+      <tr><td class="left">Первый</td><td>\\(x+10\\)</td><td>560</td><td>\\(\\frac{560}{x+10}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Время второго \\(\\frac{560}{x}\\), первого \\(\\frac{560}{x+10}\\). Первый раньше на 1 час.",
+      "\\(\\frac{560}{x} - \\frac{560}{x+10} = 1\\).",
+      "Умножаем на \\(x(x+10)\\): \\(560(x+10) - 560x = x(x+10)\\), то есть \\(5600 = x^2 + 10x\\).",
+      "\\(x^2 + 10x - 5600 = 0\\). \\(D = 100 + 22400 = 22500\\), \\(\\sqrt{D} = 150\\).",
+      "\\(x = \\frac{-10+150}{2} = 70\\) — второй; первый \\(70+10 = 80\\) км/ч. Ответ: 80 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Два автомобиля одновременно отправляются в 800-километровый пробег. Первый едет со скоростью на 36 км/ч большей и прибывает на 5 часов раньше. Найдите скорость первого автомобиля.",
+    answer: { val: 96, unit: "км/ч" },
+    hints: [
+      "Пусть \\(x\\) — скорость второго. Уравнение: \\(\\frac{800}{x} - \\frac{800}{x+36} = 5\\).",
+      "После упрощения получится \\(x^2 + 36x - 5760 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Автомобиль</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Второй</td><td>\\(x\\)</td><td>800</td><td>\\(\\frac{800}{x}\\)</td></tr>
+        <tr><td class="left">Первый</td><td>\\(x+36\\)</td><td>800</td><td>\\(\\frac{800}{x+36}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{800}{x} - \\frac{800}{x+36} = ${b(5)}\\).`,
+        `Умножаем на \\(x(x+36)\\): \\(800(x+36) - 800x = 5x(x+36)\\), то есть \\(${b(28800,90)} = 5x^2 + 180x\\).`,
+        `Делим на 5: \\(x^2 + 36x - ${b(5760,90)} = 0\\).`,
+        `\\(D = 1296 + 23040 = ${b(24336,90)}\\), \\(\\sqrt{D} = ${b(156,80)}\\). \\(x = \\frac{-36+156}{2} = ${b(60)}\\) — второй.`,
+        `Первый: \\(60 + 36 = ${b(96)}\\) км/ч. Ответ: 96 км/ч.`
+      ]
+    }
+  }
+},
+{
+  id: 4,
+  section: "Движение по прямой",
+  topic: "Вдогонку: велосипедисты",
+  source: {
+    condition: "Два велосипедиста одновременно отправляются в 224-километровый пробег. Первый едет со скоростью на 2 км/ч большей, чем второй, и прибывает на 2 часа раньше. Найдите скорость велосипедиста, пришедшего к финишу вторым.",
+    idea: "<b>Главная мысль:</b> спрашивают скорость более медленного. Пусть \\(x\\) — скорость второго.",
+    table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Велосипедист</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Второй</td><td>\\(x\\)</td><td>224</td><td>\\(\\frac{224}{x}\\)</td></tr>
+      <tr><td class="left">Первый</td><td>\\(x+2\\)</td><td>224</td><td>\\(\\frac{224}{x+2}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{224}{x} - \\frac{224}{x+2} = 2\\).",
+      "\\(224(x+2) - 224x = 2x(x+2)\\), то есть \\(448 = 2x^2 + 4x\\).",
+      "Делим на 2: \\(x^2 + 2x - 224 = 0\\). \\(D = 4 + 896 = 900\\), \\(\\sqrt{D} = 30\\).",
+      "\\(x = \\frac{-2+30}{2} = 14\\). Ответ: 14 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Два велосипедиста одновременно отправляются в 100-километровый пробег. Первый едет со скоростью на 15 км/ч большей и прибывает на 6 часов раньше. Найдите скорость велосипедиста, пришедшего вторым.",
+    answer: { val: 10, unit: "км/ч" },
+    hints: [
+      "Пусть \\(x\\) — скорость второго. Уравнение: \\(\\frac{100}{x} - \\frac{100}{x+15} = 6\\).",
+      "После упрощения получится \\(x^2 + 15x - 250 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Велосипедист</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Второй</td><td>\\(x\\)</td><td>100</td><td>\\(\\frac{100}{x}\\)</td></tr>
+        <tr><td class="left">Первый</td><td>\\(x+15\\)</td><td>100</td><td>\\(\\frac{100}{x+15}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{100}{x} - \\frac{100}{x+15} = ${b(6)}\\).`,
+        `Умножаем на \\(x(x+15)\\): \\(100(x+15) - 100x = 6x(x+15)\\), то есть \\(${b(1500,80)} = 6x^2 + 90x\\).`,
+        `Делим на 6: \\(x^2 + 15x - ${b(250,70)} = 0\\).`,
+        `\\(D = 225 + 1000 = ${b(1225,80)}\\), \\(\\sqrt{D} = ${b(35)}\\). \\(x = \\frac{-15+35}{2} = ${b(10)}\\).`,
+        "Ответ: 10 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 5,
+  section: "Движение по прямой",
+  topic: "Две половины пути (второй медленнее)",
+  source: {
+    condition: "Из А в В одновременно выехали два автомобиля. Первый проехал весь путь с постоянной скоростью. Второй первую половину пути проехал со скоростью, меньшей скорости первого на 6 км/ч, а вторую половину — со скоростью 56 км/ч, и прибыл одновременно с первым. Найдите скорость первого, если она больше 45 км/ч.",
+    idea: "<b>Главная мысль:</b> второй едет двумя половинами пути с разными скоростями, его время — сумма двух времён. Длина пути S сократится.",
+    table: `<table class="cond"><caption>Таблица. \\(S\\) — весь путь, \\(x\\) — скорость первого</caption><thead><tr><th>Участник / участок</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Первый, весь путь</td><td>\\(S\\)</td><td>\\(x\\)</td><td>\\(\\frac{S}{x}\\)</td></tr>
+      <tr><td class="left">Второй, 1-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>\\(x-6\\)</td><td>\\(\\frac{S}{2(x-6)}\\)</td></tr>
+      <tr><td class="left">Второй, 2-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>56</td><td>\\(\\frac{S}{112}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Прибыли одновременно: \\(\\frac{S}{x} = \\frac{S}{2(x-6)} + \\frac{S}{112}\\).",
+      "Делим на \\(S \\neq 0\\): \\(\\frac{1}{x} = \\frac{1}{2(x-6)} + \\frac{1}{112}\\).",
+      "Умножаем на \\(112x(x-6)\\): \\(112(x-6) = 56x + x(x-6)\\), то есть \\(x^2 - 62x + 672 = 0\\).",
+      "\\(D = 1156\\), \\(\\sqrt{D} = 34\\). \\(x = 48\\) или \\(x = 14\\). По условию \\(x > 45\\), значит 48.",
+      "Ответ: 48 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Из А в В одновременно выехали два автомобиля. Первый проехал весь путь с постоянной скоростью. Второй первую половину проехал со скоростью на 17 км/ч меньшей, а вторую — со скоростью 102 км/ч, и прибыл одновременно. Найдите скорость первого, если она больше 65 км/ч.",
+    answer: { val: 68, unit: "км/ч" },
+    hints: [
+      "Уравнение: \\(\\frac{1}{x} = \\frac{1}{2(x-17)} + \\frac{1}{204}\\). Длина пути сокращается.",
+      "После упрощения получится \\(x^2 - 119x + 3468 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Участник</th><th>S</th><th>v, км/ч</th><th>t</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>\\(S\\)</td><td>\\(x\\)</td><td>\\(\\frac{S}{x}\\)</td></tr>
+        <tr><td class="left">Второй, 1-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>\\(x-17\\)</td><td>\\(\\frac{S}{2(x-17)}\\)</td></tr>
+        <tr><td class="left">Второй, 2-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>102</td><td>\\(S/${b(204,70)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{1}{x} = \\frac{1}{2(x-17)} + 1/${b(204,70)}\\).`,
+        `Умножаем на \\(204x(x-17)\\): \\(204(x-17) = 102x + x(x-17)\\), то есть \\(x^2 - 119x + ${b(3468,90)} = 0\\).`,
+        `\\(D = 14161 - 13872 = ${b(289,70)}\\), \\(\\sqrt{D} = ${b(17)}\\). \\(x = \\frac{119+17}{2} = ${b(68)}\\).`,
+        `Проверяем условие \\(x > 65\\): \\(${b(68)} > 65 \\checkmark\\).`,
+        "Ответ: 68 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 6,
+  section: "Движение по прямой",
+  topic: "Две половины пути (второй быстрее)",
+  source: {
+    condition: "Из А в В одновременно выехали два автомобиля. Первый проехал весь путь с постоянной скоростью. Второй первую половину пути проехал со скоростью 48 км/ч, а вторую половину — со скоростью на 32 км/ч больше скорости первого, и прибыл одновременно с первым. Найдите скорость первого.",
+    idea: "<b>Главная мысль:</b> второй на второй половине быстрее первого, но на первой — фиксированная скорость 48. Времена равны.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость первого</caption><thead><tr><th>Участник / участок</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Первый, весь путь</td><td>\\(S\\)</td><td>\\(x\\)</td><td>\\(\\frac{S}{x}\\)</td></tr>
+      <tr><td class="left">Второй, 1-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>48</td><td>\\(\\frac{S}{96}\\)</td></tr>
+      <tr><td class="left">Второй, 2-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>\\(x+32\\)</td><td>\\(\\frac{S}{2(x+32)}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Прибыли одновременно: \\(\\frac{1}{x} = \\frac{1}{96} + \\frac{1}{2(x+32)}\\).",
+      "Умножаем на \\(96x(x+32)\\): \\(96(x+32) = x(x+32) + 48x\\), то есть \\(x^2 - 16x - 3072 = 0\\).",
+      "\\(D = 256 + 12288 = 12544\\), \\(\\sqrt{D} = 112\\).",
+      "\\(x = \\frac{16+112}{2} = 64\\) (корень \\(-48\\) не подходит). Ответ: 64 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Из А в В одновременно выехали два автомобиля. Первый проехал весь путь с постоянной скоростью. Второй первую половину пути проехал со скоростью 57 км/ч, а вторую половину — со скоростью на 38 км/ч больше скорости первого, и прибыл в В одновременно с первым. Найдите скорость первого.",
+    answer: { val: 76, unit: "км/ч" },
+    hints: [
+      "Уравнение: \\(\\frac{1}{x} = \\frac{1}{114} + \\frac{1}{2(x+38)}\\).",
+      "После упрощения получится \\(x^2 - 19x - 4332 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Участник</th><th>S</th><th>v, км/ч</th><th>t</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>\\(S\\)</td><td>\\(x\\)</td><td>\\(\\frac{S}{x}\\)</td></tr>
+        <tr><td class="left">Второй, 1-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>57</td><td>\\(S/${b(114,70)}\\)</td></tr>
+        <tr><td class="left">Второй, 2-я половина</td><td>\\(\\frac{S}{2}\\)</td><td>\\(x+38\\)</td><td>\\(\\frac{S}{2(x+38)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{1}{x} = 1/${b(114,70)} + \\frac{1}{2(x+38)}\\).`,
+        `Умножаем на \\(114x(x+38)\\): \\(114(x+38) = x(x+38) + 57x\\), то есть \\(x^2 - 19x - ${b(4332,90)} = 0\\).`,
+        `\\(D = 361 + 17328 = ${b(17689,90)}\\), \\(\\sqrt{D} = ${b(133,80)}\\). \\(x = \\frac{19+133}{2} = ${b(76)}\\).`,
+        "Ответ: 76 км/ч."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: КРУГОВАЯ ТРАССА
+   ============================================================ */
+{
+  id: 7,
+  section: "Круговая трасса",
+  topic: "Круговая трасса",
+  source: {
+    condition: "Два бегуна одновременно стартовали в одном направлении из одного места круговой трассы. Спустя час, когда первому оставалось 4 км до окончания первого круга, ему сообщили, что второй пробежал круг 18 минут назад. Найдите скорость первого, если она на 10 км/ч меньше скорости второго.",
+    idea: "<b>Главная мысль:</b> длина круга L одна и та же. Первому за час осталось 4 км — значит \\(L = x + 4\\). Второй пробежал круг за \\(1 - \\frac{18}{60} = \\frac{42}{60}\\) ч.",
+    table: `<table class="cond"><caption>Таблица. \\(L\\) — длина круга, \\(x\\) — скорость первого</caption><thead><tr><th>Бегун</th><th>v, км/ч</th><th>t, ч</th><th>S, км</th></tr></thead><tbody>
+      <tr><td class="left">Первый, за 1 час</td><td>\\(x\\)</td><td>1</td><td>\\(x\\)</td></tr>
+      <tr><td class="left">Второй, круг</td><td>\\(x+10\\)</td><td>\\(\\frac{42}{60}\\)</td><td>\\(L\\)</td></tr>
+      <tr class="total"><td class="left">Длина круга</td><td>—</td><td>—</td><td>\\(x+4\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Первому осталось 4 км за час \\(\\implies L = x + 4\\).",
+      "Второй пробежал круг 18 минут назад, то есть за \\(\\frac{42}{60} = 0{,}7\\) ч: \\(L = 0{,}7(x+10)\\).",
+      "\\(x + 4 = 0{,}7(x+10)\\). Умножаем на 10: \\(10x + 40 = 7x + 70 \\implies 3x = 30 \\implies x = 10\\).",
+      "Ответ: 10 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Два бегуна одновременно стартовали в одном направлении из одного места круговой трассы. Спустя час, когда первому оставалось 2 км до окончания первого круга, ему сообщили, что второй пробежал круг 9 минут назад. Найдите скорость первого, если она на 5 км/ч меньше скорости второго.",
+    answer: { val: 15, unit: "км/ч" },
+    hints: [
+      "Пусть \\(x\\) — скорость первого. Тогда \\(L = x+2\\).",
+      "Второй пробежал круг за \\(1 - \\frac{9}{60} = \\frac{51}{60} = \\frac{17}{20}\\) ч. Значит \\(L = \\frac{17}{20}(x+5)\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Бегун</th><th>v, км/ч</th><th>t, ч</th><th>S, км</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>\\(x\\)</td><td>1</td><td>\\(x\\)</td></tr>
+        <tr><td class="left">Второй</td><td>\\(x+5\\)</td><td>\\(${b(0.85,70)}\\) (17/20)</td><td>\\(L\\)</td></tr>
+        <tr class="total"><td class="left">Длина круга</td><td>—</td><td>—</td><td>\\(x+${b(2)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `9 минут назад — значит круг пройден за \\(\\frac{51}{60} = ${b(0.85,70)}\\) ч.`,
+        `\\(L = x + 2\\) и \\(L = \\frac{17}{20}(x+5)\\), то есть \\(x + 2 = \\frac{17}{20}(x+5)\\).`,
+        `Умножаем на 20: \\(20x + ${b(40)} = 17x + ${b(85)} \\implies 3x = 45 \\implies x = ${b(15)}\\).`,
+        "Ответ: 15 км/ч."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: СРЕДНЯЯ СКОРОСТЬ
+   ============================================================ */
+{
+  id: 8,
+  section: "Средняя скорость",
+  topic: "Средняя скорость по участкам",
+  source: {
+    condition: "Первые 450 км автомобиль ехал со скоростью 90 км/ч, следующие 230 км — со скоростью 115 км/ч, а последние 120 км — со скоростью 40 км/ч. Найдите среднюю скорость автомобиля на протяжении всего пути.",
+    idea: "<b>Главная мысль:</b> средняя скорость = весь путь : всё время.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — средняя скорость</caption><thead><tr><th>Участок</th><th>S, км</th><th>v, км/ч</th><th>t = S:v, ч</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>450</td><td>90</td><td>5</td></tr>
+      <tr><td class="left">Второй</td><td>230</td><td>115</td><td>2</td></tr>
+      <tr><td class="left">Третий</td><td>120</td><td>40</td><td>3</td></tr>
+      <tr class="total"><td class="left">Всего</td><td>800</td><td>\\(x = ?\\)</td><td>10</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Время на участках: \\(450 : 90 = 5\\) ч, \\(230 : 115 = 2\\) ч, \\(120 : 40 = 3\\) ч.",
+      "Весь путь \\(450 + 230 + 120 = 800\\) км. Всё время \\(5 + 2 + 3 = 10\\) ч.",
+      "\\(x = 800 : 10 = 80\\) км/ч.",
+      "Ответ: 80 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Первые 200 км автомобиль ехал со скоростью 50 км/ч, следующие 320 км — со скоростью 80 км/ч, а последние 140 км — со скоростью 35 км/ч. Найдите среднюю скорость на протяжении всего пути.",
+    answer: { val: 55, unit: "км/ч" },
+    hints: [
+      "Найдите время на каждом участке.",
+      "Средняя скорость = весь путь : всё время."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Участок</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>200</td><td>50</td><td>${b(4)}</td></tr>
+        <tr><td class="left">Второй</td><td>320</td><td>80</td><td>${b(4)}</td></tr>
+        <tr><td class="left">Третий</td><td>140</td><td>35</td><td>${b(4)}</td></tr>
+        <tr class="total"><td class="left">Всего</td><td>\\(${b(660,80)}\\)</td><td>\\(x\\)</td><td>\\(${b(12)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Время: \\(200 : 50 = ${b(4)}\\) ч; \\(320 : 80 = ${b(4)}\\) ч; \\(140 : 35 = ${b(4)}\\) ч.`,
+        `Весь путь: \\(200 + 320 + 140 = ${b(660,80)}\\) км. Всё время: \\(4+4+4 = ${b(12)}\\) ч.`,
+        `\\(x = 660 : 12 = ${b(55)}\\) км/ч.`,
+        "Ответ: 55 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 9,
+  section: "Средняя скорость",
+  topic: "Средняя скорость половины пути",
+  source: {
+    condition: "Первую половину трассы автомобиль проехал со скоростью 90 км/ч, а вторую — со скоростью 110 км/ч. Найдите среднюю скорость на всём пути.",
+    idea: "<b>Главная мысль:</b> половины пути равны, но время разное. Средняя скорость = \\(\\frac{2v_1v_2}{v_1+v_2}\\).",
+    table: `<table class="cond"><caption>Таблица. \\(S\\) — весь путь, \\(x\\) — средняя скорость</caption><thead><tr><th>Участок</th><th>S, км</th><th>v, км/ч</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Первая половина</td><td>\\(\\frac{S}{2}\\)</td><td>90</td><td>\\(\\frac{S}{180}\\)</td></tr>
+      <tr><td class="left">Вторая половина</td><td>\\(\\frac{S}{2}\\)</td><td>110</td><td>\\(\\frac{S}{220}\\)</td></tr>
+      <tr class="total"><td class="left">Всего</td><td>\\(S\\)</td><td>\\(x\\)</td><td>\\(\\frac{S}{180} + \\frac{S}{220}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(x = S : \\left(\\frac{S}{180} + \\frac{S}{220}\\right) = 1 : \\left(\\frac{1}{180} + \\frac{1}{220}\\right)\\).",
+      "\\(\\frac{1}{180} + \\frac{1}{220} = \\frac{220+180}{180 \\cdot 220} = \\frac{400}{39600} = \\frac{1}{99}\\).",
+      "\\(x = 1 : \\frac{1}{99} = 99\\) км/ч.",
+      "Ответ: 99 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Первую половину трассы автомобиль проехал со скоростью 84 км/ч, а вторую — со скоростью 108 км/ч. Найдите среднюю скорость на всём пути.",
+    answer: { val: 94.5, unit: "км/ч" },
+    hints: [
+      "Формула для равных половин пути: \\(x = \\frac{2v_1v_2}{v_1+v_2}\\).",
+      "Подставьте 84 и 108."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Участок</th><th>S</th><th>v, км/ч</th><th>t</th></tr></thead><tbody>
+        <tr><td class="left">Первая половина</td><td>\\(\\frac{S}{2}\\)</td><td>84</td><td>\\(S/${b(168,70)}\\)</td></tr>
+        <tr><td class="left">Вторая половина</td><td>\\(\\frac{S}{2}\\)</td><td>108</td><td>\\(S/${b(216,70)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        "\\(x = S : \\left(\\frac{S}{168} + \\frac{S}{216}\\right) = 1 : \\left(\\frac{1}{168} + \\frac{1}{216}\\right)\\).",
+        `\\(\\frac{1}{168} + \\frac{1}{216} = \\frac{216+168}{168 \\cdot 216} = \\frac{384}{36288} = 1/${b(94.5,80,0.01)}\\).`,
+        `\\(x = ${b(94.5,80,0.01)}\\) км/ч.`,
+        "Ответ: 94,5 км/ч."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: ПРОТЯЖЁННЫЕ ТЕЛА
+   ============================================================ */
+{
+  id: 10,
+  section: "Протяжённые тела",
+  topic: "Поезд навстречу пешеходу",
+  source: {
+    condition: "Поезд, двигаясь равномерно со скоростью 75 км/ч, проезжает мимо пешехода, идущего параллельно путям со скоростью 3 км/ч навстречу поезду, за 30 секунд. Найдите длину поезда в метрах.",
+    idea: "<b>Главная мысль:</b> при движении навстречу скорости складываются. Время дано в секундах — нужно перевести км/ч в м/с.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — длина поезда</caption><thead><tr><th>Величина</th><th>Значение</th></tr></thead><tbody>
+      <tr><td class="left">Скорость поезда</td><td>75 км/ч</td></tr>
+      <tr><td class="left">Скорость пешехода</td><td>3 км/ч</td></tr>
+      <tr><td class="left">Скорость сближения</td><td>\\(78 \\text{ км/ч} = \\frac{78 \\cdot 1000}{3600} \\text{ м/с}\\)</td></tr>
+      <tr><td class="left">Время проезда</td><td>30 с</td></tr>
+      <tr class="total"><td class="left">Длина поезда, м</td><td>\\(x = ?\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Скорость сближения: \\(75 + 3 = 78 \\text{ км/ч} = \\frac{78000}{3600} = \\frac{65}{3}\\) м/с.",
+      "\\(x = \\text{скорость сближения} \\times \\text{время} = \\frac{65}{3} \\cdot 30 = 650\\) м.",
+      "Ответ: 650 м."
+    ]
+  },
+  practice: {
+    condition: "Поезд со скоростью 36 км/ч проезжает мимо пешехода, идущего навстречу со скоростью 4 км/ч, за 54 секунды. Найдите длину поезда в метрах.",
+    answer: { val: 600, unit: "м" },
+    hints: [
+      "Скорость сближения: \\(36 + 4 = 40\\) км/ч. Переведите в м/с.",
+      "Длина = скорость сближения × время."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Величина</th><th>Значение</th></tr></thead><tbody>
+        <tr><td class="left">Скорость поезда</td><td>36 км/ч</td></tr>
+        <tr><td class="left">Скорость пешехода</td><td>4 км/ч</td></tr>
+        <tr><td class="left">Сближение</td><td>\\(${b(40,70)}\\) км/ч = \\(${b(11.11,80,0.02)}\\) м/с</td></tr>
+        <tr><td class="left">Время</td><td>54 с</td></tr>
+        <tr class="total"><td class="left">Длина поезда, м</td><td>\\(x\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Скорость сближения: \\(36 + 4 = ${b(40,70)}\\) км/ч = \\(\\frac{40000}{3600} = ${b(11.11,80,0.02)}\\) м/с.`,
+        `\\(x = \\frac{100}{9} \\cdot 54 = ${b(600,90)}\\) м.`,
+        "Ответ: 600 м."
+      ]
+    }
+  }
+},
+{
+  id: 11,
+  section: "Протяжённые тела",
+  topic: "Поезд в одном направлении с пешеходом",
+  source: {
+    condition: "Поезд, двигаясь равномерно со скоростью 63 км/ч, проезжает мимо пешехода, идущего в том же направлении со скоростью 3 км/ч, за 39 секунд. Найдите длину поезда в метрах.",
+    idea: "<b>Главная мысль:</b> при движении в одном направлении скорости вычитаются.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — длина поезда</caption><thead><tr><th>Величина</th><th>Значение</th></tr></thead><tbody>
+      <tr><td class="left">Скорость поезда</td><td>63 км/ч</td></tr>
+      <tr><td class="left">Скорость пешехода</td><td>3 км/ч</td></tr>
+      <tr><td class="left">Разность скоростей</td><td>60 км/ч</td></tr>
+      <tr><td class="left">Время</td><td>39 с</td></tr>
+      <tr class="total"><td class="left">Длина поезда, м</td><td>\\(x = ?\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Разность скоростей: \\(63 - 3 = 60 \\text{ км/ч} = \\frac{60000}{3600} = \\frac{50}{3}\\) м/с.",
+      "\\(x = \\frac{50}{3} \\cdot 39 = 650\\) м.",
+      "Ответ: 650 м."
+    ]
+  },
+  practice: {
+    condition: "Поезд со скоростью 44 км/ч проезжает мимо пешехода, идущего в том же направлении со скоростью 4 км/ч, за 36 секунд. Найдите длину поезда в метрах.",
+    answer: { val: 400, unit: "м" },
+    hints: [
+      "Разность скоростей: \\(44 - 4 = 40\\) км/ч.",
+      "Переведите в м/с и умножьте на 36 секунд."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Величина</th><th>Значение</th></tr></thead><tbody>
+        <tr><td class="left">Скорость поезда</td><td>44 км/ч</td></tr>
+        <tr><td class="left">Скорость пешехода</td><td>4 км/ч</td></tr>
+        <tr><td class="left">Разность</td><td>\\(${b(40,70)}\\) км/ч = \\(${b(11.11,80,0.02)}\\) м/с</td></tr>
+        <tr><td class="left">Время</td><td>36 с</td></tr>
+        <tr class="total"><td class="left">Длина поезда, м</td><td>\\(x\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Разность: \\(44 - 4 = ${b(40,70)}\\) км/ч = \\(${b(11.11,80,0.02)}\\) м/с.`,
+        `\\(x = \\frac{100}{9} \\cdot 36 = ${b(400,90)}\\) м.`,
+        "Ответ: 400 м."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: ДВИЖЕНИЕ ПО ВОДЕ
+   ============================================================ */
+{
+  id: 12,
+  section: "Движение по воде",
+  topic: "Баржа (туда и обратно)",
+  source: {
+    condition: "Баржа прошла по течению 56 км и, повернув обратно, прошла ещё 54 км, затратив на весь путь 5 часов. Найдите собственную скорость баржи, если скорость течения 5 км/ч.",
+    idea: "<b>Главная мысль:</b> по течению \\(x+5\\), против \\(x-5\\). Суммарное время = 5 часов.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — собственная скорость</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">По течению</td><td>\\(x+5\\)</td><td>56</td><td>\\(\\frac{56}{x+5}\\)</td></tr>
+      <tr><td class="left">Против течения</td><td>\\(x-5\\)</td><td>54</td><td>\\(\\frac{54}{x-5}\\)</td></tr>
+      <tr class="total"><td class="left">Всего</td><td>—</td><td>110</td><td>5</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{56}{x+5} + \\frac{54}{x-5} = 5\\).",
+      "Умножаем на \\((x-5)(x+5)\\): \\(56(x-5) + 54(x+5) = 5(x^2-25)\\).",
+      "\\(110x - 10 = 5x^2 - 125 \\implies 5x^2 - 110x - 115 = 0\\), делим на 5: \\(x^2 - 22x - 23 = 0\\).",
+      "\\(D = 484 + 92 = 576\\), \\(\\sqrt{D} = 24\\). \\(x = \\frac{22+24}{2} = 23\\) (корень \\(-1\\) не подходит).",
+      "Ответ: 23 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Баржа прошла по течению 84 км и, повернув обратно, прошла ещё 66 км, затратив на весь путь 10 часов. Найдите собственную скорость баржи, если скорость течения 5 км/ч.",
+    answer: { val: 16, unit: "км/ч" },
+    hints: [
+      "Уравнение: \\(\\frac{84}{x+5} + \\frac{66}{x-5} = 10\\).",
+      "После упрощения получится \\(x^2 - 15x - 16 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">По течению</td><td>\\(x+5\\)</td><td>84</td><td>\\(\\frac{84}{x+5}\\)</td></tr>
+        <tr><td class="left">Против течения</td><td>\\(x-5\\)</td><td>66</td><td>\\(\\frac{66}{x-5}\\)</td></tr>
+        <tr class="total"><td class="left">Всего</td><td>—</td><td>150</td><td>\\(${b(10)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{84}{x+5} + \\frac{66}{x-5} = ${b(10)}\\).`,
+        `Умножаем на \\((x-5)(x+5)\\): \\(84(x-5) + 66(x+5) = 10(x^2-25)\\), то есть \\(150x - 90 = 10x^2 - 250\\).`,
+        `Делим на 10: \\(x^2 - 15x - ${b(16,70)} = 0\\).`,
+        `\\(D = 225 + 64 = ${b(289,70)}\\), \\(\\sqrt{D} = ${b(17)}\\). \\(x = \\frac{15+17}{2} = ${b(16)}\\).`,
+        "Ответ: 16 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 13,
+  section: "Движение по воде",
+  topic: "Плот и лодка",
+  source: {
+    condition: "Расстояние между пристанями 72 км. Из А в В по течению отправился плот, а через час — моторная лодка, которая дошла до В, тотчас повернула и вернулась в А. К этому времени плот прошёл 33 км. Найдите скорость лодки в неподвижной воде, если скорость течения 3 км/ч.",
+    idea: "<b>Главная мысль:</b> плот плывёт со скоростью течения. Сначала узнаём время плота, потом — лодки (она вышла на час позже).",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость лодки</caption><thead><tr><th>Участник</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Плот</td><td>3</td><td>33</td><td>11</td></tr>
+      <tr><td class="left">Лодка: А→В</td><td>\\(x+3\\)</td><td>72</td><td>\\(\\frac{72}{x+3}\\)</td></tr>
+      <tr><td class="left">Лодка: В→А</td><td>\\(x-3\\)</td><td>72</td><td>\\(\\frac{72}{x-3}\\)</td></tr>
+      <tr class="total"><td class="left">Лодка, всего</td><td>—</td><td>144</td><td>10</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Плот: \\(33 : 3 = 11\\) ч. Лодка вышла на 1 ч позже \\(\\implies\\) была в пути 10 ч.",
+      "\\(\\frac{72}{x+3} + \\frac{72}{x-3} = 10\\).",
+      "\\(144x = 10x^2 - 90 \\implies 10x^2 - 144x - 90 = 0\\), делим на 2: \\(5x^2 - 72x - 45 = 0\\).",
+      "\\(D = 5184 + 900 = 6084\\), \\(\\sqrt{D} = 78\\). \\(x = \\frac{72+78}{10} = 15\\).",
+      "Ответ: 15 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Расстояние между пристанями 126 км. Из А в В отправился плот, а через час — лодка, которая дошла до В, повернула и вернулась в А. К этому времени плот прошёл 36 км. Найдите скорость лодки, если скорость течения 4 км/ч.",
+    answer: { val: 32, unit: "км/ч" },
+    hints: [
+      "Время плота: \\(36 : 4 = 9\\) ч. Лодка была в пути 8 ч.",
+      "Уравнение: \\(\\frac{126}{x+4} + \\frac{126}{x-4} = 8\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Участник</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Плот</td><td>4</td><td>36</td><td>\\(${b(9)}\\)</td></tr>
+        <tr><td class="left">Лодка: А→В</td><td>\\(x+4\\)</td><td>126</td><td>\\(\\frac{126}{x+4}\\)</td></tr>
+        <tr><td class="left">Лодка: В→А</td><td>\\(x-4\\)</td><td>126</td><td>\\(\\frac{126}{x-4}\\)</td></tr>
+        <tr class="total"><td class="left">Лодка, всего</td><td>—</td><td>252</td><td>\\(${b(8)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Время плота: \\(36 : 4 = ${b(9)}\\) ч. Лодка в пути: \\(9 - 1 = ${b(8)}\\) ч.`,
+        `Уравнение: \\(\\frac{126}{x+4} + \\frac{126}{x-4} = ${b(8)}\\).`,
+        `Умножаем: \\(126(x-4) + 126(x+4) = 8(x^2-16)\\), то есть \\(252x = 8x^2 - 128\\).`,
+        `\\(8x^2 - 252x - 128 = 0\\), делим на 4: \\(2x^2 - 63x - 32 = 0\\). \\(D = 3969 + 256 = ${b(4225,80)}\\), \\(\\sqrt{D} = ${b(65)}\\).`,
+        `\\(x = \\frac{63+65}{4} = ${b(32)}\\). Ответ: 32 км/ч.`
+      ]
+    }
+  }
+},
+{
+  id: 14,
+  section: "Движение по воде",
+  topic: "Лодка против течения и обратно",
+  source: {
+    condition: "Моторная лодка прошла против течения 72 км и вернулась обратно, затратив на обратный путь на 2 часа меньше. Найдите скорость лодки в неподвижной воде, если скорость течения 3 км/ч.",
+    idea: "<b>Главная мысль:</b> против течения время больше на 2 часа.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость лодки</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Против течения</td><td>\\(x-3\\)</td><td>72</td><td>\\(\\frac{72}{x-3}\\)</td></tr>
+      <tr><td class="left">По течению</td><td>\\(x+3\\)</td><td>72</td><td>\\(\\frac{72}{x+3}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{72}{x-3} - \\frac{72}{x+3} = 2\\).",
+      "\\(72(x+3) - 72(x-3) = 2(x^2-9)\\), то есть \\(432 = 2x^2 - 18\\).",
+      "\\(x^2 = 225 \\implies x = 15\\).",
+      "Ответ: 15 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Моторная лодка прошла против течения 132 км и вернулась обратно, затратив на обратный путь на 5 часов меньше. Найдите скорость лодки в неподвижной воде, если скорость течения 5 км/ч.",
+    answer: { val: 17, unit: "км/ч" },
+    hints: [
+      "Уравнение: \\(\\frac{132}{x-5} - \\frac{132}{x+5} = 5\\).",
+      "Упростите: \\(1320 = 5x^2 - 125\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Против течения</td><td>\\(x-5\\)</td><td>132</td><td>\\(\\frac{132}{x-5}\\)</td></tr>
+        <tr><td class="left">По течению</td><td>\\(x+5\\)</td><td>132</td><td>\\(\\frac{132}{x+5}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{132}{x-5} - \\frac{132}{x+5} = ${b(5)}\\).`,
+        `Умножаем: \\(132(x+5) - 132(x-5) = 5(x^2-25)\\), то есть \\(${b(1320,80)} = 5x^2 - 125\\).`,
+        `\\(5x^2 = 1445 \\implies x^2 = ${b(289,70)} \\implies x = ${b(17)}\\).`,
+        "Ответ: 17 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 15,
+  section: "Движение по воде",
+  topic: "Теплоход: найти скорость",
+  source: {
+    condition: "Теплоход проходит по течению до пункта назначения 210 км и после стоянки возвращается. Найдите скорость в неподвижной воде, если скорость течения 4 км/ч, стоянка длится 9 часов, а возвращается через 27 часов после отплытия.",
+    idea: "<b>Главная мысль:</b> время в пути = общее время − стоянка. Дальше — обычная формула.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость теплохода</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">По течению</td><td>\\(x+4\\)</td><td>210</td><td>\\(\\frac{210}{x+4}\\)</td></tr>
+      <tr><td class="left">Против течения</td><td>\\(x-4\\)</td><td>210</td><td>\\(\\frac{210}{x-4}\\)</td></tr>
+      <tr class="total"><td class="left">Всего в пути</td><td>—</td><td>420</td><td>18</td></tr>
+    </tbody></table>`,
+    steps: [
+      "В пути: \\(27 - 9 = 18\\) ч. Уравнение: \\(\\frac{210}{x+4} + \\frac{210}{x-4} = 18\\).",
+      "Умножаем на \\((x-4)(x+4)\\): \\(210(x-4) + 210(x+4) = 18(x^2-16)\\), то есть \\(420x = 18x^2 - 288\\).",
+      "\\(18x^2 - 420x - 288 = 0\\), делим на 6: \\(3x^2 - 70x - 48 = 0\\).",
+      "\\(D = 4900 + 576 = 5476\\), \\(\\sqrt{D} = 74\\). \\(x = \\frac{70+74}{6} = 24\\) (корень \\(-2/3\\) не подходит).",
+      "Ответ: 24 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Теплоход проходит по течению 80 км и после стоянки возвращается. Скорость течения 5 км/ч, стоянка длится 23 часа, возвращается через 35 часов. Найдите скорость в неподвижной воде.",
+    answer: { val: 15, unit: "км/ч" },
+    hints: [
+      "В пути: \\(35 - 23 = 12\\) ч. Уравнение: \\(\\frac{80}{x+5} + \\frac{80}{x-5} = 12\\).",
+      "После упрощения получится \\(3x^2 - 40x - 75 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">По течению</td><td>\\(x+5\\)</td><td>80</td><td>\\(\\frac{80}{x+5}\\)</td></tr>
+        <tr><td class="left">Против течения</td><td>\\(x-5\\)</td><td>80</td><td>\\(\\frac{80}{x-5}\\)</td></tr>
+        <tr class="total"><td class="left">Всего в пути</td><td>—</td><td>160</td><td>\\(${b(12)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `В пути: \\(35 - 23 = ${b(12)}\\) ч.`,
+        `Уравнение: \\(\\frac{80}{x+5} + \\frac{80}{x-5} = ${b(12)}\\).`,
+        `Умножаем: \\(160x = 12x^2 - 300\\), то есть \\(3x^2 - 40x - 75 = 0\\).`,
+        `\\(D = 1600 + 900 = ${b(2500,80)}\\), \\(\\sqrt{D} = ${b(50)}\\). \\(x = \\frac{40+50}{6} = ${b(15)}\\).`,
+        "Ответ: 15 км/ч."
+      ]
+    }
+  }
+},
+{
+  id: 16,
+  section: "Движение по воде",
+  topic: "Теплоход: найти скорость течения",
+  source: {
+    condition: "Теплоход проходит по течению до пункта назначения 70 км и возвращается. Найдите скорость течения, если скорость теплохода в неподвижной воде 24 км/ч, стоянка длится 8 часов, а возвращается через 14 часов.",
+    idea: "<b>Главная мысль:</b> скорость теплохода известна, неизвестна скорость течения \\(x\\).",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — скорость течения</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">По течению</td><td>\\(24+x\\)</td><td>70</td><td>\\(\\frac{70}{24+x}\\)</td></tr>
+      <tr><td class="left">Против течения</td><td>\\(24-x\\)</td><td>70</td><td>\\(\\frac{70}{24-x}\\)</td></tr>
+      <tr class="total"><td class="left">Всего в пути</td><td>—</td><td>140</td><td>6</td></tr>
+    </tbody></table>`,
+    steps: [
+      "В пути: \\(14 - 8 = 6\\) ч. Уравнение: \\(\\frac{70}{24+x} + \\frac{70}{24-x} = 6\\).",
+      "\\(70 \\cdot 48 = 6(576 - x^2) \\implies 3360 = 3456 - 6x^2\\).",
+      "\\(6x^2 = 96 \\implies x^2 = 16 \\implies x = 4\\).",
+      "Ответ: 4 км/ч."
+    ]
+  },
+  practice: {
+    condition: "Теплоход проходит по течению 132 км и возвращается. Скорость теплохода в стоячей воде 25 км/ч, стоянка 21 час, возвращается через 32 часа. Найдите скорость течения.",
+    answer: { val: 5, unit: "км/ч" },
+    hints: [
+      "В пути: \\(32 - 21 = 11\\) ч. Уравнение: \\(\\frac{132}{25+x} + \\frac{132}{25-x} = 11\\).",
+      "Упростите: \\(6600 = 11(625 - x^2)\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Направление</th><th>v, км/ч</th><th>S, км</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">По течению</td><td>\\(25+x\\)</td><td>132</td><td>\\(\\frac{132}{25+x}\\)</td></tr>
+        <tr><td class="left">Против течения</td><td>\\(25-x\\)</td><td>132</td><td>\\(\\frac{132}{25-x}\\)</td></tr>
+        <tr class="total"><td class="left">Всего в пути</td><td>—</td><td>264</td><td>\\(${b(11)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `В пути: \\(32 - 21 = ${b(11)}\\) ч.`,
+        `Уравнение: \\(\\frac{132}{25+x} + \\frac{132}{25-x} = ${b(11)}\\).`,
+        `Умножаем: \\(132 \\cdot 50 = 11(625 - x^2)\\), то есть \\(${b(6600,80)} = 11(625 - x^2)\\).`,
+        `\\(625 - x^2 = 600 \\implies x^2 = 25 \\implies x = ${b(5)}\\).`,
+        "Ответ: 5 км/ч."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: РАСТВОРЫ И ПРОЦЕНТЫ
+   ============================================================ */
+{
+  id: 17,
+  section: "Растворы и проценты",
+  topic: "Растворы: найти массу кислоты в первом",
+  source: {
+    condition: "Имеются два сосуда: 10 кг и 16 кг раствора кислоты разной концентрации. Если слить вместе — получится 55% раствор. Если слить равные массы — 61%. Сколько кг кислоты в первом растворе?",
+    idea: "<b>Главная мысль:</b> масса кислоты в смеси = сумма масс кислоты в растворах. Два условия дают два уравнения. Равные массы берут не больше, чем в меньшем сосуде: здесь по 10 кг.",
+    table: `<table class="cond"><caption>Таблица 1. Слили всё: \\(10 + 16 = 26\\) кг. \\(x, y\\) — доли кислоты</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>10</td><td>\\(x\\)</td><td>\\(10x\\)</td></tr>
+      <tr><td class="left">Второй</td><td>16</td><td>\\(y\\)</td><td>\\(16y\\)</td></tr>
+      <tr class="total"><td class="left">Смесь</td><td>26</td><td>0,55</td><td>14,3</td></tr>
+    </tbody></table>
+    <table class="cond"><caption>Таблица 2. Слили равные массы: по 10 кг</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>10</td><td>\\(x\\)</td><td>\\(10x\\)</td></tr>
+      <tr><td class="left">Второй</td><td>10</td><td>\\(y\\)</td><td>\\(10y\\)</td></tr>
+      <tr class="total"><td class="left">Смесь</td><td>20</td><td>0,61</td><td>12,2</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Из таблицы 1: \\(10x + 16y = 14{,}3\\).",
+      "Из таблицы 2: \\(10x + 10y = 12{,}2\\), откуда \\(x + y = 1{,}22\\).",
+      "Вычитаем: \\(6y = 2{,}1 \\implies y = 0{,}35\\). Тогда \\(x = 1{,}22 - 0{,}35 = 0{,}87\\).",
+      "Масса кислоты в первом: \\(10 \\cdot 0{,}87 = 8{,}7\\) кг.",
+      "Ответ: 8,7 кг."
+    ]
+  },
+  practice: {
+    condition: "Имеются два сосуда: 12 кг и 8 кг раствора кислоты. Если слить вместе — 65% раствор. Если слить равные массы — 60%. Сколько кг кислоты в первом растворе?",
+    answer: { val: 10.2, unit: "кг" },
+    hints: [
+      "Равные массы — по 8 кг: больше, чем в меньшем сосуде, взять нельзя. Составьте два уравнения: \\(12x + 8y = 20 \\cdot 0{,}65\\) и \\(8x + 8y = 16 \\cdot 0{,}60\\).",
+      "Вычтите второе из первого: останется только \\(x\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица 1. Слили всё</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>12</td><td>\\(x\\)</td><td>\\(12x\\)</td></tr>
+        <tr><td class="left">Второй</td><td>8</td><td>\\(y\\)</td><td>\\(8y\\)</td></tr>
+        <tr class="total"><td class="left">Смесь</td><td>20</td><td>0,65</td><td>\\(${b(13,70)}\\)</td></tr>
+      </tbody></table>
+      <table class="cond"><caption>Таблица 2. Равные массы по 8 кг (во втором сосуде больше нет)</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>8</td><td>\\(x\\)</td><td>\\(8x\\)</td></tr>
+        <tr><td class="left">Второй</td><td>8</td><td>\\(y\\)</td><td>\\(8y\\)</td></tr>
+        <tr class="total"><td class="left">Смесь</td><td>16</td><td>0,60</td><td>\\(${b(9.6,80)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Система: \\(12x + 8y = ${b(13,70)}\\) и \\(8x + 8y = ${b(9.6,70)}\\).`,
+        `Вычитаем: \\(4x = ${b(3.4,70)} \\implies x = ${b(0.85,70,0.001)}\\).`,
+        `Масса кислоты в первом: \\(12 \\cdot 0{,}85 = ${b(10.2,80)}\\) кг.`,
+        "Ответ: 10,2 кг."
+      ]
+    }
+  }
+},
+{
+  id: 18,
+  section: "Растворы и проценты",
+  topic: "Растворы: найти массу кислоты во втором",
+  source: {
+    condition: "Имеются два сосуда: 30 кг и 20 кг раствора кислоты. Если слить вместе — 81% раствор. Если слить равные массы — 83%. Сколько кг кислоты во втором растворе?",
+    idea: "<b>Главная мысль:</b> та же система, но просят массу во втором сосуде. Равные массы берут не больше, чем в меньшем сосуде: здесь по 20 кг.",
+    table: `<table class="cond"><caption>Таблица 1. Слили всё. \\(x, y\\) — доли кислоты</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>30</td><td>\\(x\\)</td><td>\\(30x\\)</td></tr>
+      <tr><td class="left">Второй</td><td>20</td><td>\\(y\\)</td><td>\\(20y\\)</td></tr>
+      <tr class="total"><td class="left">Смесь</td><td>50</td><td>0,81</td><td>40,5</td></tr>
+    </tbody></table>
+    <table class="cond"><caption>Таблица 2. Равные массы по 20 кг (во втором сосуде больше нет)</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th><th>Кислота, кг</th></tr></thead><tbody>
+      <tr><td class="left">Первый</td><td>20</td><td>\\(x\\)</td><td>\\(20x\\)</td></tr>
+      <tr><td class="left">Второй</td><td>20</td><td>\\(y\\)</td><td>\\(20y\\)</td></tr>
+      <tr class="total"><td class="left">Смесь</td><td>40</td><td>0,83</td><td>33,2</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Из таблицы 1: \\(30x + 20y = 40{,}5\\).",
+      "Из таблицы 2: \\(20x + 20y = 33{,}2\\).",
+      "Вычитаем: \\(10x = 7{,}3 \\implies x = 0{,}73\\).",
+      "Масса кислоты во втором: \\(20y = 33{,}2 - 20 \\cdot 0{,}73 = 33{,}2 - 14{,}6 = 18{,}6\\) кг.",
+      "Ответ: 18,6 кг."
+    ]
+  },
+  practice: {
+    condition: "Имеются два сосуда: 12 кг и 8 кг раствора кислоты. Если слить вместе — 65% раствор. Если слить равные массы — 60%. Сколько кг кислоты во втором растворе?",
+    answer: { val: 2.8, unit: "кг" },
+    hints: [
+      "Равные массы — по 8 кг (больше во втором сосуде нет). Система: \\(12x + 8y = 13\\) и \\(8x + 8y = 9{,}6\\).",
+      "Вычтите и найдите \\(x\\). Масса кислоты во втором: \\(8y = 9{,}6 - 8x\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Раствор</th><th>m, кг</th><th>Доля</th></tr></thead><tbody>
+        <tr><td class="left">Первый</td><td>12</td><td>\\(x\\)</td></tr>
+        <tr><td class="left">Второй</td><td>8</td><td>\\(y\\)</td></tr>
+        <tr class="total"><td class="left">Смесь всё</td><td>20</td><td>0,65</td></tr>
+        <tr class="total"><td class="left">Смесь равных масс (по 8 кг)</td><td>16</td><td>0,60</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Система: \\(12x + 8y = ${b(13,70)}\\) и \\(8x + 8y = ${b(9.6,70)}\\).`,
+        `Вычитаем: \\(4x = ${b(3.4,70)} \\implies x = ${b(0.85,70,0.001)}\\).`,
+        `Масса кислоты во втором: \\(8y = 9{,}6 - 8 \\cdot 0{,}85 = ${b(2.8,70)}\\) кг.`,
+        "Ответ: 2,8 кг."
+      ]
+    }
+  }
+},
+{
+  id: 19,
+  section: "Растворы и проценты",
+  topic: "Сухофрукты: сколько свежих",
+  source: {
+    condition: "Свежие фрукты содержат 78% воды, а высушенные — 22%. Сколько требуется свежих фруктов для приготовления 22 кг высушенных?",
+    idea: "<b>Главная мысль:</b> «сухое вещество» при сушке не меняется. Считаем его массу в сушёных, затем — в свежих.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — масса свежих фруктов</caption><thead><tr><th>Продукт</th><th>m, кг</th><th>Вода, %</th><th>Сухое вещество, %</th><th>Сух. в-во, кг</th></tr></thead><tbody>
+      <tr><td class="left">Сушёные</td><td>22</td><td>22</td><td>78</td><td>17,16</td></tr>
+      <tr><td class="left">Свежие</td><td>\\(x\\)</td><td>78</td><td>22</td><td>\\(0{,}22x\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Сухое вещество в сушёных: \\(22 \\cdot 0{,}78 = 17{,}16\\) кг.",
+      "Сухое вещество в свежих: \\(x \\cdot 0{,}22\\). Приравниваем: \\(0{,}22x = 17{,}16\\).",
+      "\\(x = 17{,}16 : 0{,}22 = 78\\) кг.",
+      "Ответ: 78 кг."
+    ]
+  },
+  practice: {
+    condition: "Свежие фрукты содержат 93% воды, а высушенные — 16%. Сколько требуется свежих фруктов для приготовления 21 кг высушенных?",
+    answer: { val: 252, unit: "кг" },
+    hints: [
+      "Сухое вещество в сушёных: \\(21 \\cdot (1 - 0{,}16)\\).",
+      "Сухое вещество в свежих: \\(x \\cdot (1 - 0{,}93)\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Продукт</th><th>m, кг</th><th>Вода, %</th><th>Сух. в-во, %</th></tr></thead><tbody>
+        <tr><td class="left">Сушёные</td><td>21</td><td>16</td><td>\\(${b(84,70)}\\)</td></tr>
+        <tr><td class="left">Свежие</td><td>\\(x\\)</td><td>93</td><td>\\(${b(7,70)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Сухое вещество в сушёных: \\(21 \\cdot 0{,}84 = ${b(17.64,80,0.01)}\\) кг.`,
+        `В свежих: \\(x \\cdot 0{,}07 = ${b(17.64,80,0.01)}\\).`,
+        `\\(x = 17{,}64 : 0{,}07 = ${b(252,80)}\\) кг.`,
+        "Ответ: 252 кг."
+      ]
+    }
+  }
+},
+{
+  id: 20,
+  section: "Растворы и проценты",
+  topic: "Сухофрукты: сколько сухих",
+  source: {
+    condition: "Свежие фрукты содержат 79% воды, а высушенные — 16%. Сколько сухих фруктов получится из 288 кг свежих?",
+    idea: "<b>Главная мысль:</b> сухое вещество не меняется. Считаем его в свежих и приравниваем к сушёным.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — масса сушёных фруктов</caption><thead><tr><th>Продукт</th><th>m, кг</th><th>Вода, %</th><th>Сух. в-во, %</th><th>Сух. в-во, кг</th></tr></thead><tbody>
+      <tr><td class="left">Свежие</td><td>288</td><td>79</td><td>21</td><td>60,48</td></tr>
+      <tr><td class="left">Сушёные</td><td>\\(x\\)</td><td>16</td><td>84</td><td>\\(0{,}84x\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "Сухое вещество в свежих: \\(288 \\cdot 0{,}21 = 60{,}48\\) кг.",
+      "В сушёных: \\(x \\cdot 0{,}84\\). Приравниваем: \\(0{,}84x = 60{,}48\\).",
+      "\\(x = 60{,}48 : 0{,}84 = 72\\) кг.",
+      "Ответ: 72 кг."
+    ]
+  },
+  practice: {
+    condition: "Свежие фрукты содержат 72% воды, а высушенные — 26%. Сколько сухих фруктов получится из 222 кг свежих?",
+    answer: { val: 84, unit: "кг" },
+    hints: [
+      "Сухое вещество в свежих: \\(222 \\cdot (1 - 0{,}72)\\).",
+      "В сушёных: \\(x \\cdot (1 - 0{,}26)\\). Приравняйте."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Продукт</th><th>m, кг</th><th>Вода, %</th><th>Сух. в-во, %</th></tr></thead><tbody>
+        <tr><td class="left">Свежие</td><td>222</td><td>72</td><td>\\(${b(28,70)}\\)</td></tr>
+        <tr><td class="left">Сушёные</td><td>\\(x\\)</td><td>26</td><td>\\(${b(74,70)}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Сухое вещество в свежих: \\(222 \\cdot 0{,}28 = ${b(62.16,80,0.01)}\\) кг.`,
+        `В сушёных: \\(x \\cdot 0{,}74 = ${b(62.16,80,0.01)}\\).`,
+        `\\(x = 62{,}16 : 0{,}74 = ${b(84,80)}\\) кг.`,
+        "Ответ: 84 кг."
+      ]
+    }
+  }
+},
+
+/* ============================================================
+   РАЗДЕЛ: РАБОТА
+   ============================================================ */
+{
+  id: 21,
+  section: "Работа",
+  topic: "Рабочие: найти второго",
+  source: {
+    condition: "Первый рабочий делает на 13 деталей в час больше, чем второй, и выполняет заказ из 208 деталей на 8 часов быстрее. Сколько деталей в час делает второй?",
+    idea: "<b>Главная мысль:</b> работа = производительность × время. Разница во времени даёт уравнение.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — производительность второго</caption><thead><tr><th>Рабочий</th><th>p, дет./ч</th><th>A, деталей</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Второй</td><td>\\(x\\)</td><td>208</td><td>\\(\\frac{208}{x}\\)</td></tr>
+      <tr><td class="left">Первый</td><td>\\(x+13\\)</td><td>208</td><td>\\(\\frac{208}{x+13}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{208}{x} - \\frac{208}{x+13} = 8\\).",
+      "\\(208 \\cdot 13 = 8x(x+13)\\), то есть \\(2704 = 8x^2 + 104x\\).",
+      "Делим на 8: \\(x^2 + 13x - 338 = 0\\).",
+      "\\(D = 169 + 1352 = 1521\\), \\(\\sqrt{D} = 39\\). \\(x = \\frac{-13+39}{2} = 13\\).",
+      "Ответ: 13 дет./ч."
+    ]
+  },
+  practice: {
+    condition: "Первый рабочий делает на 9 деталей в час больше, чем второй, и выполняет заказ из 216 деталей на 4 часа быстрее. Сколько деталей в час делает второй?",
+    answer: { val: 18, unit: "дет./ч" },
+    hints: [
+      "Уравнение: \\(\\frac{216}{x} - \\frac{216}{x+9} = 4\\).",
+      "После упрощения получится \\(x^2 + 9x - 486 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Рабочий</th><th>p, дет./ч</th><th>A, деталей</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Второй</td><td>\\(x\\)</td><td>216</td><td>\\(\\frac{216}{x}\\)</td></tr>
+        <tr><td class="left">Первый</td><td>\\(x+9\\)</td><td>216</td><td>\\(\\frac{216}{x+9}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{216}{x} - \\frac{216}{x+9} = ${b(4)}\\).`,
+        `\\(216 \\cdot 9 = 4x(x+9)\\), то есть \\(${b(1944,80)} = 4x^2 + 36x\\).`,
+        `Делим на 4: \\(x^2 + 9x - ${b(486,80)} = 0\\).`,
+        `\\(D = 81 + 1944 = ${b(2025,80)}\\), \\(\\sqrt{D} = ${b(45)}\\). \\(x = \\frac{-9+45}{2} = ${b(18)}\\).`,
+        "Ответ: 18 дет./ч."
+      ]
+    }
+  }
+},
+{
+  id: 22,
+  section: "Работа",
+  topic: "Рабочие: найти первого",
+  source: {
+    condition: "Первый рабочий делает на 10 деталей в час больше, чем второй, и выполняет заказ из 60 деталей на 3 часа быстрее. Сколько деталей в час делает первый?",
+    idea: "<b>Главная мысль:</b> пусть \\(x\\) — производительность второго, тогда у первого \\(x+10\\).",
+    table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Рабочий</th><th>p, дет./ч</th><th>A, деталей</th><th>t, ч</th></tr></thead><tbody>
+      <tr><td class="left">Второй</td><td>\\(x\\)</td><td>60</td><td>\\(\\frac{60}{x}\\)</td></tr>
+      <tr><td class="left">Первый</td><td>\\(x+10\\)</td><td>60</td><td>\\(\\frac{60}{x+10}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{60}{x} - \\frac{60}{x+10} = 3\\).",
+      "\\(60 \\cdot 10 = 3x(x+10)\\), то есть \\(600 = 3x^2 + 30x\\).",
+      "Делим на 3: \\(x^2 + 10x - 200 = 0\\). \\(D = 900\\), \\(\\sqrt{D} = 30\\).",
+      "\\(x = \\frac{-10+30}{2} = 10\\) — второй; первый \\(10+10 = 20\\).",
+      "Ответ: 20 дет./ч."
+    ]
+  },
+  practice: {
+    condition: "Первый рабочий делает на 9 деталей в час больше, чем второй, и выполняет заказ из 112 деталей на 4 часа быстрее. Сколько деталей в час делает первый?",
+    answer: { val: 21, unit: "дет./ч" },
+    hints: [
+      "Пусть \\(x\\) — производительность второго. Уравнение: \\(\\frac{112}{x} - \\frac{112}{x+9} = 4\\).",
+      "После упрощения получится \\(x^2 + 9x - 252 = 0\\). Найдите второго и прибавьте 9."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Рабочий</th><th>p, дет./ч</th><th>A, деталей</th><th>t, ч</th></tr></thead><tbody>
+        <tr><td class="left">Второй</td><td>\\(x\\)</td><td>112</td><td>\\(\\frac{112}{x}\\)</td></tr>
+        <tr><td class="left">Первый</td><td>\\(x+9\\)</td><td>112</td><td>\\(\\frac{112}{x+9}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{112}{x} - \\frac{112}{x+9} = ${b(4)}\\).`,
+        `\\(112 \\cdot 9 = 4x(x+9)\\), то есть \\(${b(1008,80)} = 4x^2 + 36x\\).`,
+        `Делим на 4: \\(x^2 + 9x - ${b(252,70)} = 0\\).`,
+        `\\(D = 81 + 1008 = ${b(1089,80)}\\), \\(\\sqrt{D} = ${b(33)}\\). \\(x = \\frac{-9+33}{2} = ${b(12)}\\) — второй.`,
+        `Первый: \\(12 + 9 = ${b(21)}\\) дет./ч. Ответ: 21 дет./ч.`
+      ]
+    }
+  }
+},
+{
+  id: 23,
+  section: "Работа",
+  topic: "Трубы: найти вторую",
+  source: {
+    condition: "Первая труба пропускает на 3 литра в минуту меньше, чем вторая. Сколько литров в минуту пропускает вторая труба, если резервуар 260 л она заполняет на 6 минут быстрее первой?",
+    idea: "<b>Главная мысль:</b> объём одинаковый, у второй производительность больше — время меньше.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — производительность первой</caption><thead><tr><th>Труба</th><th>p, л/мин</th><th>A, л</th><th>t, мин</th></tr></thead><tbody>
+      <tr><td class="left">Первая</td><td>\\(x\\)</td><td>260</td><td>\\(\\frac{260}{x}\\)</td></tr>
+      <tr><td class="left">Вторая</td><td>\\(x+3\\)</td><td>260</td><td>\\(\\frac{260}{x+3}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{260}{x} - \\frac{260}{x+3} = 6\\).",
+      "\\(260 \\cdot 3 = 6x(x+3)\\), то есть \\(780 = 6x^2 + 18x\\).",
+      "Делим на 6: \\(x^2 + 3x - 130 = 0\\). \\(D = 9 + 520 = 529\\), \\(\\sqrt{D} = 23\\).",
+      "\\(x = \\frac{-3+23}{2} = 10\\) — первая; вторая \\(10+3 = 13\\).",
+      "Ответ: 13 л/мин."
+    ]
+  },
+  practice: {
+    condition: "Первая труба пропускает на 16 литров в минуту меньше, чем вторая. Сколько литров в минуту пропускает вторая, если резервуар 105 л она заполняет на 4 минуты быстрее первой?",
+    answer: { val: 30, unit: "л/мин" },
+    hints: [
+      "Уравнение: \\(\\frac{105}{x} - \\frac{105}{x+16} = 4\\).",
+      "После упрощения получится \\(x^2 + 16x - 420 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Труба</th><th>p, л/мин</th><th>A, л</th><th>t, мин</th></tr></thead><tbody>
+        <tr><td class="left">Первая</td><td>\\(x\\)</td><td>105</td><td>\\(\\frac{105}{x}\\)</td></tr>
+        <tr><td class="left">Вторая</td><td>\\(x+16\\)</td><td>105</td><td>\\(\\frac{105}{x+16}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{105}{x} - \\frac{105}{x+16} = ${b(4)}\\).`,
+        `\\(105 \\cdot 16 = 4x(x+16)\\), то есть \\(${b(1680,80)} = 4x^2 + 64x\\).`,
+        `Делим на 4: \\(x^2 + 16x - ${b(420,70)} = 0\\).`,
+        `\\(D = 256 + 1680 = ${b(1936,80)}\\), \\(\\sqrt{D} = ${b(44)}\\). \\(x = \\frac{-16+44}{2} = ${b(14)}\\) — первая.`,
+        `Вторая: \\(14 + 16 = ${b(30)}\\) л/мин. Ответ: 30 л/мин.`
+      ]
+    }
+  }
+},
+{
+  id: 24,
+  section: "Работа",
+  topic: "Трубы: найти первую",
+  source: {
+    condition: "Первая труба пропускает на 5 литров в минуту меньше, чем вторая. Сколько литров в минуту пропускает первая, если резервуар 200 л она заполняет на 2 минуты дольше второй?",
+    idea: "<b>Главная мысль:</b> первая медленнее — тратит больше времени.",
+    table: `<table class="cond"><caption>Таблица. \\(x\\) — производительность первой</caption><thead><tr><th>Труба</th><th>p, л/мин</th><th>A, л</th><th>t, мин</th></tr></thead><tbody>
+      <tr><td class="left">Первая</td><td>\\(x\\)</td><td>200</td><td>\\(\\frac{200}{x}\\)</td></tr>
+      <tr><td class="left">Вторая</td><td>\\(x+5\\)</td><td>200</td><td>\\(\\frac{200}{x+5}\\)</td></tr>
+    </tbody></table>`,
+    steps: [
+      "\\(\\frac{200}{x} - \\frac{200}{x+5} = 2\\).",
+      "\\(200 \\cdot 5 = 2x(x+5)\\), то есть \\(1000 = 2x^2 + 10x\\).",
+      "Делим на 2: \\(x^2 + 5x - 500 = 0\\). \\(D = 2025\\), \\(\\sqrt{D} = 45\\).",
+      "\\(x = \\frac{-5+45}{2} = 20\\).",
+      "Ответ: 20 л/мин."
+    ]
+  },
+  practice: {
+    condition: "Первая труба пропускает на 15 литров в минуту меньше, чем вторая. Сколько литров в минуту пропускает первая, если резервуар 100 л она заполняет на 6 минут дольше второй?",
+    answer: { val: 10, unit: "л/мин" },
+    hints: [
+      "Уравнение: \\(\\frac{100}{x} - \\frac{100}{x+15} = 6\\).",
+      "После упрощения получится \\(x^2 + 15x - 250 = 0\\)."
+    ],
+    solution: {
+      table: `<table class="cond"><caption>Таблица</caption><thead><tr><th>Труба</th><th>p, л/мин</th><th>A, л</th><th>t, мин</th></tr></thead><tbody>
+        <tr><td class="left">Первая</td><td>\\(x\\)</td><td>100</td><td>\\(\\frac{100}{x}\\)</td></tr>
+        <tr><td class="left">Вторая</td><td>\\(x+15\\)</td><td>100</td><td>\\(\\frac{100}{x+15}\\)</td></tr>
+      </tbody></table>`,
+      steps: [
+        `Уравнение: \\(\\frac{100}{x} - \\frac{100}{x+15} = ${b(6)}\\).`,
+        `\\(100 \\cdot 15 = 6x(x+15)\\), то есть \\(${b(1500,80)} = 6x^2 + 90x\\).`,
+        `Делим на 6: \\(x^2 + 15x - ${b(250,70)} = 0\\).`,
+        `\\(D = 225 + 1000 = ${b(1225,80)}\\), \\(\\sqrt{D} = ${b(35)}\\). \\(x = \\frac{-15+35}{2} = ${b(10)}\\).`,
+        "Ответ: 10 л/мин."
+      ]
+    }
+  }
+}
+
+];
+
+/* ============ рендер ============ */
+const sections = [...new Set(groups.map(g => g.section))];
+let currentSection = sections[0];
+let currentGroupId = groups[0].id;
+
+const sectionsEl = document.getElementById("sections");
+const groupsEl = document.getElementById("groups");
+const contentEl = document.getElementById("content");
+
+function renderSectionTabs() {
+  sectionsEl.innerHTML = "";
+  sections.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "section-btn" + (s === currentSection ? " active" : "");
+    btn.textContent = s;
+    btn.setAttribute("aria-pressed", s === currentSection ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentSection = s;
+      const firstInSection = groups.find(g => g.section === s);
+      currentGroupId = firstInSection.id;
+      renderSectionTabs();
+      renderGroupTabs();
+      renderContent();
+    });
+    sectionsEl.appendChild(btn);
+  });
+}
+
+function renderGroupTabs() {
+  groupsEl.innerHTML = "";
+  groups.filter(g => g.section === currentSection).forEach(g => {
+    const btn = document.createElement("button");
+    btn.className = "group-btn" + (g.id === currentGroupId ? " active" : "");
+    btn.textContent = `${g.id}. ${g.topic}`;
+    btn.setAttribute("aria-pressed", g.id === currentGroupId ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentGroupId = g.id;
+      renderGroupTabs();
+      renderContent();
+    });
+    groupsEl.appendChild(btn);
+  });
+}
+
+function renderContent() {
+  const g = groups.find(x => x.id === currentGroupId);
+  const src = g.source;
+  const pr = g.practice;
+
+  const rawHTML = `
+    <h2 class="topic">${g.id}. ${g.topic}</h2>
+
+    <div class="card card-source">
+      <div class="card-label">📖 Разбираем вместе</div>
+      <p class="condition">${src.condition}</p>
+      <div class="idea">${src.idea}</div>
+      <div class="table-wrap">${src.table}</div>
+      <div class="steps">
+        ${src.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+      </div>
+      ${src.check ? `<div class="check-line">✓ ${src.check}</div>` : ""}
+    </div>
+
+    <div class="card card-practice" id="practiceCard">
+      <div class="card-label">✏️ Реши сам</div>
+      <p class="condition">${pr.condition}</p>
+      <div class="answer-row">
+        <label>Ответ: <input class="final" type="text" autocomplete="off" data-answer="${pr.answer.val}" data-tol="0.01"> ${pr.answer.unit}</label>
+        <button class="check-answer">Проверить ответ</button>
+        <span class="feedback" role="status" aria-live="polite"></span>
+      </div>
+      <div class="practice-actions">
+        <button class="hint">💡 Подсказка</button>
+        <button class="ghost reveal-btn">🔎 Показать решение (заполни пропуски)</button>
+      </div>
+      <div class="hints-wrap"></div>
+      <div class="reveal hidden">
+        <div class="table-wrap">${pr.solution.table}</div>
+        <div class="steps">
+          ${pr.solution.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+        </div>
+        <div class="solution-controls">
+          <button class="check-blanks">Проверить пропуски</button>
+          <button class="ghost show-all">Показать все ответы</button>
+          <span class="blanks-feedback" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  contentEl.innerHTML = prepareMath(rawHTML);
+  renderMath(contentEl);
+  restoreInputs(contentEl);
+
+  const card = document.getElementById("practiceCard");
+  const input = card.querySelector(".final");
+  const feedback = card.querySelector(".feedback");
+  const hintsWrap = card.querySelector(".hints-wrap");
+  const hintBtn = card.querySelector(".hint");
+  const revealBtn = card.querySelector(".reveal-btn");
+  const reveal = card.querySelector(".reveal");
+  const blanksFb = card.querySelector(".blanks-feedback");
+  let hintIndex = 0;
+  input.addEventListener("keydown", e => { if (e.key === "Enter") card.querySelector(".check-answer").click(); });
+
+  card.querySelector(".check-answer").addEventListener("click", () => {
+    const ok = checkInput(input);
+    input.classList.toggle("ok", ok);
+    input.classList.toggle("err", !ok);
+    feedback.textContent = ok ? "Верно! Молодец." : "Пока неверно — попробуй ещё или открой решение.";
+    feedback.className = "feedback " + (ok ? "ok" : "err");
+    if (ok) card.classList.add("practice-solved");
+  });
+
+  hintBtn.addEventListener("click", () => {
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны"; return;
+    }
+    const box = document.createElement("div");
+    box.className = "hint-box";
+    box.innerHTML = prepareMath(`<b>Подсказка ${hintIndex+1}.</b> ${pr.hints[hintIndex]}`);
+    hintsWrap.appendChild(box);
+    renderMath(box);
+    restoreInputs(box);
+    hintIndex++;
+    if (hintIndex >= pr.hints.length) {
+      hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны";
+    }
+  });
+
+  revealBtn.addEventListener("click", () => {
+    reveal.classList.toggle("hidden");
+    revealBtn.textContent = reveal.classList.contains("hidden")
+      ? "🔎 Показать решение (заполни пропуски)"
+      : "Скрыть решение";
+    if (!reveal.classList.contains("hidden")) {
+      renderMath(reveal);
+      restoreInputs(reveal);
+    }
+  });
+
+  card.querySelector(".check-blanks").addEventListener("click", () => {
+    const blanks = reveal.querySelectorAll("input.blank");
+    let okCount = 0;
+    blanks.forEach(inp => {
+      const ok = checkInput(inp);
+      inp.classList.remove("shown");
+      inp.classList.toggle("ok", ok);
+      inp.classList.toggle("err", !ok && inp.value.trim() !== "");
+      if (ok) okCount++;
+    });
+    blanksFb.textContent = `Верно: ${okCount} из ${blanks.length}`;
+    blanksFb.className = "blanks-feedback " + (okCount === blanks.length ? "ok" : "err");
+  });
+
+  card.querySelector(".show-all").addEventListener("click", () => {
+    reveal.querySelectorAll("input.blank").forEach(inp => {
+      inp.value = String(inp.dataset.answer).replace(".", ",");
+      inp.classList.remove("err", "ok");
+      inp.classList.add("shown");
+    });
+    blanksFb.textContent = "Все пропуски заполнены.";
+    blanksFb.className = "blanks-feedback ok";
+  });
+}
+
+renderSectionTabs();
+renderGroupTabs();
+renderContent();
+</script>
+</body>
+</html>
