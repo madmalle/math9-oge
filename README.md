@@ -9,7 +9,7 @@
 Задание 5: 
 
 Алгебра
-Задание 6: 
+Задание 6: https://madmalle.github.io/math9-oge/ogemathzadanie6.html
 Задание 7: 
 Задание 8: 
 Задание 9: 
