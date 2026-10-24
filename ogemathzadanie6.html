@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ОГЭ математика. Задание 6 — Тренажёр</title>
+<!-- KaTeX CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<!-- KaTeX JS -->
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMath();"></script>
+
+<style>
+  :root{
+    --bg:#f2f7f4;
+    --card:#ffffff;
+    --accent:#2e7d32;
+    --accent-dark:#1b5e20;
+    --ok:#1b5e20;
+    --err:#c62828;
+    --text:#1c2a21;
+    --muted:#5a6e60;
+    --gold:#81c784;
+    --green-1:#e8f5e9;
+    --green-2:#c8e6c9;
+    --green-3:#a5d6a7;
+    --green-4:#f4faf5;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.55;
+    font-size:15px;
+  }
+  header{
+    background:linear-gradient(135deg,#2e7d32,#1b5e20);
+    color:#fff;
+    padding:22px 16px 18px;
+    text-align:center;
+  }
+  header h1{margin:0 0 4px; font-size:clamp(18px,2.5vw,24px)}
+  header p{margin:0; font-size:14px}
+
+  .nav{
+    background:#fff;
+    border-bottom:1px solid var(--green-3);
+    position:sticky;
+    top:0;
+    z-index:10;
+    box-shadow:0 2px 10px rgba(46,125,50,.08);
+  }
+  .sections{
+    display:flex;
+    gap:6px;
+    padding:10px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+    border-bottom:1px solid var(--green-2);
+  }
+  .sections::-webkit-scrollbar{height:6px}
+  .sections::-webkit-scrollbar-thumb{background:var(--green-3); border-radius:3px}
+  .section-btn{
+    background:var(--green-1);
+    border:none;
+    padding:8px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13.5px;
+    font-weight:700;
+    color:var(--accent-dark);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .section-btn:hover{background:var(--green-2)}
+  .section-btn.active{background:var(--accent); color:#fff}
+
+  .groups{
+    display:flex;
+    gap:6px;
+    padding:8px 12px;
+    overflow-x:auto;
+    white-space:nowrap;
+  }
+  .groups::-webkit-scrollbar{height:6px}
+  .groups::-webkit-scrollbar-thumb{background:var(--green-3); border-radius:3px}
+  .group-btn{
+    background:#fff;
+    border:2px solid var(--green-3);
+    padding:6px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:13px;
+    font-weight:600;
+    color:var(--muted);
+    white-space:nowrap;
+    transition:.15s;
+  }
+  .group-btn:hover{border-color:var(--accent); color:var(--accent-dark)}
+  .group-btn.active{
+    background:var(--green-1);
+    border-color:var(--accent);
+    color:var(--accent-dark);
+  }
+
+  main{max-width:900px; margin:0 auto; padding:20px 14px 60px}
+
+  .card{
+    background:var(--card);
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:14px;
+    box-shadow:0 4px 18px rgba(46,125,50,.07);
+    border:1px solid var(--green-2);
+  }
+  .card-label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:12px;
+    font-weight:800;
+    padding:3px 10px;
+    border-radius:999px;
+    margin-bottom:10px;
+    text-transform:uppercase;
+    letter-spacing:.3px;
+  }
+  .card-theory .card-label{background:#fff9c4; color:#827717;}
+  .card-source .card-label{background:var(--green-1); color:var(--accent-dark)}
+  .card-practice .card-label{background:#e8f5e9; color:#1b5e20}
+  .card.practice-solved{
+    border-color:var(--ok);
+    box-shadow:0 4px 18px rgba(27,94,32,.14);
+  }
+  .card.practice-solved .card-label{background:#e8f5e9; color:var(--ok)}
+
+  .topic{
+    font-size:16px;
+    font-weight:800;
+    color:var(--accent-dark);
+    margin-bottom:10px;
+  }
+  .condition{font-size:14.5px; margin:0 0 12px}
+
+  .theory-content {
+    background:#fffdf5;
+    border-left:4px solid #fbc02d;
+    border-radius:6px;
+    padding:12px 16px;
+    font-size:14.5px;
+    margin-bottom:12px;
+  }
+  .theory-content ul { margin: 8px 0; padding-left: 20px; }
+  .theory-content li { margin-bottom: 6px; }
+
+  .idea{
+    background:#f4faf5;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:10px 12px;
+    margin-bottom:12px;
+    font-size:13.5px;
+  }
+  .idea b{color:#1b5e20}
+
+  .steps{display:flex; flex-direction:column; gap:8px}
+  .step{
+    background:var(--green-4);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    padding:9px 12px;
+    font-size:14px;
+  }
+  .step .num{
+    font-weight:700;
+    color:var(--accent-dark);
+    margin-right:5px;
+  }
+
+  .answer-row{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    gap:10px;
+    padding:10px 12px;
+    background:var(--green-4);
+    border-radius:10px;
+    border:1px dashed var(--green-3);
+    margin-bottom:10px;
+  }
+  .answer-row label{font-weight:600; font-size:14px}
+
+  input[type="text"]{
+    border:2px solid var(--green-3);
+    border-radius:6px;
+    padding:5px 8px;
+    font-size:14px;
+    font-family:inherit;
+    transition:.15s;
+    background:#fff;
+  }
+  input.final{width:100px}
+  input.blank{width:64px; text-align:center; font-weight:700; font-size:13.5px; vertical-align: middle;}
+  input:focus{
+    outline:none;
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(46,125,50,.15);
+  }
+  input.ok{border-color:var(--ok); background:#eefaf2}
+  input.err{border-color:var(--err); background:#fdeeee}
+  input.shown{border-color:var(--accent); background:var(--green-1)}
+
+  button{
+    border:none;
+    border-radius:8px;
+    padding:8px 14px;
+    font-size:13.5px;
+    font-weight:600;
+    font-family:inherit;
+    cursor:pointer;
+    transition:.15s;
+    background:var(--accent);
+    color:#fff;
+  }
+  button:hover{background:var(--accent-dark); transform:translateY(-1px)}
+  button.ghost{background:var(--green-1); color:var(--accent-dark)}
+  button.ghost:hover{background:var(--green-2)}
+  button.hint{background:#e8f5e9; color:#1b5e20}
+  button.hint:hover{background:#c8e6c9}
+  button:disabled{opacity:.5; cursor:default; transform:none}
+
+  .feedback{font-weight:700; font-size:14px}
+  .feedback.ok{color:var(--ok)}
+  .feedback.err{color:var(--err)}
+
+  .hint-box{
+    background:#f4faf5;
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:9px 12px;
+    margin-top:8px;
+    font-size:13.5px;
+  }
+  .hint-box b{color:#1b5e20}
+
+  .reveal{margin-top:12px; padding-top:12px; border-top:1px solid var(--green-2)}
+  .solution-controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin-top:12px;
+  }
+  .blanks-feedback{font-weight:700; font-size:13.5px}
+  .blanks-feedback.ok{color:var(--ok)}
+  .blanks-feedback.err{color:var(--err)}
+
+  .hidden{display:none}
+  .practice-actions{display:flex; gap:8px; flex-wrap:wrap}
+  h2.topic{margin:0 0 10px}
+  button:focus-visible,input:focus-visible{outline:3px solid #1b5e20; outline-offset:2px}
+  @media (max-width:600px){ input[type="text"]{font-size:16px} }
+</style>
+</head>
+<body>
+<header>
+  <h1>ОГЭ математика. Задание 6</h1>
+  <p>Дроби и степени</p>
+</header>
+<nav class="nav" aria-label="Разделы и задачи">
+  <div class="sections" id="sections"></div>
+  <div class="groups" id="groups"></div>
+</nav>
+<main id="content"></main>
+
+<script>
+/* ============ УТИЛИТЫ ============ */
+let blankCounter = 0;
+const inputMap = {};
+
+function b(ans, width = 64, tol = 0.01) {
+  const id = `blank_${blankCounter++}`;
+  return `<input class="blank" type="text" autocomplete="off" aria-label="Пропуск" id="${id}" data-answer="${ans}" data-tol="${tol}" style="width:${width}px">`;
+}
+
+function normalize(s) { return String(s).trim().replace(/\s+/g,"").replace(",","."); }
+const UNITS = /(км\/ч|м\/с|л\/мин|дет\.?\/ч|км|кг|мин|дет\.?|м|л|ч|с)\.?$/i;
+function parseNumber(raw) {
+  let s = String(raw).trim().replace(/\s+/g, "").replace(/[−–—]/g, "-").replace(/,/g, ".");
+  s = s.replace(/^[xXхХyYуУ]=/, "").replace(UNITS, "");
+  const m = s.match(/^([+-]?\d+(?:\.\d+)?)\/([+-]?\d+(?:\.\d+)?)$/);
+  if (m) { const d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+  return /^[+-]?\d+(?:\.\d+)?$/.test(s) ? parseFloat(s) : NaN;
+}
+
+function checkInput(inp) {
+  if (String(inp.value).trim() === "") return false;
+  const ans = parseNumber(inp.dataset.answer);
+  const t = parseFloat(inp.dataset.tol);
+  const tol = isNaN(t) ? 0.01 : t;
+  const num = parseNumber(inp.value);
+  if (!isNaN(ans)) return !isNaN(num) && Math.abs(num - ans) <= tol + 1e-9;
+  return normalize(inp.value).toLowerCase() === normalize(inp.dataset.answer).toLowerCase();
+}
+
+function replaceInputsInMath(mathStr) {
+  return mathStr.replace(/<input class="blank"[^>]*>/g, (match) => {
+    const idMatch = match.match(/id="([^"]+)"/);
+    if (idMatch) {
+      const id = idMatch[1];
+      inputMap[id] = match;
+      return `\\htmlClass{${id}}{\\square}`;
+    }
+    return match;
+  });
+}
+
+function prepareMath(html) {
+  let processed = html.replace(/\\\((.*?)\\\)/gs, (match, inner) => {
+    return '\\(' + replaceInputsInMath(inner) + '\\)';
+  });
+  processed = processed.replace(/\$\$(.*?)\$\$/gs, (match, inner) => {
+    return '$$' + replaceInputsInMath(inner) + '$$';
+  });
+  return processed;
+}
+
+function restoreInputs(container) {
+  if (!container) return;
+  container.querySelectorAll('span[class*="blank_"]').forEach(span => {
+    const className = Array.from(span.classList).find(c => c.startsWith('blank_'));
+    if (className && inputMap[className]) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = inputMap[className];
+      const input = tmp.firstElementChild;
+      input.style.verticalAlign = 'middle';
+      span.parentNode.replaceChild(input, span);
+    }
+  });
+}
+
+function renderMath(container = document.body) {
+  if (typeof renderMathInElement === 'function') {
+    renderMathInElement(container, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "$", right: "$", display: false}
+      ],
+      throwOnError: false,
+      trust: true
+    });
+  }
+}
+
+/* ============ ДАННЫЕ ============ */
+const groups = [
+/* ============================================================
+   РАЗДЕЛ: ДЕЙСТВИЯ С ДРОБЯМИ
+   ============================================================ */
+{
+  id: 1,
+  section: "Действия с дробями",
+  topic: "Умножение дробей",
+  theory: `<p>Чтобы умножить дробь на дробь, нужно:</p><ul><li>перемножить их числители и записать результат в числитель;</li><li>перемножить их знаменатели и записать результат в знаменатель;</li><li>сократить полученную дробь (если это возможно).</li></ul><p>При наличии смешанных чисел или десятичных дробей их предварительно переводят в неправильные обыкновенные дроби.</p>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{2}{7} \\cdot \\frac{42}{5}\\)",
+    idea: "<b>Главная мысль:</b> при умножении дробей перемножаем числители и знаменатели, а затем сокращаем.",
+    steps: [
+      "Запишем под общую дробную черту: \\(\\frac{2 \\cdot 42}{7 \\cdot 5}\\).",
+      "Сократим 42 и 7 на 7: \\(\\frac{2 \\cdot 6}{1 \\cdot 5}\\).",
+      "Перемножим: \\(\\frac{12}{5}\\).",
+      "Переведём в десятичную дробь: \\(2{,}4\\).",
+      "Ответ: 2,4."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{3}{4} \\cdot \\frac{6}{5}\\)",
+      answer: { val: 0.9, unit: "" },
+      hints: ["Перемножьте числители и знаменатели.", "Сократите полученную дробь и переведите в десятичную."],
+      solution: { steps: [
+        `Запишем под общую дробную черту: \\(\\frac{3 \\cdot 6}{4 \\cdot 5}\\).`,
+        `Перемножим: \\(\\frac{18}{20}\\).`,
+        `Сократим на 2: \\(\\frac{9}{10}\\).`,
+        `Переведём в десятичную дробь: \\(${b(0.9,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{21}{5} \\cdot \\frac{3}{7}\\)",
+      answer: { val: 1.8, unit: "" },
+      hints: ["Перемножьте числители и знаменатели.", "Сократите 21 и 7.", "Переведите в десятичную дробь."],
+      solution: { steps: [
+        `Запишем под общую дробную черту: \\(\\frac{21 \\cdot 3}{5 \\cdot 7}\\).`,
+        `Сократим 21 и 7 на 7: \\(\\frac{3 \\cdot 3}{5 \\cdot 1}\\).`,
+        `Перемножим: \\(\\frac{9}{5}\\).`,
+        `Переведём в десятичную дробь: \\(${b(1.8,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{3}{5} \\cdot \\frac{25}{4}\\)",
+      answer: { val: 3.75, unit: "" },
+      hints: ["Перемножьте числители и знаменатели.", "Сократите 25 и 5.", "Переведите в десятичную дробь."],
+      solution: { steps: [
+        `Запишем под общую дробную черту: \\(\\frac{3 \\cdot 25}{5 \\cdot 4}\\).`,
+        `Сократим 25 и 5 на 5: \\(\\frac{3 \\cdot 5}{1 \\cdot 4}\\).`,
+        `Перемножим: \\(\\frac{15}{4}\\).`,
+        `Переведём в десятичную дробь: \\(${b(3.75,70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 2,
+  section: "Действия с дробями",
+  topic: "Деление дробей",
+  theory: `<p>Чтобы разделить одну дробь на другую, нужно:</p><ul><li>умножить первую дробь на дробь, обратную второй (то есть перевернуть вторую дробь);</li><li>выполнить умножение по правилам умножения дробей.</li></ul><p><b>Правило:</b> \\(\\frac{a}{b} : \\frac{c}{d} = \\frac{a}{b} \\cdot \\frac{d}{c}\\).</p>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{3}{16} : \\frac{5}{8}\\)",
+    idea: "<b>Главная мысль:</b> деление на дробь равносильно умножению на перевёрнутую дробь.",
+    steps: [
+      "Заменим деление умножением на обратную дробь: \\(\\frac{3}{16} \\cdot \\frac{8}{5}\\).",
+      "Сократим 16 и 8 на 8: \\(\\frac{3 \\cdot 1}{2 \\cdot 5}\\).",
+      "Перемножим: \\(\\frac{3}{10}\\).",
+      "Переведём в десятичную дробь: \\(0{,}3\\).",
+      "Ответ: 0,3."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\left(\\frac{1}{17} + \\frac{1}{4}\\right) : \\frac{1}{34}\\)",
+      answer: { val: 10.5, unit: "" },
+      hints: ["Приведите дроби в скобках к общему знаменателю 68.", "Замените деление умножением на 34."],
+      solution: { steps: [
+        `Приведём к общему знаменателю: \\(\\frac{4}{68} + \\frac{17}{68} = \\frac{21}{68}\\).`,
+        `Заменим деление умножением: \\(\\frac{21}{68} \\cdot 34\\).`,
+        `Сократим 68 и 34: \\(\\frac{21}{2}\\).`,
+        `Разделим: \\(${b(10.5,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\left(\\frac{3}{4} - \\frac{9}{10}\\right) : \\frac{1}{12}\\)",
+      answer: { val: -1.8, unit: "" },
+      hints: ["Приведите к общему знаменателю 20.", "Замените деление умножением на 12."],
+      solution: { steps: [
+        `Приведём к общему знаменателю: \\(\\frac{15}{20} - \\frac{18}{20} = -\\frac{3}{20}\\).`,
+        `Заменим деление умножением: \\(-\\frac{3}{20} \\cdot 12\\).`,
+        `Сократим 20 и 12 на 4: \\(-\\frac{3}{5} \\cdot 3\\).`,
+        `Перемножим: \\(-\\frac{9}{5}\\).`,
+        `Переведём: \\(${b(-1.8,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\left(\\frac{7}{9} + \\frac{1}{5}\\right) : \\frac{1}{18}\\)",
+      answer: { val: 17.6, unit: "" },
+      hints: ["Приведите к общему знаменателю 45.", "Замените деление умножением на 18."],
+      solution: { steps: [
+        `Приведём к общему знаменателю: \\(\\frac{35}{45} + \\frac{9}{45} = \\frac{44}{45}\\).`,
+        `Заменим деление умножением: \\(\\frac{44}{45} \\cdot 18\\).`,
+        `Сократим 45 и 18 на 9: \\(\\frac{44}{5} \\cdot 2\\).`,
+        `Перемножим: \\(\\frac{88}{5}\\).`,
+        `Переведём: \\(${b(17.6,70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 3,
+  section: "Действия с дробями",
+  topic: "Вычитание дробей",
+  theory: `<p>Чтобы вычесть дроби с разными знаменателями, нужно:</p><ul><li>найти наименьший общий знаменатель (НОК);</li><li>привести дроби к этому общему знаменателю, умножив числитель и знаменатель на нужные дополнительные множители;</li><li>вычесть числители, а знаменатель оставить общим;</li><li>сократить полученную дробь.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{1}{10} - \\frac{39}{50}\\)",
+    idea: "<b>Главная мысль:</b> приводим дроби к общему знаменателю и вычитаем числители.",
+    steps: [
+      "Приведём к общему знаменателю 50: \\(\\frac{5}{50} - \\frac{39}{50}\\).",
+      "Вычтем числители: \\(\\frac{5 - 39}{50} = \\frac{-34}{50}\\).",
+      "Сократим на 2: \\(-\\frac{17}{25}\\).",
+      "Переведём в десятичную дробь: \\(-0{,}68\\).",
+      "Ответ: -0,68."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{12} - \\frac{1}{21}\\)",
+      answer: { val: "1/28", unit: "" },
+      hints: ["Общий знаменатель для 12 и 21 — 84.", "Вычтите числители и сократите дробь."],
+      solution: { steps: [
+        `Общий знаменатель 84: \\(\\frac{7}{84} - \\frac{4}{84}\\).`,
+        `Вычтем: \\(\\frac{3}{84}\\).`,
+        `Сократим на 3: \\(${b("1/28",70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{72} - \\frac{1}{88}\\)",
+      answer: { val: "1/396", unit: "" },
+      hints: ["Общий знаменатель для 72 и 88 — 792.", "Вычтите и сократите."],
+      solution: { steps: [
+        `Общий знаменатель 792: \\(\\frac{11}{792} - \\frac{9}{792}\\).`,
+        `Вычтем: \\(\\frac{2}{792}\\).`,
+        `Сократим на 2: \\(${b("1/396",70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{40} - \\frac{1}{65}\\)",
+      answer: { val: "1/104", unit: "" },
+      hints: ["Общий знаменатель для 40 и 65 — 520.", "Вычтите и сократите."],
+      solution: { steps: [
+        `Общий знаменатель 520: \\(\\frac{13}{520} - \\frac{8}{520}\\).`,
+        `Вычтем: \\(\\frac{5}{520}\\).`,
+        `Сократим на 5: \\(${b("1/104",70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 4,
+  section: "Действия с дробями",
+  topic: "Сложение дробей",
+  theory: `<p>Чтобы сложить дроби с разными знаменателями, нужно:</p><ul><li>найти наименьший общий знаменатель (НОК);</li><li>привести дроби к этому общему знаменателю;</li><li>сложить числители, а знаменатель оставить общим;</li><li>сократить полученную дробь (или выделить целую часть).</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{1}{5} + \\frac{3}{20}\\)",
+    idea: "<b>Главная мысль:</b> приводим дроби к общему знаменателю и складываем числители.",
+    steps: [
+      "Приведём к общему знаменателю 20: \\(\\frac{4}{20} + \\frac{3}{20}\\).",
+      "Сложим числители: \\(\\frac{4 + 3}{20} = \\frac{7}{20}\\).",
+      "Переведём в десятичную дробь: \\(0{,}35\\).",
+      "Ответ: 0,35."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{20} + \\frac{1}{12}\\)",
+      answer: { val: "2/15", unit: "" },
+      hints: ["Общий знаменатель 60.", "Сложите и сократите."],
+      solution: { steps: [
+        `Общий знаменатель 60: \\(\\frac{3}{60} + \\frac{5}{60}\\).`,
+        `Сложим: \\(\\frac{8}{60}\\).`,
+        `Сократим на 4: \\(${b("2/15",70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{18} + \\frac{1}{45}\\)",
+      answer: { val: "7/90", unit: "" },
+      hints: ["Общий знаменатель 90.", "Сложите числители."],
+      solution: { steps: [
+        `Общий знаменатель 90: \\(\\frac{5}{90} + \\frac{2}{90}\\).`,
+        `Сложим: \\(${b("7/90",70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{28} + \\frac{1}{42}\\)",
+      answer: { val: "5/84", unit: "" },
+      hints: ["Общий знаменатель 84.", "Сложите числители."],
+      solution: { steps: [
+        `Общий знаменатель 84: \\(\\frac{3}{84} + \\frac{2}{84}\\).`,
+        `Сложим: \\(${b("5/84",70)}\\).`
+      ]}
+    }
+  ]
+},
+
+/* ============================================================
+   РАЗДЕЛ: ДЕСЯТИЧНЫЕ ДРОБИ
+   ============================================================ */
+{
+  id: 5,
+  section: "Десятичные дроби",
+  topic: "Сложение десятичных дробей",
+  theory: `<p>Чтобы сложить десятичные дроби, нужно:</p><ul><li>записать числа друг под другом так, чтобы запятая оказалась под запятой;</li><li>уравнять количество знаков после запятой;</li><li>выполнить сложение, не обращая внимания на запятую;</li><li>поставить в ответе запятую под запятыми в данных числах.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(8{,}8 + 5{,}9\\)",
+    idea: "<b>Главная мысль:</b> складываем целые части и десятые доли по отдельности.",
+    steps: [
+      "Сложим целые части: \\(8 + 5 = 13\\).",
+      "Сложим десятые: \\(0{,}8 + 0{,}9 = 1{,}7\\).",
+      "Сложим результаты: \\(13 + 1{,}7 = 14{,}7\\).",
+      "Ответ: 14,7."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(9{,}3 + 7{,}8\\)",
+      answer: { val: 17.1, unit: "" },
+      hints: ["Сложите целые части, затем десятые."],
+      solution: { steps: [
+        `Сложим целые: \\(9 + 7 = 16\\).`,
+        `Сложим десятые: \\(0{,}3 + 0{,}8 = 1{,}1\\).`,
+        `Общий результат: \\(16 + 1{,}1 = ${b(17.1,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(8{,}7 + 4{,}6\\)",
+      answer: { val: 13.3, unit: "" },
+      hints: ["Сложите целые, затем десятые."],
+      solution: { steps: [
+        `Сложим целые: \\(8 + 4 = 12\\).`,
+        `Сложим десятые: \\(0{,}7 + 0{,}6 = 1{,}3\\).`,
+        `Общий результат: \\(12 + 1{,}3 = ${b(13.3,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(6{,}9 + 7{,}4\\)",
+      answer: { val: 14.3, unit: "" },
+      hints: ["Сложите целые, затем десятые."],
+      solution: { steps: [
+        `Сложим целые: \\(6 + 7 = 13\\).`,
+        `Сложим десятые: \\(0{,}9 + 0{,}4 = 1{,}3\\).`,
+        `Общий результат: \\(13 + 1{,}3 = ${b(14.3,70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 6,
+  section: "Десятичные дроби",
+  topic: "Вычитание десятичных дробей",
+  theory: `<p>Чтобы вычесть десятичные дроби, нужно:</p><ul><li>записать числа друг под другом так, чтобы запятая оказалась под запятой;</li><li>уравнять количество знаков после запятой;</li><li>выполнить вычитание по правилам вычитания целых чисел (занимая десяток);</li><li>поставить в ответе запятую под запятыми.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(9{,}2 - 2{,}4\\)",
+    idea: "<b>Главная мысль:</b> вычитаем по разрядам, при необходимости занимая десяток.",
+    steps: [
+      "Вычтем целые: \\(9 - 2 = 7\\).",
+      "Вычтем десятые: \\(0{,}2 - 0{,}4 = -0{,}2\\).",
+      "Сложим результаты: \\(7 - 0{,}2 = 6{,}8\\).",
+      "Ответ: 6,8."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(5{,}7 - 7{,}6\\)",
+      answer: { val: -1.9, unit: "" },
+      hints: ["Вычтите целые части: \\(5 - 7 = -2\\).", "Прибавьте разность десятых."],
+      solution: { steps: [
+        `Вычтем целые: \\(5 - 7 = -2\\).`,
+        `Вычтем десятые: \\(0{,}7 - 0{,}6 = 0{,}1\\).`,
+        `Итог: \\(-2 + 0{,}1 = ${b(-1.9,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(4{,}9 - 9{,}4\\)",
+      answer: { val: -4.5, unit: "" },
+      hints: ["Вычтите целые: \\(4 - 9 = -5\\).", "Прибавьте \\(0{,}5\\)."],
+      solution: { steps: [
+        `Вычтем целые: \\(4 - 9 = -5\\).`,
+        `Вычтем десятые: \\(0{,}9 - 0{,}4 = 0{,}5\\).`,
+        `Итог: \\(-5 + 0{,}5 = ${b(-4.5,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(6{,}1 - 2{,}5\\)",
+      answer: { val: 3.6, unit: "" },
+      hints: ["Вычтите целые: \\(6 - 2 = 4\\).", "Вычтите десятые: \\(0{,}1 - 0{,}5 = -0{,}4\\)."],
+      solution: { steps: [
+        `Вычтем целые: \\(6 - 2 = 4\\).`,
+        `Вычтем десятые: \\(0{,}1 - 0{,}5 = -0{,}4\\).`,
+        `Итог: \\(4 - 0{,}4 = ${b(3.6,70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 7,
+  section: "Десятичные дроби",
+  topic: "Умножение десятичных дробей",
+  theory: `<p>Чтобы умножить десятичные дроби, нужно:</p><ul><li>выполнить умножение как умножение целых чисел, не обращая внимания на запятые;</li><li>посчитать общее количество цифр после запятой в обоих множителях;</li><li>в полученном произведении отделить запятой справа столько цифр, сколько их было после запятой в обоих множителях вместе.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(1{,}6 \\cdot 5{,}1\\)",
+    idea: "<b>Главная мысль:</b> умножаем как целые числа, затем отделяем запятой сумму знаков после запятой.",
+    steps: [
+      "Умножим без учёта запятых: \\(16 \\cdot 51 = 816\\).",
+      "Посчитаем количество знаков после запятой: в 1,6 — один, в 5,1 — один. Всего два.",
+      "Поставим запятую: \\(8{,}16\\).",
+      "Ответ: 8,16."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(5{,}2 \\cdot 3{,}1\\)",
+      answer: { val: 16.12, unit: "" },
+      hints: ["Умножьте 52 на 31.", "Отделите запятой два знака справа."],
+      solution: { steps: [
+        `Умножим без запятых: \\(52 \\cdot 31 = 1612\\).`,
+        `Сумма знаков после запятой: 2.`,
+        `Ставим запятую: \\(${b(16.12,80)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(2{,}1 \\cdot 9{,}6\\)",
+      answer: { val: 20.16, unit: "" },
+      hints: ["Умножьте 21 на 96.", "Отделите запятой два знака справа."],
+      solution: { steps: [
+        `Умножим без запятых: \\(21 \\cdot 96 = 2016\\).`,
+        `Сумма знаков: 2.`,
+        `Ставим запятую: \\(${b(20.16,80)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(8{,}9 \\cdot 4{,}3\\)",
+      answer: { val: 38.27, unit: "" },
+      hints: ["Умножьте 89 на 43.", "Отделите запятой два знака справа."],
+      solution: { steps: [
+        `Умножим без запятых: \\(89 \\cdot 43 = 3827\\).`,
+        `Сумма знаков: 2.`,
+        `Ставим запятую: \\(${b(38.27,80)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 8,
+  section: "Десятичные дроби",
+  topic: "Деление десятичных дробей",
+  theory: `<p>Чтобы разделить число на десятичную дробь, нужно:</p><ul><li>в делимом и делителе перенести запятую вправо на столько цифр, сколько их содержится после запятой в делителе;</li><li>выполнить деление на целое число (или натуральное число);</li><li>если в делимом не хватает цифр для переноса запятой, то дописывают нули.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{6{,}8}{1{,}7}\\)",
+    idea: "<b>Главная мысль:</b> избавляемся от запятых, умножая числитель и знаменатель на 10.",
+    steps: [
+      "Умножим оба числа на 10: \\(\\frac{68}{17}\\).",
+      "Разделим: \\(68 : 17 = 4\\).",
+      "Ответ: 4."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{8{,}2}{4{,}1}\\)",
+      answer: { val: 2, unit: "" },
+      hints: ["Умножьте на 10, чтобы избавиться от запятых.", "Разделите 82 на 41."],
+      solution: { steps: [
+        `Умножим на 10: \\(\\frac{82}{41}\\).`,
+        `Разделим: \\(${b(2,60)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{13{,}2}{1{,}2}\\)",
+      answer: { val: 11, unit: "" },
+      hints: ["Умножьте на 10.", "Разделите 132 на 12."],
+      solution: { steps: [
+        `Умножим на 10: \\(\\frac{132}{12}\\).`,
+        `Разделим: \\(${b(11,60)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{6{,}5}{1{,}3}\\)",
+      answer: { val: 5, unit: "" },
+      hints: ["Умножьте на 10.", "Разделите 65 на 13."],
+      solution: { steps: [
+        `Умножим на 10: \\(\\frac{65}{13}\\).`,
+        `Разделим: \\(${b(5,60)}\\).`
+      ]}
+    }
+  ]
+},
+
+/* ============================================================
+   РАЗДЕЛ: МНОГОЭТАЖНЫЕ ДРОБИ
+   ============================================================ */
+{
+  id: 9,
+  section: "Многоэтажные дроби",
+  topic: "Сумма в знаменателе",
+  theory: `<p>Для вычисления выражения вида \\(\\frac{1}{\\frac{a}{b} + \\frac{c}{d}}\\):</p><ul><li>выполните сложение в знаменателе (приведите к общему знаменателю);</li><li>полученную дробь \\(\\frac{m}{n}\\) переверните, так как деление единицы на дробь даёт обратную дробь \\(\\frac{n}{m}\\).</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{28} + \\frac{1}{12}}\\)",
+    idea: "<b>Главная мысль:</b> сначала упрощаем знаменатель, приводя дроби к общему знаменателю.",
+    steps: [
+      "Приведём дроби в знаменателе к общему знаменателю 84: \\(\\frac{3}{84} + \\frac{7}{84} = \\frac{10}{84}\\).",
+      "Подставим обратно: \\(\\frac{1}{\\frac{10}{84}}\\).",
+      "Перевернём дробь: \\(\\frac{84}{10}\\).",
+      "Разделим: \\(8{,}4\\).",
+      "Ответ: 8,4."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{30} + \\frac{1}{42}}\\)",
+      answer: { val: 17.5, unit: "" },
+      hints: ["Общий знаменатель для 30 и 42 — 210.", "Переверните дробь и разделите."],
+      solution: { steps: [
+        `Общий знаменатель 210: \\(\\frac{7}{210} + \\frac{5}{210} = \\frac{12}{210}\\).`,
+        `Перевернём: \\(\\frac{210}{12}\\).`,
+        `Разделим: \\(${b(17.5,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{36} + \\frac{1}{45}}\\)",
+      answer: { val: 20, unit: "" },
+      hints: ["Общий знаменатель 180.", "Переверните дробь."],
+      solution: { steps: [
+        `Общий знаменатель 180: \\(\\frac{5}{180} + \\frac{4}{180} = \\frac{9}{180}\\).`,
+        `Перевернём: \\(\\frac{180}{9}\\).`,
+        `Разделим: \\(${b(20,70)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{21} + \\frac{1}{28}}\\)",
+      answer: { val: 12, unit: "" },
+      hints: ["Общий знаменатель 84.", "Переверните и разделите."],
+      solution: { steps: [
+        `Общий знаменатель 84: \\(\\frac{4}{84} + \\frac{3}{84} = \\frac{7}{84}\\).`,
+        `Перевернём: \\(\\frac{84}{7}\\).`,
+        `Разделим: \\(${b(12,70)}\\).`
+      ]}
+    }
+  ]
+},
+{
+  id: 10,
+  section: "Многоэтажные дроби",
+  topic: "Разность в знаменателе",
+  theory: `<p>Для вычисления выражения вида \\(\\frac{1}{\\frac{a}{b} - \\frac{c}{d}}\\):</p><ul><li>выполните вычитание в знаменателе (найдите общий знаменатель, вычтите числители);</li><li>полученную дробь переверните. Помните, что результат будет положительным, так как знаменатель (разность дробей) должен быть положительным для корректности выражения.</li></ul>`,
+  source: {
+    condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{14} - \\frac{1}{63}}\\)",
+    idea: "<b>Главная мысль:</b> упрощаем знаменатель и переворачиваем дробь.",
+    steps: [
+      "Приведём дроби к общему знаменателю 126: \\(\\frac{9}{126} - \\frac{2}{126} = \\frac{7}{126}\\).",
+      "Подставим обратно: \\(\\frac{1}{\\frac{7}{126}}\\).",
+      "Перевернём: \\(\\frac{126}{7}\\).",
+      "Разделим: \\(18\\).",
+      "Ответ: 18."
+    ]
+  },
+  practices: [
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{36} - \\frac{1}{44}}\\)",
+      answer: { val: 198, unit: "" },
+      hints: ["Общий знаменатель для 36 и 44 — 396.", "Переверните дробь."],
+      solution: { steps: [
+        `Общий знаменатель 396: \\(\\frac{11}{396} - \\frac{9}{396} = \\frac{2}{396}\\).`,
+        `Перевернём: \\(\\frac{396}{2}\\).`,
+        `Разделим: \\(${b(198,80)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{35} - \\frac{1}{60}}\\)",
+      answer: { val: 84, unit: "" },
+      hints: ["Общий знаменатель 420.", "Переверните дробь."],
+      solution: { steps: [
+        `Общий знаменатель 420: \\(\\frac{12}{420} - \\frac{7}{420} = \\frac{5}{420}\\).`,
+        `Перевернём: \\(\\frac{420}{5}\\).`,
+        `Разделим: \\(${b(84,80)}\\).`
+      ]}
+    },
+    {
+      condition: "Найдите значение выражения: \\(\\frac{1}{\\frac{1}{72} - \\frac{1}{99}}\\)",
+      answer: { val: 264, unit: "" },
+      hints: ["Общий знаменатель 792.", "Переверните дробь."],
+      solution: { steps: [
+        `Общий знаменатель 792: \\(\\frac{11}{792} - \\frac{8}{792} = \\frac{3}{792}\\).`,
+        `Перевернём: \\(\\frac{792}{3}\\).`,
+        `Разделим: \\(${b(264,80)}\\).`
+      ]}
+    }
+  ]
+}
+];
+
+/* ============ РЕНДЕР ============ */
+const sections = [...new Set(groups.map(g => g.section))];
+let currentSection = sections[0];
+let currentGroupId = groups[0].id;
+
+const sectionsEl = document.getElementById("sections");
+const groupsEl = document.getElementById("groups");
+const contentEl = document.getElementById("content");
+
+function renderSectionTabs() {
+  sectionsEl.innerHTML = "";
+  sections.forEach(s => {
+    const btn = document.createElement("button");
+    btn.className = "section-btn" + (s === currentSection ? " active" : "");
+    btn.textContent = s;
+    btn.setAttribute("aria-pressed", s === currentSection ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentSection = s;
+      const firstInSection = groups.find(g => g.section === s);
+      currentGroupId = firstInSection.id;
+      renderSectionTabs();
+      renderGroupTabs();
+      renderContent();
+    });
+    sectionsEl.appendChild(btn);
+  });
+}
+
+function renderGroupTabs() {
+  groupsEl.innerHTML = "";
+  groups.filter(g => g.section === currentSection).forEach(g => {
+    const btn = document.createElement("button");
+    btn.className = "group-btn" + (g.id === currentGroupId ? " active" : "");
+    btn.innerHTML = prepareMath(`${g.id}. ${g.topic}`);
+    btn.setAttribute("aria-pressed", g.id === currentGroupId ? "true" : "false");
+    btn.addEventListener("click", () => {
+      currentGroupId = g.id;
+      renderGroupTabs();
+      renderContent();
+    });
+    groupsEl.appendChild(btn);
+    renderMath(btn);
+  });
+}
+
+function renderContent() {
+  const g = groups.find(x => x.id === currentGroupId);
+  const src = g.source;
+  const prs = g.practices;
+
+  let practicesHTML = prs.map((pr, index) => `
+    <div class="card card-practice" id="practiceCard_${index}">
+      <div class="card-label">✏️ Реши самостоятельно · Задача ${index + 1}</div>
+      <div class="condition">${pr.condition}</div>
+      <div class="answer-row">
+        <label>Ответ: <input class="final" type="text" autocomplete="off" data-answer="${pr.answer.val}" data-tol="0.001"> ${pr.answer.unit}</label>
+        <button class="check-answer">Проверить ответ</button>
+        <span class="feedback" role="status" aria-live="polite"></span>
+      </div>
+      <div class="practice-actions">
+        <button class="hint">💡 Подсказка</button>
+        <button class="ghost reveal-btn">🔎 Показать решение (с пропусками)</button>
+      </div>
+      <div class="hints-wrap"></div>
+      <div class="reveal hidden">
+        <div class="steps">
+          ${pr.solution.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join("")}
+        </div>
+        <div class="solution-controls">
+          <button class="check-blanks">Проверить пропуски</button>
+          <button class="ghost show-all">Показать все ответы</button>
+          <span class="blanks-feedback" role="status" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  const rawHTML = `
+    <h2 class="topic">${g.id}. ${g.topic}</h2>
+
+    <div class="card card-theory">
+      <div class="card-label">📌 Теория</div>
+      <div class="theory-content">
+        ${g.theory}
+      </div>
+    </div>
+
+    <div class="card card-source">
+      <div class="card-label">📖 Разбираем вместе</div>
+      <div class="condition">${src.condition}</div>
+      <div class="idea">${src.idea}</div>
+      <div class="steps">
+        ${src.steps.map((s,i) => `<div class="step"><span class="num">Шаг ${i+1}.</span>${s}</div>`).join('')}
+      </div>
+    </div>
+
+    ${practicesHTML}
+  `;
+
+  contentEl.innerHTML = prepareMath(rawHTML);
+  renderMath(contentEl);
+  restoreInputs(contentEl);
+
+  // Привязываем обработчики для каждой из задач
+  prs.forEach((pr, index) => {
+    const card = document.getElementById(`practiceCard_${index}`);
+    const input = card.querySelector(".final");
+    const feedback = card.querySelector(".feedback");
+    const hintsWrap = card.querySelector(".hints-wrap");
+    const hintBtn = card.querySelector(".hint");
+    const revealBtn = card.querySelector(".reveal-btn");
+    const reveal = card.querySelector(".reveal");
+    const blanksFb = card.querySelector(".blanks-feedback");
+    let hintIndex = 0;
+
+    input.addEventListener("keydown", e => { if (e.key === "Enter") card.querySelector(".check-answer").click(); });
+
+    card.querySelector(".check-answer").addEventListener("click", () => {
+      const ok = checkInput(input);
+      input.classList.toggle("ok", ok);
+      input.classList.toggle("err", !ok);
+      feedback.textContent = ok ? "Верно! Отличная работа." : "Пока неверно — попробуй ещё раз или открой решение.";
+      feedback.className = "feedback " + (ok ? "ok" : "err");
+      if (ok) card.classList.add("practice-solved");
+    });
+
+    hintBtn.addEventListener("click", () => {
+      if (hintIndex >= pr.hints.length) {
+        hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны"; return;
+      }
+      const box = document.createElement("div");
+      box.className = "hint-box";
+      box.innerHTML = prepareMath(`<b>Подсказка ${hintIndex+1}.</b> ${pr.hints[hintIndex]}`);
+      hintsWrap.appendChild(box);
+      renderMath(box);
+      restoreInputs(box);
+      hintIndex++;
+      if (hintIndex >= pr.hints.length) {
+        hintBtn.disabled = true; hintBtn.textContent = "Все подсказки показаны";
+      }
+    });
+
+    revealBtn.addEventListener("click", () => {
+      reveal.classList.toggle("hidden");
+      revealBtn.textContent = reveal.classList.contains("hidden")
+        ? "🔎 Показать решение (с пропусками)"
+        : "Скрыть решение";
+      if (!reveal.classList.contains("hidden")) {
+        renderMath(reveal);
+        restoreInputs(reveal);
+      }
+    });
+
+    card.querySelector(".check-blanks").addEventListener("click", () => {
+      const blanks = reveal.querySelectorAll("input.blank");
+      let okCount = 0;
+      blanks.forEach(inp => {
+        const ok = checkInput(inp);
+        inp.classList.remove("shown");
+        inp.classList.toggle("ok", ok);
+        inp.classList.toggle("err", !ok && inp.value.trim() !== "");
+        if (ok) okCount++;
+      });
+      blanksFb.textContent = `Верно: ${okCount} из ${blanks.length}`;
+      blanksFb.className = "blanks-feedback " + (okCount === blanks.length ? "ok" : "err");
+    });
+
+    card.querySelector(".show-all").addEventListener("click", () => {
+      reveal.querySelectorAll("input.blank").forEach(inp => {
+        inp.value = String(inp.dataset.answer).replace(".", ",");
+        inp.classList.remove("err", "ok");
+        inp.classList.add("shown");
+      });
+      blanksFb.textContent = "Все пропуски заполнены.";
+      blanksFb.className = "blanks-feedback ok";
+    });
+  });
+}
+
+renderSectionTabs();
+renderGroupTabs();
+renderContent();
+</script>
+</body>
+</html>
