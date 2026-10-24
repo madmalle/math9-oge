@@ -9,7 +9,7 @@
 Задание 7: 
 Задание 8: 
 Задание 9: 
-Задание 10: https://madmalle.github.io/algebra9-tasks/ogemathzadanie10.html
+Задание 10: https://madmalle.github.io/math9-oge/ogemathzadanie10.html
 Задание 11: 
 Задание 12: 
 Задание 13: 
@@ -19,8 +19,8 @@
 Задание 17: 
 Задание 18: 
 Задание 19: 
-Задание 20: https://madmalle.github.io/algebra9-tasks/ogemathzadanie20.html
-Задание 21: https://madmalle.github.io/algebra9-tasks/ogemathzadanie21.html
+Задание 20: https://madmalle.github.io/math9-oge/ogemathzadanie20.html
+Задание 21: https://madmalle.github.io/math9-oge/ogemathzadanie21.html
 Задание 22: 
 Задание 23: 
 Задание 24: 
