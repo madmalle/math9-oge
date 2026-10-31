@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ОГЭ 2027. Задание 10 — Тренажёр</title>
-<!-- KaTeX CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<!-- KaTeX JS (загружаем синхронно, без defer) -->
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<!-- KaTeX CSS (CDN cdnjs) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<!-- KaTeX JS (CDN cdnjs, загружаем с defer) -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 
 <style>
   :root{
@@ -1154,8 +1154,8 @@ function renderContent() {
   });
 }
 
-// Ждем полной загрузки страницы и всех скриптов (включая KaTeX)
-window.addEventListener('load', () => {
+// Запуск после полной загрузки DOM (скрипты с defer уже загрузятся к этому моменту)
+document.addEventListener("DOMContentLoaded", () => {
   renderSectionTabs();
   renderGroupTabs();
   renderContent();
