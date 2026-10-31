@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ОГЭ 2027. Задание 10 — Тренажёр</title>
+<!-- KaTeX CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
-<!-- Убрали onload="renderMath();" из auto-render, так как рендер будет вызываться из основного скрипта -->
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+<!-- KaTeX JS (загружаем синхронно, без defer) -->
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 <style>
   :root{
@@ -1032,7 +1033,7 @@ function renderGroupTabs() {
       renderContent();
     });
     groupsEl.appendChild(btn);
-    renderMath(btn); // Рендерим формулы, если они есть в названии кнопки
+    renderMath(btn);
   });
 }
 
@@ -1153,8 +1154,8 @@ function renderContent() {
   });
 }
 
-// Ждем полной загрузки DOM и внешних скриптов (KaTeX), прежде чем запускать тренажёр
-document.addEventListener('DOMContentLoaded', () => {
+// Ждем полной загрузки страницы и всех скриптов (включая KaTeX)
+window.addEventListener('load', () => {
   renderSectionTabs();
   renderGroupTabs();
   renderContent();
